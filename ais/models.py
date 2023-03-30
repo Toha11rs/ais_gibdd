@@ -13,7 +13,6 @@ class DriverAddress(models.Model):
     Street = models.CharField(max_length=50)
     House = models.IntegerField()
     Flat = models.IntegerField()
-    # driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'driver_address'
@@ -36,3 +35,24 @@ class DriverLicense(models.Model):
 
     class Meta:
         db_table = 'driver_license'
+
+
+class CarInformation(models.Model):
+    Number = models.CharField(max_length=50)
+    Brand = models.CharField(max_length=50)
+    Model = models.CharField(max_length=50)
+    Color = models.CharField(max_length=50)
+    Year = models.IntegerField()
+    RegistrationDate = models.DateField()
+
+    class Meta:
+        db_table = 'carInformation'
+
+
+class Car(models.Model):
+    carInformation = models.ForeignKey(
+        CarInformation, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'car'
