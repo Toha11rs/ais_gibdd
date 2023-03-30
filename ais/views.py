@@ -21,6 +21,6 @@ def search_driver_license(request):
 
 def driver_info(request, driver_license_id):
     driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
-    drivers = driver_license.driver
-    address = driver_license.address
-    return render(request, 'base/driver_info.html', {'drivers': drivers, 'driver_license': driver_license, 'address': address})
+    driver = driver_license.driver
+    address = driver.address
+    return render(request, 'base/driver_info.html', {'drivers': driver, 'driver_license': driver_license, "address": address})
