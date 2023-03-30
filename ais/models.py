@@ -16,15 +16,6 @@ class Driver(models.Model):
         db_table = 'driver'
 
 
-class DriverLicense(models.Model):
-    number = models.IntegerField()
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'driver_license'
-
-
 class DriverAddress(models.Model):
     City = models.CharField(max_length=50)
     Street = models.CharField(max_length=50)
@@ -34,3 +25,13 @@ class DriverAddress(models.Model):
 
     class Meta:
         db_table = 'driver_address'
+
+
+class DriverLicense(models.Model):
+    number = models.IntegerField()
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    address = models.ForeignKey(DriverAddress, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'driver_license'

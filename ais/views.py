@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Status
+from ais.models import Driver, DriverLicense, Status, DriverAddress
 from base.forms import SearchForm
 
 
@@ -22,5 +22,5 @@ def search_driver_license(request):
 def driver_info(request, driver_license_id):
     driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
     drivers = driver_license.driver
-
-    return render(request, 'base/driver_info.html', {'drivers': drivers, 'driver_license': driver_license})
+    address = driver_license.address
+    return render(request, 'base/driver_info.html', {'drivers': drivers, 'driver_license': driver_license, 'address': address})
