@@ -19,7 +19,7 @@ from ais import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('search_driver_license/', views.search_driver_license,
+    path('', views.search_driver_license,
          name='search_driver_license'),
     path('driver_info/<int:driver_license_id>/',
          views.driver_info, name='driver_info'),

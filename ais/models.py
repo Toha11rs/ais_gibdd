@@ -57,3 +57,46 @@ class Car(models.Model):
 
     class Meta:
         db_table = 'car'
+
+
+class TypeWarning(models.Model):
+    Type = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'type'
+
+
+class CodeWarning(models.Model):
+    Code = models.IntegerField()
+
+    class Meta:
+        db_table = 'code'
+
+
+class GetWarning(models.Model):
+    GetWarning = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'warning'
+
+
+class TermDeprivation(models.Model):
+    TermDeprivation = models.IntegerField()
+
+    class Meta:
+        db_table = 'termDeprivation'
+
+
+class Violation(models.Model):
+    typeWarning = models.ForeignKey(TypeWarning, on_delete=models.CASCADE)
+    code = models.ForeignKey(CodeWarning, on_delete=models.CASCADE)
+    warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
+    termDeprivation = models.ForeignKey(
+        TermDeprivation, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'violation'
+
+    # penaltie = models.ForeignKey(Penaltie, on_delete=models.CASCADE)
+    # employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
