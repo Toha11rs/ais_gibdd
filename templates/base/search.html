@@ -43,23 +43,39 @@
                     <span class="text-danger">{{ driver_license.status.status }}</span>
                     {% endif %}
                 </p>
-            
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    <p>
+                        <label for="type_warning">Тип нарушения:</label>
+                        <select id="type_warning" name="type_warning">
+                            {% for type in types %}
+                                <option value="{{ type.id }}">{{ type.Type }}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="code_warning">Код нарушения:</label>
+                        <select id="code_warning" name="code_warning">
+                            {% for code in codes %}
+                                <option value="{{ code.id }}">{{ code.Code }}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="warning">Предупреждение:</label>
+                        <input type="checkbox" id="warning" name="warning" value="yes">
+                    </p>
+                    <p>
+                        <label for="term_deprivation">Срок лишения прав:</label>
+                        <input type="text" id="term_deprivation" name="term_deprivation">
+                    </p>
+                    <input type="submit" value="Выписать штраф">
+                </form>
+            </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-<bode>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-
-    <body>
-        <hr>
-    </body>
-
-    </html>
-    </body>
-
 </html>
