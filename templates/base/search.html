@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о водитевле</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container" style="float: up; width: 100%;">
+        <a href="{% url 'search_driver_license' %}" class="btn btn-link">Назад к поиску водительских удостоверений</a>
+        
+        <hr>
+        <div style="overflow: hidden;">
+            <div style="float: right; width: 30%;">
+                {% for car in cars %}
+                <h1>Информация об автомобиле:</h1>
+                <p>Марка: {{ car.carinformation.Brand }}</p>
+                <p>Модель: {{ car.carinformation.Model }}</p>
+                <p>Цвет: {{ car.carinformation.Color }}</p>
+                <p>Год выпуска: {{ car.carinformation.Year }}</p>
+                <p>Дата регистрации: {{ car.carinformation.RegistrationDate }}</p>
+                {% endfor %} 
+            </div>   
+
+                <h1>Информация о водителе:</h1>
+                <p>Имя: {{ driver.name }}</p>
+                <p>Фамилия: {{ driver.surname }}</p>
+                <p>Город: {{ address.City }}</p>
+                <p>Улица: {{ address.Street }}</p>
+                <p>Дом: {{ address.House }}</p>
+                <p>Квартира: {{ address.Flat }}</p>
+                <hr style="float: up; width: 100%;">
+                <p>Номер водительского удостоверения: {{ driver_license.number }}</p>
+                <p>Статус:
+                    {% if driver_license.status.id == 1 %}
+                    <span class="text-success">{{ driver_license.status.status }}</span>
+                    {% elif driver_license.status.id == 2 %}
+
+                    <span class="text-danger">{{ driver_license.status.status }}</span>
+                    {% endif %}
+                </p>
+            
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+<bode>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+    <body>
+        <hr>
+    </body>
+
+    </html>
+    </body>
+
+</html>

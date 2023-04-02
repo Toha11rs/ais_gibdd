@@ -50,9 +50,10 @@ class CarInformation(models.Model):
 
 
 class Car(models.Model):
-    carInformation = models.ForeignKey(
+    carinformation = models.ForeignKey(
         CarInformation, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    token = models.IntegerField()
 
     class Meta:
         db_table = 'car'
