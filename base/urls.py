@@ -24,4 +24,5 @@ urlpatterns = [
     path('driver_info/<int:driver_license_id>/',
          views.driver_info, name='driver_info'),
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
+    path('test/<int:driver_id>/', views.test, name='test'),
 ]

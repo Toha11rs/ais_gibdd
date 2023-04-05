@@ -44,33 +44,44 @@
                     {% endif %}
                 </p>
             <div>
-                <form method="post">
+
+
+                <form method="POST">
                     {% csrf_token %}
-                    <p>
-                        <label for="type_warning">Тип нарушения:</label>
-                        <select id="type_warning" name="type_warning">
-                            {% for type in types %}
-                                <option value="{{ type.id }}">{{ type.Type }}</option>
-                            {% endfor %}
-                        </select>
-                    </p>
-                    <p>
-                        <label for="code_warning">Код нарушения:</label>
-                        <select id="code_warning" name="code_warning">
-                            {% for code in codes %}
-                                <option value="{{ code.id }}">{{ code.Code }}</option>
-                            {% endfor %}
-                        </select>
-                    </p>
-                    <p>
-                        <label for="warning">Предупреждение:</label>
-                        <input type="checkbox" id="warning" name="warning" value="yes">
-                    </p>
-                    <p>
-                        <label for="term_deprivation">Срок лишения прав:</label>
-                        <input type="text" id="term_deprivation" name="term_deprivation">
-                    </p>
-                    <input type="submit" value="Выписать штраф">
+                    {{ form.as_p }}
+                    <button type="submit">Создать</button>
+                </form>
+
+
+
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="typeWarning">Type Warning:</label>
+                    <select name="typeWarning" id="typeWarning">
+                        {% for typeWarning in typeWarning %}
+                            <option value="{{ typeWarning.pk }}">{{ typeWarning.Type }}</option>
+                        {% endfor %}
+                    </select><br>
+                
+                    <label for="code">Code:</label>
+                    <select name="code" id="code">
+                        {% for code in codes %}
+                            <option value="{{ code.pk }}">{{ code.code }}</option>
+                        {% endfor %}
+                    </select><br>
+                
+                    <label for="warning">Warning:</label>
+                    <select name="warning" id="warning">
+                        {% for warning in warnings %}
+                            <option value="{{ warning.pk }}">{{ warning.warning }}</option>
+                        {% endfor %}
+                    </select><br>
+                
+                    <label for="termDeprivation">Term Deprivation:</label>
+                    <input type="text" name="termDeprivation" id="termDeprivation"><br>
+                
+                    <input type="submit" value="Submit">
                 </form>
             </div>
 

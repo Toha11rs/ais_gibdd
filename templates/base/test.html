@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="type_warning">Type of violation:</label>
+        <select id="type_warning" name="type_warning">
+          {% for type in types %}
+          <option value="{{ type.id }}">{{ type.Type }}</option>
+          {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Create">
+      </form>
+</body>
+</html>

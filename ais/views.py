@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Status, DriverAddress, Car
-from base.forms import SearchForm, ViolationForm
+from ais.models import Driver, DriverLicense, Status, DriverAddress, Car, TypeWarning, Violation
+from base.forms import SearchForm, ViolationForm, TypeWarningForm
 
 
 def search_driver_license(request):
@@ -39,23 +39,39 @@ def car_info(request, driver_license_id):
     address = driver.address
 
     if request.method == 'POST':
-        form = ViolationForm(request.POST)
+        form = TypeWarningForm(request.POST)
         if form.is_valid():
             violation = form.save(commit=False)
             violation.driver = driver
             violation.save()
+            return redirect('car_info', driver_license_id=driver_license_id)
     else:
-        form = ViolationForm()
-
-    violations = driver.violation_set.all()
+        form = TypeWarningForm()
 
     context = {
         'cars': cars,
         'driver': driver,
         'address': address,
         'driver_license': driver_license,
-        'form': form,
-        'violations': violations
+        'form': form
+    }
+    return render(request, 'base/search.html', context)
+
+
+def test(request, driver_id):
+    if request.method == 'POST':
+        type_warning_id = request.POST.get('type_warning')
+        violation = Violation.objects.create(
+            typeWarning_id=type_warning_id,
+            driver_id=driver_id,
+        )
+        return redirect('car_info', violation.id)
+
+    types = TypeWarning.objects.all()
+
+    context = {
+        'types': types,
+        'driver_id': driver_id,
     }
 
-    return render(request, 'base/search.html', context)
+    return render(request, 'base/test.html', context)

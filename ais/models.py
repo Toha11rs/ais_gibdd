@@ -62,12 +62,18 @@ class Car(models.Model):
 class TypeWarning(models.Model):
     Type = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f"{self.Type}"
+
     class Meta:
         db_table = 'type'
 
 
 class CodeWarning(models.Model):
     Code = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.Code}"
 
     class Meta:
         db_table = 'code'
@@ -76,23 +82,18 @@ class CodeWarning(models.Model):
 class GetWarning(models.Model):
     GetWarning = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f"{self.GetWarning}"
+
     class Meta:
         db_table = 'warning'
-
-
-class TermDeprivation(models.Model):
-    TermDeprivation = models.IntegerField()
-
-    class Meta:
-        db_table = 'termDeprivation'
 
 
 class Violation(models.Model):
     typeWarning = models.ForeignKey(TypeWarning, on_delete=models.CASCADE)
     code = models.ForeignKey(CodeWarning, on_delete=models.CASCADE)
     warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
-    termDeprivation = models.ForeignKey(
-        TermDeprivation, on_delete=models.CASCADE)
+    termDeprivation = models.IntegerField()
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
     class Meta:
