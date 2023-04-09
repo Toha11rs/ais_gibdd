@@ -4,9 +4,8 @@
 <html lang="en">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-          
-            crossorigin="anonymous"></script>
+    
+           
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <head>
     <meta charset="UTF-8">
@@ -51,15 +50,29 @@
             <div>
 
 
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Создать</button>
-                    {% if messages %}
-                    {% for message in messages %}
+               <form method="POST">
+                <h2>Add Violation</h2>
+                {% if messages %}
+                  {% for message in messages %}
                     <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-                {% endfor %}
+                  {% endfor %}
                 {% endif %}
+                <form method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit">Save</button>
+                </form>
+              
+                <h2>Car List</h2>
+                <ul>
+                  {% for car in cars %}
+                    <li>{{ car }}</li>
+                  {% empty %}
+                    <li>No cars found.</li>
+                  {% endfor%}
+
+                    </form>
+
                 <style>
                     .success {
                         color: green;
@@ -68,31 +81,8 @@
             </form>
 
             
-            <a href="#" data-toggle="popover" data-content-src="{% static 'warnings.txt' %}">Забыли код штрафа?</a>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous">
-            
-          </head>
-            <script>
-                $(function () {
-                    $('[data-toggle="popover"]').popover({
-                      html: true,
-                      trigger: 'hover',
-                      content: function () {
-                        var content = $(this).attr("data-content-src");
-                        return $.ajax({
-                          url: '/static/warnings.txt',
-                          type: "GET",
-                          dataType: "text"
-                        }).then(function (data) {
-                          return data;
-                        });
-                      }
-                    });
-                  });
-                </script>
-                </script>
-                </script>
+           
+
                 </script>
                 <style>
                     #code {
@@ -103,8 +93,6 @@
                 </style>
             </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Status, DriverAddress, Car
-from base.forms import SearchForm
+from base.forms import SearchForm, ViolationForm
+from django.contrib import messages
 
 
 def search_driver_license(request):
@@ -37,4 +38,27 @@ def car_info(request, driver_license_id):
     driver = driver_license.driver
     cars = Car.objects.filter(driver=driver)
     address = driver.address
-    return render(request, 'base/search.html', {'cars': cars, 'driver': driver, 'address': address, 'driver_license': driver_license})
+
+    context = {
+        'cars': cars,
+        'driver': driver,
+        'address': address,
+        'driver_license': driver_license,
+    }
+
+    if request.method == 'POST':
+        form = ViolationForm(request.POST)
+        if form.is_valid():
+            violation = form.save(commit=False)
+            violation.driver = driver
+            violation.save()
+            messages.success(request, 'Violation has been created.')
+            return redirect('car_info', driver_license_id=driver_license_id)
+        else:
+            messages.error(request, 'Invalid form data.')
+    else:
+        form = ViolationForm()
+
+    context['form'] = form
+
+    return render(request, 'base/search.html', context)
