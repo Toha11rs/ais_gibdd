@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Status, DriverAddress, Car, TypeWarning, Violation
 from base.forms import SearchForm, ViolationForm, TypeWarningForm
+from django.contrib import messages
 
 
 def search_driver_license(request):
@@ -23,7 +24,7 @@ def driver_info(request, driver_license_id):
     driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
     driver = driver_license.driver
     address = driver.address
-    # car = driver.cars
+
     return render(request, 'base/driver_info.html', {'drivers': driver, 'driver_license': driver_license, "address": address})
 
 
@@ -38,40 +39,26 @@ def car_info(request, driver_license_id):
     cars = Car.objects.filter(driver=driver)
     address = driver.address
 
-    if request.method == 'POST':
-        form = TypeWarningForm(request.POST)
-        if form.is_valid():
-            violation = form.save(commit=False)
-            violation.driver = driver
-            violation.save()
-            return redirect('car_info', driver_license_id=driver_license_id)
-    else:
-        form = TypeWarningForm()
-
     context = {
         'cars': cars,
         'driver': driver,
         'address': address,
         'driver_license': driver_license,
-        'form': form
     }
-    return render(request, 'base/search.html', context)
 
-
-def test(request, driver_id):
     if request.method == 'POST':
-        type_warning_id = request.POST.get('type_warning')
-        violation = Violation.objects.create(
-            typeWarning_id=type_warning_id,
-            driver_id=driver_id,
-        )
-        return redirect('car_info', violation.id)
+        form = ViolationForm(request.POST)
+        if form.is_valid():
+            violation = form.save(commit=False)
+            violation.driver = driver
+            violation.save()
+            messages.success(request, 'Штраф успешно создан',
+                             extra_tags='success')
+            return redirect('car_info', driver_license_id=driver_license_id)
+        else:
+            messages.error(request, 'Invalid form data.')
+    else:
+        form = ViolationForm()
 
-    types = TypeWarning.objects.all()
-
-    context = {
-        'types': types,
-        'driver_id': driver_id,
-    }
-
-    return render(request, 'base/test.html', context)
+    context['form'] = form
+    return render(request, 'base/search.html', context)
