@@ -22,6 +22,6 @@ urlpatterns = [
     path('', views.search_driver_license,
          name='search_driver_license'),
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
-    path('penalty/<int:driver_id>/',
+    path('penalty/<int:driver_license_id>/',
          views.penalty_view, name='penalty_view'),
 ]

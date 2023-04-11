@@ -72,7 +72,7 @@ class Car(models.Model):
 
 
 ###################################
-# VIOLATION
+# PENALTY
 ###################################
 
 class TypeWarning(models.Model):
@@ -105,21 +105,6 @@ class GetWarning(models.Model):
         return f"{self.GetWarning}"
 
 
-class Violation(models.Model):
-    typeWarning = models.ForeignKey(TypeWarning, on_delete=models.CASCADE)
-    code = models.ForeignKey(CodeWarning, on_delete=models.CASCADE)
-    warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
-    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'violation'
-
-
-###################################
-# PENALTY
-###################################
-
-
 class BaseValue (models.Model):
     BaseValue = models.IntegerField()
 
@@ -131,7 +116,7 @@ class BaseValue (models.Model):
 
 
 class District (models.Model):
-    District = models.CharField(max_length=100)
+    District = models.CharField(max_length=200)
 
     class Meta:
         db_table = 'district'
@@ -172,14 +157,31 @@ class Employee(models.Model):
 
 
 class Penalty (models.Model):
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    typeWarning = models.ForeignKey(TypeWarning, on_delete=models.CASCADE)
+    code = models.ForeignKey(CodeWarning, on_delete=models.CASCADE)
+    warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
     PeymantPenalty = models.IntegerField()
-    BaseValue = models.ForeignKey(BaseValue, on_delete=models.CASCADE)
-    DateTime = models.DateTimeField()
-    DeprivationDriving = models.DateField()
-    Disrict = models.ForeignKey(District, on_delete=models.CASCADE)
-    StatusPenalty = models.ForeignKey(StatusPenalty, on_delete=models.CASCADE)
-    Employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    Violation = models.ForeignKey(Violation, on_delete=models.CASCADE)
+    baseValue = models.ForeignKey(BaseValue, on_delete=models.CASCADE)
+    DateTime = models.IntegerField()
+    deprivationDriving = models.IntegerField()
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+    statusPenalty = models.ForeignKey(StatusPenalty, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'penalty'
+
+###################################
+# VIOLATION
+###################################
+
+
+class Violation(models.Model):
+    typeWarning = models.ForeignKey(TypeWarning, on_delete=models.CASCADE)
+    code = models.ForeignKey(CodeWarning, on_delete=models.CASCADE)
+    warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'violation'

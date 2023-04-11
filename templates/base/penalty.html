@@ -7,64 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-  <form method="POST">
-  {% csrf_token %}
-  <label for="typeWarning">Type Warning:</label>
-  <select name="typeWarning" id="typeWarning">
-    {% for type_warning in type_warnings %}
-      <option value="{{ type_warning.pk }}">{{ type_warning }}</option>
-    {% endfor %}
-  </select><br>
 
-  <label for="code">Code:</label>
-  <select name="code" id="code">
-    {% for code_warning in code_warnings %}
-      <option value="{{ code_warning.pk }}">{{ code_warning }}</option>
-    {% endfor %}
-  </select><br>
-
-  <label for="warning">Warning:</label>
-  <select name="warning" id="warning">
-    {% for get_warning in get_warnings %}
-      <option value="{{ get_warning.pk }}">{{ get_warning }}</option>
-    {% endfor %}
-  </select><br>
-
-  <label for="baseValue">Base Value:</label>
-  <select name="baseValue" id="baseValue">
-    {% for base_value in base_values %}
-      <option value="{{ base_value.pk }}">{{ base_value }}</option>
-    {% endfor %}
-  </select><br>
-
-  <label for="dateTime">Date Time:</label>
-  <input type="datetime-local" name="dateTime" id="dateTime"><br>
-
-  <label for="deprivationDriving">Deprivation Driving:</label>
-  <input type="date" name="deprivationDriving" id="deprivationDriving"><br>
-
-  <label for="district">District:</label>
-  <select name="district" id="district">
-    {% for district in districts %}
-      <option value="{{ district.pk }}">{{ district }}</option>
-    {% endfor %}
-  </select><br>
-
-  <label for="statusPenalty">Status Penalty:</label>
-  <select name="statusPenalty" id="statusPenalty">
-    {% for status_penalty in status_penalties %}
-      <option value="{{ status_penalty.pk }}">{{ status_penalty }}</option>
-    {% endfor %}
-  </select><br>
-
-  <label for="employee">Employee:</label>
-  <select name="employee" id="employee">
-    {% for employee in employees %}
-      <option value="{{ employee.pk }}">{{ employee }}</option>
-    {% endfor %}
-  </select><br>
-
-  <button type="submit">Submit</button>
-</form>
+                <form method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit">Выписать штраф</button>
+                </form>
+            
 </body>
 </html>

@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Car, Penalty, BaseValue, District, StatusPenalty, Employee, Violation, TypeWarning, CodeWarning, GetWarning, District, BaseValue, StatusPenalty, Position, Employee, Violation, Penalty
+from ais.models import Driver, DriverLicense, Car
 from base.forms import SearchForm, ViolationForm, PenaltyForm
 from django.contrib import messages
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
 
 
 def search_driver_license(request):
@@ -38,9 +36,9 @@ def car_info(request, driver_license_id):
     if request.method == 'POST':
         form = ViolationForm(request.POST)
         if form.is_valid():
-            violation = form.save(commit=False)
-            violation.driver = driver
-            violation.save()
+            penalty = form.save(commit=False)
+            penalty.driver = driver
+            penalty.save()
             messages.success(request, 'Штраф успешно создан')
             return redirect('car_info', driver_license_id=driver_license_id)
         else:
@@ -53,37 +51,27 @@ def car_info(request, driver_license_id):
     return render(request, 'base/search.html', context)
 
 
-def penalty_view(request, driver_id):
-    driver = Driver.objects.get(id=driver_id)
+def penalty_view(request, driver_license_id):
+    driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
+    driver = driver_license.driver
 
     if request.method == 'POST':
-        violation_form = ViolationForm(request.POST)
-        penalty_form = PenaltyForm(request.POST)
-        if violation_form.is_valid() and penalty_form.is_valid():
-            type_warning = TypeWarning.objects.get(
-                id=request.POST['type_warning'])
-            code_warning = CodeWarning.objects.get(
-                id=request.POST['code_warning'])
-            get_warning = GetWarning.objects.get(
-                id=request.POST['get_warning'])
-
-            # Сохранение новой записи Violation в базу данных
-            violation = Violation.objects.create(
-                typeWarning=type_warning,
-                code=code_warning,
-                warning=get_warning,
-                driver=driver
-            )
-
-            # Сохранение новой записи Penalty в базу данных
-            penalty = penalty_form.save(commit=False)
-            penalty.Violation = violation
+        form = PenaltyForm(request.POST)
+        if form.is_valid():
+            penalty = form.save(commit=False)
+            penalty.driver = driver
             penalty.save()
-
-            return HttpResponseRedirect(f'/driver/{driver_id}/')
-
+            messages.success(request, 'Штраф успешно создан')
+            return redirect('car_info', driver_license_id=driver_license_id)
+        else:
+            messages.error(request, 'Ошибка при созданни штрафа')
     else:
-        violation_form = ViolationForm()
-        penalty_form = PenaltyForm()
+        form = PenaltyForm()
 
-    return render(request, 'base/penalty.html', {'violation_form': violation_form, 'penalty_form': penalty_form})
+    context = {
+        'driver': driver,
+        'form': form
+
+    }
+
+    return render(request, 'base/penalty.html', context)

@@ -1,7 +1,5 @@
 from django import forms
 from ais.models import TypeWarning, CodeWarning, GetWarning, Violation, Penalty, BaseValue, District, StatusPenalty, Employee
-from django.forms.widgets import DateTimeInput
-from django.views.generic.edit import CreateView
 
 
 class SearchForm(forms.Form):
@@ -14,7 +12,7 @@ class ViolationForm(forms.ModelForm):
         queryset=TypeWarning.objects.all(), label="Тип нарушения")
     code = forms.ModelChoiceField(
         queryset=CodeWarning.objects.all(), label="Код нарушения")
-    warning = forms.ModelChoiceField(
+    GetWarning = forms.ModelChoiceField(
         queryset=GetWarning.objects.all(), label="Сделать предупреждение")
 
     class Meta:
@@ -23,21 +21,34 @@ class ViolationForm(forms.ModelForm):
 
 
 class PenaltyForm(forms.ModelForm):
-    BaseValue = forms.ModelChoiceField(
+    typeWarning = forms.ModelChoiceField(
+        queryset=TypeWarning.objects.all(), label="Тип нарушения")
+
+    code = forms.ModelChoiceField(
+        queryset=CodeWarning.objects.all(), label="Код нарушения")
+
+    warning = forms.ModelChoiceField(
+        queryset=GetWarning.objects.all(), label="Сделать предупреждение")
+
+    PeymantPenalty = forms.IntegerField(label="Укажите сумму штрафа")
+
+    DateTime = forms.IntegerField(label="Укажите текущее время")
+
+    deprivationDriving = forms.IntegerField(label="Укажите срок лишения прав")
+
+    baseValue = forms.ModelChoiceField(
         queryset=BaseValue.objects.all(), label="Базовое значение")
 
-    District = forms.ModelChoiceField(
+    district = forms.ModelChoiceField(
         queryset=District.objects.all(), label="Район")
 
-    StatusPenalty = forms.ModelChoiceField(
+    statusPenalty = forms.ModelChoiceField(
         queryset=StatusPenalty.objects.all(), label="Статус штрафа")
 
-    Employee = forms.ModelChoiceField(
+    employee = forms.ModelChoiceField(
         queryset=Employee.objects.all(), label="Сотрудник")
-    Violation = forms.ModelChoiceField(
-        queryset=Violation.objects.all(), label="Нарушение")
 
     class Meta:
         model = Penalty
-        fields = ['PeymantPenalty', 'BaseValue', 'DateTime',
-                  'District', 'StatusPenalty', 'Employee', 'Violation']
+        fields = ['code', 'warning', 'typeWarning', 'PeymantPenalty', 'employee', 'baseValue', 'DateTime',
+                  'deprivationDriving', 'district', 'statusPenalty']
