@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Status, DriverAddress, Car
-from base.forms import SearchForm, ViolationForm
+from ais.models import Driver, DriverLicense, Car, Penalty, BaseValue, District, StatusPenalty, Employee, Violation, TypeWarning, CodeWarning, GetWarning, District, BaseValue, StatusPenalty, Position, Employee, Violation, Penalty
+from base.forms import SearchForm, ViolationForm, PenaltyForm
 from django.contrib import messages
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 def search_driver_license(request):
@@ -18,19 +20,6 @@ def search_driver_license(request):
                 error_message = 'Водительское удостоверение с номером {} не найдено'.format(
                     number)
     return render(request, 'base/search_driver_license.html', {'form': form, 'error_message': error_message})
-
-
-def driver_info(request, driver_license_id):
-    driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
-    driver = driver_license.driver
-    address = driver.address
-    # car = driver.cars
-    return render(request, 'base/driver_info.html', {'drivers': driver, 'driver_license': driver_license, "address": address})
-
-
-def car(request, id):
-    car = get_object_or_404(Car, pk=id)
-    return render(request, 'base/search.html', {'cars': car})
 
 
 def car_info(request, driver_license_id):
@@ -52,13 +41,49 @@ def car_info(request, driver_license_id):
             violation = form.save(commit=False)
             violation.driver = driver
             violation.save()
-            messages.success(request, 'Violation has been created.')
+            messages.success(request, 'Штраф успешно создан')
             return redirect('car_info', driver_license_id=driver_license_id)
         else:
-            messages.error(request, 'Invalid form data.')
+            messages.error(request, 'Ошибка при созданни штрафа')
     else:
         form = ViolationForm()
 
     context['form'] = form
 
     return render(request, 'base/search.html', context)
+
+
+def penalty_view(request, driver_id):
+    driver = Driver.objects.get(id=driver_id)
+
+    if request.method == 'POST':
+        violation_form = ViolationForm(request.POST)
+        penalty_form = PenaltyForm(request.POST)
+        if violation_form.is_valid() and penalty_form.is_valid():
+            type_warning = TypeWarning.objects.get(
+                id=request.POST['type_warning'])
+            code_warning = CodeWarning.objects.get(
+                id=request.POST['code_warning'])
+            get_warning = GetWarning.objects.get(
+                id=request.POST['get_warning'])
+
+            # Сохранение новой записи Violation в базу данных
+            violation = Violation.objects.create(
+                typeWarning=type_warning,
+                code=code_warning,
+                warning=get_warning,
+                driver=driver
+            )
+
+            # Сохранение новой записи Penalty в базу данных
+            penalty = penalty_form.save(commit=False)
+            penalty.Violation = violation
+            penalty.save()
+
+            return HttpResponseRedirect(f'/driver/{driver_id}/')
+
+    else:
+        violation_form = ViolationForm()
+        penalty_form = PenaltyForm()
+
+    return render(request, 'base/penalty.html', {'violation_form': violation_form, 'penalty_form': penalty_form})

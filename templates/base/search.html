@@ -49,24 +49,25 @@
                 </p>
             <div>
 
-
-               <form method="POST">
-                <h2>Выписать штраф</h2>
-                {% if messages %}
-                  {% for message in messages %}
-                    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-                  {% endfor %}
-                {% endif %}
+                
+            {% block ViolationForm %}
                 <form method="POST">
                   {% csrf_token %}
                   {{ form.as_p }}
-                  <button type="submit">Save</button>
+                  <button type="submit">Выписать штраф</button>
                 </form>
-              
-                
+                {% endblock %}
 
-                    </form>
-
+            {% comment %} {% block PenaltyForm %}
+            <form>
+             
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">ОТПРАВИТЬ </button>
+                </form>
+                {% endblock %} {% endcomment %}
+               
                 <style>
                     .success {
                         color: green;

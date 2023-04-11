@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.search_driver_license,
          name='search_driver_license'),
-    path('driver_info/<int:driver_license_id>/',
-         views.driver_info, name='driver_info'),
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
+    path('penalty/<int:driver_id>/',
+         views.penalty_view, name='penalty_view'),
 ]
