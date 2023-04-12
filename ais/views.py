@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Car
-from base.forms import SearchForm, ViolationForm, PenaltyForm
+from ais.models import Driver, DriverLicense, Car, Penalty
+from base.forms import SearchForm, ViolationForm, PenaltyForm, CustomPenaltyForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def search_driver_license(request):
@@ -34,28 +35,6 @@ def car_info(request, driver_license_id):
     }
 
     if request.method == 'POST':
-        form = ViolationForm(request.POST)
-        if form.is_valid():
-            penalty = form.save(commit=False)
-            penalty.driver = driver
-            penalty.save()
-            messages.success(request, 'Штраф успешно создан')
-            return redirect('car_info', driver_license_id=driver_license_id)
-        else:
-            messages.error(request, 'Ошибка при созданни штрафа')
-    else:
-        form = ViolationForm()
-
-    context['form'] = form
-
-    return render(request, 'base/search.html', context)
-
-
-def penalty_view(request, driver_license_id):
-    driver_license = get_object_or_404(DriverLicense, pk=driver_license_id)
-    driver = driver_license.driver
-
-    if request.method == 'POST':
         form = PenaltyForm(request.POST)
         if form.is_valid():
             penalty = form.save(commit=False)
@@ -68,10 +47,15 @@ def penalty_view(request, driver_license_id):
     else:
         form = PenaltyForm()
 
-    context = {
-        'driver': driver,
-        'form': form
+    context['form'] = form
 
-    }
+    return render(request, 'base/search.html', context)
 
-    return render(request, 'base/penalty.html', context)
+
+def RegisterCar(request):
+    return render(request, 'base/registercar.html')
+
+
+def test(request):
+
+    return render(request, 'base/test.html')

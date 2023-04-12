@@ -52,3 +52,16 @@ class PenaltyForm(forms.ModelForm):
         model = Penalty
         fields = ['code', 'warning', 'typeWarning', 'PeymantPenalty', 'employee', 'baseValue', 'DateTime',
                   'deprivationDriving', 'district', 'statusPenalty']
+
+
+class CustomPenaltyForm(PenaltyForm):
+    class Meta:
+        model = Penalty
+        fields = ['code', 'warning', 'typeWarning', 'employee', 'DateTime',
+                  'district', 'statusPenalty', 'PeymantPenalty', 'deprivationDriving', 'baseValue']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['PeymantPenalty'].widget.attrs['style'] = 'display:none'
+        self.fields['deprivationDriving'].widget.attrs['style'] = 'display:none'
+        self.fields['baseValue'].widget.attrs['style'] = 'display:none'

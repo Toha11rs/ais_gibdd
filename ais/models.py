@@ -155,6 +155,9 @@ class Employee(models.Model):
     class Meta:
         db_table = 'employee'
 
+    def __str__(self):
+        return f"{self.Name}"
+
 
 class Penalty (models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)

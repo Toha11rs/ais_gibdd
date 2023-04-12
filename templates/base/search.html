@@ -50,13 +50,13 @@
             <div>
 
                 
-            {% block ViolationForm %}
+            
                 <form method="POST">
                   {% csrf_token %}
                   {{ form.as_p }}
                   <button type="submit">Выписать штраф</button>
                 </form>
-                {% endblock %}
+               
 
             {% comment %} {% block PenaltyForm %}
             <form>
