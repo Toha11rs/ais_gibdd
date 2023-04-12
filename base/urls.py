@@ -19,8 +19,9 @@ from ais import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('serach/', views.search_driver_license,
-         name='search_driver_license'),
+    path('serach/', views.search_driver_license, name='search_driver_license'),
+    path('auth/', views.AuthDriver, name='auth'),
+
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
 
     path('', views.test, name='test'),

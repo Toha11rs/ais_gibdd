@@ -8,6 +8,11 @@ class SearchForm(forms.Form):
         label='Введите номер водительского удостоверения')
 
 
+class AuthForm(forms.Form):
+    number = forms.IntegerField(
+        label='Введите номер водительского ')
+
+
 class ViolationForm(forms.ModelForm):
     typeWarning = forms.ModelChoiceField(
         queryset=TypeWarning.objects.all(), label="Тип нарушения")
