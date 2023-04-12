@@ -1,5 +1,6 @@
 from django import forms
 from ais.models import TypeWarning, CodeWarning, GetWarning, Violation, Penalty, BaseValue, District, StatusPenalty, Employee
+from ais.models import CarInformation, Car
 
 
 class SearchForm(forms.Form):
@@ -52,6 +53,32 @@ class PenaltyForm(forms.ModelForm):
         model = Penalty
         fields = ['code', 'warning', 'typeWarning', 'PeymantPenalty', 'employee', 'baseValue', 'DateTime',
                   'deprivationDriving', 'district', 'statusPenalty']
+
+
+class AuthForms(forms.ModelForm):
+    number = forms.IntegerField(
+        label='Введите номер водительского удостоверения')
+
+
+class CarInformationForm(forms.ModelForm):
+    Number = forms.CharField(max_length=50)
+    Brand = forms.CharField(max_length=50)
+    Model = forms.CharField(max_length=50)
+    Color = forms.CharField(max_length=50)
+    Year = forms.IntegerField()
+    RegistrationDate = forms.IntegerField()
+
+    class Meta:
+        model = CarInformation
+        fields = ['Number', 'Brand', 'Model',
+                  'Color', 'Year', 'RegistrationDate']
+
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Car
+        fields = ['carinformation']
+# class RegisterForm(forms.ModelForm):
 
 
 class CustomPenaltyForm(PenaltyForm):

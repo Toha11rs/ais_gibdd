@@ -25,6 +25,7 @@ urlpatterns = [
 
     path('', views.test, name='test'),
 
-    path('registercar/', views.RegisterCar, name='registercar'),
+    path('registercar/<int:driver_id>/',
+         views.create_car_information, name='registercar'),
 
 ]

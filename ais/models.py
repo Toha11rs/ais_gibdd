@@ -55,7 +55,7 @@ class CarInformation(models.Model):
     Model = models.CharField(max_length=50)
     Color = models.CharField(max_length=50)
     Year = models.IntegerField()
-    RegistrationDate = models.DateField()
+    RegistrationDate = models.IntegerField()
 
     class Meta:
         db_table = 'carInformation'
@@ -65,7 +65,6 @@ class Car(models.Model):
     carinformation = models.ForeignKey(
         CarInformation, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    token = models.IntegerField()
 
     class Meta:
         db_table = 'car'
