@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_datepicker_plus_js %}
+{% bootstrap_datepicker_plus_css %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +17,7 @@
         {% csrf_token %}
         <input type="hidden" name="driver_id" value="{{ driver_id }}">
         {{ car_information_form.as_p }}
-        <button type="submit">Create</button>
+        <button type="submit">Зарегестрировать машину</button>
       </form>
 </body>
 </html>

@@ -55,7 +55,7 @@ class CarInformation(models.Model):
     Model = models.CharField(max_length=50)
     Color = models.CharField(max_length=50)
     Year = models.IntegerField()
-    RegistrationDate = models.IntegerField()
+    RegistrationDate = models.DateField()
 
     class Meta:
         db_table = 'carInformation'

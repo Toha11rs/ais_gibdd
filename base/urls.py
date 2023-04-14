@@ -18,13 +18,14 @@ from django.urls import path
 from ais import views
 
 urlpatterns = [
+    path('test', views.test, name='test'),
     path('admin/', admin.site.urls),
     path('serach/', views.search_driver_license, name='search_driver_license'),
     path('auth/', views.AuthDriver, name='auth'),
 
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
 
-    path('', views.test, name='test'),
+    path('', views.main, name='main'),
 
     path('registercar/<int:driver_id>/',
          views.create_car_information, name='registercar'),

@@ -1,6 +1,9 @@
 from django import forms
 from ais.models import TypeWarning, CodeWarning, GetWarning, Violation, Penalty, BaseValue, District, StatusPenalty, Employee
 from ais.models import CarInformation, Car
+from django.forms.widgets import DateInput
+from datetime import date
+from django import forms
 
 
 class SearchForm(forms.Form):
@@ -71,7 +74,8 @@ class CarInformationForm(forms.ModelForm):
     Model = forms.CharField(max_length=50)
     Color = forms.CharField(max_length=50)
     Year = forms.IntegerField()
-    RegistrationDate = forms.IntegerField()
+    RegistrationDate = forms.DateField(
+        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
 
     class Meta:
         model = CarInformation
@@ -83,17 +87,3 @@ class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = ['carinformation']
-# class RegisterForm(forms.ModelForm):
-
-
-class CustomPenaltyForm(PenaltyForm):
-    class Meta:
-        model = Penalty
-        fields = ['code', 'warning', 'typeWarning', 'employee', 'DateTime',
-                  'district', 'statusPenalty', 'PeymantPenalty', 'deprivationDriving', 'baseValue']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['PeymantPenalty'].widget.attrs['style'] = 'display:none'
-        self.fields['deprivationDriving'].widget.attrs['style'] = 'display:none'
-        self.fields['baseValue'].widget.attrs['style'] = 'display:none'

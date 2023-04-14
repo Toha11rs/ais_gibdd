@@ -5,6 +5,16 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponseBadRequest
 
 
+def main(request):
+
+    return render(request, 'base/main.html')
+
+
+def test(request):
+
+    return render(request, 'base/test.html')
+
+
 def search_driver_license(request):
     form = SearchForm()
     error_message = ''
@@ -21,9 +31,34 @@ def search_driver_license(request):
     return render(request, 'base/search_driver_license.html', {'form': form, 'error_message': error_message})
 
 
+def create_car_information(request, driver_id):
+    driver = get_object_or_404(Driver, pk=driver_id)
+
+    if request.method == 'POST':
+        car_information_form = CarInformationForm(request.POST)
+        if car_information_form.is_valid():
+            car_information = car_information_form.save(commit=False)
+            car_information.driver = driver
+            car_information.save()
+
+            car = Car(carinformation=car_information, driver=driver)
+            car.save()
+
+            return redirect('registercar', driver_id=driver_id)
+
+    else:
+        car_information_form = CarInformationForm()
+
+    context = {
+        'car_information_form': car_information_form
+    }
+
+    return render(request, 'base/registercar.html', context)
+
+
 def AuthDriver(request):
     form = AuthForm()
-    error_message = 'erorrorro'
+    error_message = 'errror:('
     if request.method == 'POST':
         form = AuthForm(request.POST)
         if form.is_valid():
@@ -65,33 +100,3 @@ def car_info(request, driver_license_id):
     context['form'] = form
 
     return render(request, 'base/search.html', context)
-
-
-def create_car_information(request, driver_id):
-    driver = get_object_or_404(Driver, pk=driver_id)
-
-    if request.method == 'POST':
-        car_information_form = CarInformationForm(request.POST)
-        if car_information_form.is_valid():
-            car_information = car_information_form.save(commit=False)
-            car_information.driver = driver
-            car_information.save()
-
-            car = Car(carinformation=car_information, driver=driver)
-            car.save()
-
-            return redirect('registercar', driver_id=driver_id)
-
-    else:
-        car_information_form = CarInformationForm()
-
-    context = {
-        'car_information_form': car_information_form
-    }
-
-    return render(request, 'base/registercar.html', context)
-
-
-def test(request):
-
-    return render(request, 'base/test.html')
