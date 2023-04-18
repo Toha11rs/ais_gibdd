@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Employee Info</title>
 </head>
 <body>
-  <p>тест пагес</p>
+  <h1>Employee Information</h1>
+  <ul>
+    {% for employee in employees %}
+    <li>Name: {{ employee.name }}</li>
+    <li>Number: {{ employee.number }}</li>
+    <li>patronimyc: {{ employee.patronimyc }}</li>
+    {% endfor %}
+  </ul>
 </body>
 </html>

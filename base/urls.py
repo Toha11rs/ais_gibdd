@@ -29,5 +29,6 @@ urlpatterns = [
 
     path('registercar/<int:driver_id>/',
          views.create_car_information, name='registercar'),
+    path('entryEmployee', views.entryEmployee, name='entryEmployee')
 
 ]

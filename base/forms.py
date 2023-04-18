@@ -11,6 +11,11 @@ class SearchForm(forms.Form):
         label='Введите номер водительского удостоверения')
 
 
+class EntryEmployeeForm(forms.Form):
+    name = forms.CharField(max_length=50, required=False)
+    number = forms.IntegerField()
+
+
 class AuthForm(forms.Form):
     number = forms.IntegerField(
         label='Введите номер водительского ')

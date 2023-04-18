@@ -23,6 +23,7 @@ class Driver(models.Model):
     class Meta:
         db_table = 'driver'
 
+
 ###################################
 # DRIVER_LICENSE
 ###################################
@@ -143,19 +144,28 @@ class Position(models.Model):
     def __str__(self):
         return f"{self.Position}"
 
+###################################
+# EMPLOYEE
+###################################
+
 
 class Employee(models.Model):
-    Name = models.CharField(max_length=100)
-    Surname = models.CharField(max_length=100)
-    Patronimyc = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+    patronimyc = models.CharField(max_length=100)
     PhoneNumber = models.CharField(max_length=100)
     Position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    number = models.IntegerField()
 
     class Meta:
         db_table = 'employee'
 
     def __str__(self):
-        return f"{self.Name}"
+        return f"{self.name}"
+
+###################################
+# Penalty
+###################################
 
 
 class Penalty (models.Model):

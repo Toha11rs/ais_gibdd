@@ -1,0 +1,12 @@
+
+{% block content %}
+  <h1>Вход для сторуднкиов</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+  </form>
+  {% if error %}
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
+  {% endif %}
+{% endblock %}

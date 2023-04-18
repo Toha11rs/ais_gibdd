@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Car, Penalty
-from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm
+from ais.models import Driver, DriverLicense, Car, Employee
+from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseBadRequest
 
@@ -11,8 +11,9 @@ def main(request):
 
 
 def test(request):
+    employees = Employee.objects.all()
 
-    return render(request, 'base/test.html')
+    return render(request, 'base/test.html', {'employees': employees})
 
 
 def search_driver_license(request):
@@ -29,6 +30,23 @@ def search_driver_license(request):
                 error_message = 'Водительское удостоверение с номером {} не найдено'.format(
                     number)
     return render(request, 'base/search_driver_license.html', {'form': form, 'error_message': error_message})
+
+
+def entryEmployee(request):
+    if request.method == 'POST':
+        form = EntryEmployeeForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            number = form.cleaned_data['number']
+            try:
+                Employee.objects.get(name=name, number=number)
+                return redirect('test')
+            except Employee.DoesNotExist:
+                error = "Такого сотруднкиа не существует"
+                return render(request, 'base/entryEmployee.html', {'form': form, 'error': error})
+    else:
+        form = EntryEmployeeForm()
+    return render(request, 'base/entryEmployee.html', {'form': form})
 
 
 def create_car_information(request, driver_id):
