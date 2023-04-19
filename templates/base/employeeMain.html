@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Сотрудники ГИБДД</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<header>
+    <h1>Заголовок главной страницы</h1>
+  
+  </header>
+  <a href="{% url 'entryEmployee' %}" class="btn btn-link">Вернуться на страницу входа</a>
+<body>
+
+    <div class="d-flex align-items-center justify-content-center h-100">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card-body text-center">
+              <a href="{% url 'search_driver_license' %}" class="btn btn-lg btn-primary mb-3">Выписать штраф</a>
+              <p></p>
+                <a href="{% url 'auth' %}" class="btn btn-lg btn-primary mb-3">Поставить машину на учет</a>
+                <p></p>
+            </div>
+          
+          </div>
+          <div class="container">
+            <h2>Статистика нарушений по районам</h2>
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Район</th>
+                  <th>Количество штрафов</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for district, count in data.items %}
+                  <tr>
+                    <td>{{ district }}</td>
+                    <td>{{ count }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

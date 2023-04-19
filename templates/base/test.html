@@ -1,15 +1,17 @@
-<html>
-<head>
-  <title>Employee Info</title>
-</head>
-<body>
-  <h1>Employee Information</h1>
-  <ul>
-    {% for employee in employees %}
-    <li>Name: {{ employee.name }}</li>
-    <li>Number: {{ employee.number }}</li>
-    <li>patronimyc: {{ employee.patronimyc }}</li>
-    {% endfor %}
-  </ul>
-</body>
-</html>
+<h1>Статистика штрафов по районам</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Район</th>
+                <th>Количество штрафов</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for district, count in data.items %}
+                <tr>
+                    <td>{{ district }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>

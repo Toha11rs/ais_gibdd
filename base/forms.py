@@ -12,8 +12,9 @@ class SearchForm(forms.Form):
 
 
 class EntryEmployeeForm(forms.Form):
-    name = forms.CharField(max_length=50, required=False)
-    number = forms.IntegerField()
+    name = forms.CharField(max_length=50, required=False,
+                           label="Имя")
+    number = forms.IntegerField(label="Номер сотрудника")
 
 
 class AuthForm(forms.Form):
@@ -74,11 +75,11 @@ class AuthForms(forms.ModelForm):
 
 
 class CarInformationForm(forms.ModelForm):
-    Number = forms.CharField(max_length=50)
-    Brand = forms.CharField(max_length=50)
-    Model = forms.CharField(max_length=50)
-    Color = forms.CharField(max_length=50)
-    Year = forms.IntegerField()
+    Number = forms.CharField(max_length=50, label="Номер автомобиля")
+    Brand = forms.CharField(max_length=50, label="Марка автомобиля")
+    Model = forms.CharField(max_length=50, label="Модель автомобиля")
+    Color = forms.CharField(max_length=50, label="Цвет автомотбиля")
+    Year = forms.IntegerField(label="Год автомобиля")
     RegistrationDate = forms.DateField(
         initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
 

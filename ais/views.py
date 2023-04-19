@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Car, Employee
+from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseBadRequest
+from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 
 
 def main(request):
@@ -11,9 +13,19 @@ def main(request):
 
 
 def test(request):
-    employees = Employee.objects.all()
-
-    return render(request, 'base/test.html', {'employees': employees})
+    penalty_counts = Penalty.objects.values(
+        'district__District').annotate(count=Count('id'))
+    districts = District.objects.annotate(
+        num_penalties=Count('penalty')).order_by('-num_penalties')
+    data = {}
+    for district in districts:
+        data[district.District] = 0
+    for penalty_count in penalty_counts:
+        data[penalty_count['district__District']] = penalty_count['count']
+    context = {
+        'data': data
+    }
+    return render(request, 'base/test.html', context)
 
 
 def search_driver_license(request):
@@ -40,7 +52,7 @@ def entryEmployee(request):
             number = form.cleaned_data['number']
             try:
                 Employee.objects.get(name=name, number=number)
-                return redirect('test')
+                return redirect('EmployeeMain')
             except Employee.DoesNotExist:
                 error = "Такого сотруднкиа не существует"
                 return render(request, 'base/entryEmployee.html', {'form': form, 'error': error})
@@ -76,7 +88,7 @@ def create_car_information(request, driver_id):
 
 def AuthDriver(request):
     form = AuthForm()
-    error_message = 'errror:('
+    error_message = ''
     if request.method == 'POST':
         form = AuthForm(request.POST)
         if form.is_valid():
@@ -118,3 +130,19 @@ def car_info(request, driver_license_id):
     context['form'] = form
 
     return render(request, 'base/search.html', context)
+
+
+def EmployeeMain(request):
+    penalty_counts = Penalty.objects.values(
+        'district__District').annotate(count=Count('id'))
+    districts = District.objects.annotate(
+        num_penalties=Count('penalty')).order_by('-num_penalties')
+    data = {}
+    for district in districts:
+        data[district.District] = 0
+    for penalty_count in penalty_counts:
+        data[penalty_count['district__District']] = penalty_count['count']
+    context = {
+        'data': data
+    }
+    return render(request, 'base/employeeMain.html', context)
