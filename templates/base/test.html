@@ -1,17 +1,55 @@
-<h1>Статистика штрафов по районам</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Район</th>
-                <th>Количество штрафов</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for district, count in data.items %}
-                <tr>
-                    <td>{{ district }}</td>
-                    <td>{{ count }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Сайт ГИБДД Москва</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Новости</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Добро пожаловать на сайт ГИБДД Москва</h1>
+      <p>Здесь вы можете найти различную информацию о работе Государственной инспекции безопасности дорожного движения в Москве.</p>
+    </section>
+
+    <section>
+      <h2>Новости ГИБДД Москва</h2>
+      <ul>
+        <li><a href="#">Новость 1</a></li>
+        <li><a href="#">Новость 2</a></li>
+        <li><a href="#">Новость 3</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Услуги ГИБДД Москва</h2>
+      <ul>
+        <li><a href="#">Услуга 1</a></li>
+        <li><a href="#">Услуга 2</a></li>
+        <li><a href="#">Услуга 3</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Контакты ГИБДД Москва</h2>
+      <p>Адрес: г. Москва, ул. Неглинная, д. 23</p>
+      <p>Телефон: +7 (495) 123-45-67</p>
+      <p>Email: info@gibdd-moscow.ru</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 ГИБДД Москва</p>
+  </footer>
+</body>
+</html>

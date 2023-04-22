@@ -73,7 +73,7 @@ def create_car_information(request, driver_id):
 
             car = Car(carinformation=car_information, driver=driver)
             car.save()
-
+            messages.success(request, 'Машина зарегистрирована успешно!')
             return redirect('registercar', driver_id=driver_id)
 
     else:
@@ -83,7 +83,7 @@ def create_car_information(request, driver_id):
         'car_information_form': car_information_form
     }
 
-    return render(request, 'base/registercar.html', context)
+    return render(request, 'base/registercar.html', context,)
 
 
 def AuthDriver(request):

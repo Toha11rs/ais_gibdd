@@ -20,13 +20,14 @@
         <hr>
         <div style="overflow: hidden;">
             <div style="float: right; width: 30%;">
-                {% for car in cars %}
                 <h1>Информация об автомобиле:</h1>
+                {% for car in cars %}
                 <p>Марка: {{ car.carinformation.Brand }}</p>
                 <p>Модель: {{ car.carinformation.Model }}</p>
                 <p>Цвет: {{ car.carinformation.Color }}</p>
                 <p>Год выпуска: {{ car.carinformation.Year }}</p>
                 <p>Дата регистрации: {{ car.carinformation.RegistrationDate }}</p>
+                <p>----------------------------------------------------</p>
                 {% endfor %} 
             </div>
 

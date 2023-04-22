@@ -175,7 +175,7 @@ class Penalty (models.Model):
     warning = models.ForeignKey(GetWarning, on_delete=models.CASCADE)
     PeymantPenalty = models.IntegerField()
     baseValue = models.ForeignKey(BaseValue, on_delete=models.CASCADE)
-    DateTime = models.IntegerField()
+    DateTime = models.DateField()
     deprivationDriving = models.IntegerField()
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     statusPenalty = models.ForeignKey(StatusPenalty, on_delete=models.CASCADE)
