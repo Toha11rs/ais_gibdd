@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Инвестиции | Hard5</title>
+    <title>Панель сотрудника ГАИ</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -122,14 +122,20 @@
                     <i class="bi bi-grid"></i>
                     <span>Статистика</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed"  href="">
-                    <i class="bi bi-clipboard-data"></i><span>Мои акции</span></i>
+                <a class="nav-link collapsed"  href="{% url 'search_driver_license' %}">
+                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
                 </a>
                 
-              </li><!-- End Forms Nav -->
+              </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed"  href="{% url 'auth' %}">
+                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                </a>
+                
+              </li>
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -154,111 +160,48 @@
                     <div class="row">
 
                         <!-- Reports -->
-                        <div class="col-12">
-                            <div class="card">
-
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title">Статистика </h5>
-                                    
-                                    <div id="reportsChart"></div>
-                                    <table class="table">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">Район</th>                                     
-                                                <th scope="col">Количество</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                           
-                                            {% for district, count in data.items %}
-                                                    <tr>
-                                                      <td>{{ district }}</td>
-                                                      <td>{{ count }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-                                            
-                                        </tbody>
-                                    </table>
-                                    <!-- End Line Chart -->
-                                </div>
-                            </div>
-                        </div><!-- End Reports -->
-
+                       
 
 
 
 
                     </div>
-                </div><!-- End Left side columns -->
+                </div>
 
-                <!-- Right side columns -->
-                <div class="col-lg-4">
+              
+                <body>
+                  <a href="{% url 'EmployeeMain' %}" class="btn btn-link">Вернуться в главную панель</a>
+                  <h1>Введите номер водительского удостовренеия водителя</h1>
+                  <form method="post">
+                    {% csrf_token %}
+                    {{ form.number }}
+                    <button type="submit">Найти</button>
+                  </form>
+                  {% if error_message %}
+                    <p>{{ error_message }}</p>
+                  {% endif %}
+                  <p>Памятка для сотрудника ГИБДД при выписывании штрафа</p>
+                  <ol>
+                    <li>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
+                    <li>Убедитесь, что штраф выписывается в соответствии с размерами, установленными законом. Если нарушение не является крупным или особо крупным, то размер штрафа должен быть установлен в пределах законодательных норм.</li>
+                    <li>Заполните бланк штрафного талона согласно установленным правилам. В бланке должны быть указаны данные о водителе и автомобиле, а также описано нарушение, совершенное водителем.</li>
+                    <li>Объясните водителю, как он может оплатить штраф. Укажите способы оплаты (через банк, по почте и т.д.) и сроки оплаты.</li>
+                    <li>Выдайте водителю копию штрафного талона. Объясните, что это означает, и что он должен делать с копией.</li>
+                    <li>Важно помнить, что выписывать штрафы нужно в рамках закона и только в тех случаях, когда нарушение действительно имеет место. Если вы не уверены в правильности своих действий, проконсультируйтесь со своим начальством.</li>
+                  </ol>
+                </body>
 
-                    <!-- News & Updates Traffic -->
-                    <div class="card">
+                  
+                
 
-                        <div class="card-body pb-0">
-                            <h5 class="card-title">Новости</h5>
-
-                            <div class="news">
-                      <div class="post-item clearfix">
-                          <img src="/static/assets/img/news3.jpg" alt="">
-                          <h4><a href="#">Почему крах банков США — это хорошие новости для фондового рынка?</a></h4>
-                          <p>В начале недели произошел резкий спад акций региональных банков США...
-
-                          </p>
-                      </div>
-
-                      <div class="post-item clearfix">
-                          <img src="/static/assets/img/news4.jpg" alt="">
-                          <h4><a href="#">Газпром назвал условие для газификации Забайкалья и Бурятии</a></h4>
-                          <p>Газпром готов газицировать Забайкалье и Бурятию в 2029-2030 гг...
-                          </p>
-                      </div>
-
-                      <div class="post-item clearfix">
-                          <img src="/static/assets/img/news5.jpg" alt="">
-                          <h4><a href="#">Amazon запустит спутники для передачи интернета в 2024 году</a></h4>
-                          <p>Amazon в 2024 году намерена запустить на орбиту первые спутники в рамках проекта...
-                          </p>
-                      </div>
-
-                      <div class="post-item clearfix">
-                          <img src="/static/assets/img/news2.jpg" alt="">
-                          <h4><a href="#">Торги акциями некоторых банков США приостановлены из-за обвала котировок</a></h4>
-                          <p>Торги акциями нескольких американских банков были приостановлены после открытия...
-                          </p>
-                      </div>
-
-                      <div class="post-item clearfix">
-                          <img src="/static/assets/img/news1.jpg" alt="">
-                          <h4><a href="#">Московская биржа рекомендовала выплатить дивиденды за 2022 год</a></h4>
-                          <p>Набсовет Московской биржи рекомендовал выплатить дивиденды за 2022 год в размере 4,84 руб...</p>
-                      </div>
-
-                  </div><!-- End sidebar recent posts-->
-
-                        </div>
-                    </div><!-- End News & Updates -->
-
-                </div><!-- End Right side columns -->
-
+                
             </div>
         </section>
 
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>ChapmanTeam | Hard5</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            
-            Designed by <a>ChapmanTeam | Hard5</a>
-        </div>
-    </footer><!-- End Footer -->
+  
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>

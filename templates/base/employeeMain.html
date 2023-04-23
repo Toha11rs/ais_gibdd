@@ -41,7 +41,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="" class="logo d-flex align-items-center">
-                <img src="/static/assets/img/logo.png" alt="">
+                <img src="/static/images/gibdd.png" alt="">
                 <span class="d-none d-lg-block">Hard5</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -122,14 +122,20 @@
                     <i class="bi bi-grid"></i>
                     <span>Статистика</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed"  href="{% url 'search_driver_license' %}">
                     <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
                 </a>
                 
-              </li><!-- End Forms Nav -->
+              </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed"  href="{% url 'auth' %}">
+                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                </a>
+                
+              </li>
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -159,7 +165,7 @@
 
                                 
                                 <div class="card-body">
-                                    <h5 class="card-title">Статистика </h5>
+                                    <h5 class="card-title"></h5>
                                     
                                     <div id="reportsChart"></div>
                                     <table class="table">
