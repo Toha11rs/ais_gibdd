@@ -13,9 +13,9 @@ class SearchForm(forms.Form):
 
 
 class EntryEmployeeForm(forms.Form):
-    name = forms.CharField(max_length=50, required=False,
-                           label="Имя")
-    number = forms.IntegerField(label="Номер сотрудника")
+    number = forms.CharField(max_length=50, required=False,
+                             label="Номер сотрудника")
+    password = forms.IntegerField(label="Пароль")
 
 
 class AuthForm(forms.Form):

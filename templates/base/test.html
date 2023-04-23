@@ -1,55 +1,281 @@
+<!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Сайт ГИБДД Москва</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Инвестиции | Hard5</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/static/assets/img/logo.png" rel="icon">
+    <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+
+
 </head>
+
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">О нас</a></li>
-        <li><a href="#">Новости</a></li>
-        <li><a href="#">Контакты</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <section>
-      <h1>Добро пожаловать на сайт ГИБДД Москва</h1>
-      <p>Здесь вы можете найти различную информацию о работе Государственной инспекции безопасности дорожного движения в Москве.</p>
-    </section>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <section>
-      <h2>Новости ГИБДД Москва</h2>
-      <ul>
-        <li><a href="#">Новость 1</a></li>
-        <li><a href="#">Новость 2</a></li>
-        <li><a href="#">Новость 3</a></li>
-      </ul>
-    </section>
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="" class="logo d-flex align-items-center">
+                <img src="/static/assets/img/logo.png" alt="">
+                <span class="d-none d-lg-block">Hard5</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
 
-    <section>
-      <h2>Услуги ГИБДД Москва</h2>
-      <ul>
-        <li><a href="#">Услуга 1</a></li>
-        <li><a href="#">Услуга 2</a></li>
-        <li><a href="#">Услуга 3</a></li>
-      </ul>
-    </section>
+        
 
-    <section>
-      <h2>Контакты ГИБДД Москва</h2>
-      <p>Адрес: г. Москва, ул. Неглинная, д. 23</p>
-      <p>Телефон: +7 (495) 123-45-67</p>
-      <p>Email: info@gibdd-moscow.ru</p>
-    </section>
-  </main>
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
 
-  <footer>
-    <p>&copy; 2023 ГИБДД Москва</p>
-  </footer>
+                <li class="nav-item d-block d-lg-none ">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+
+                  <li class="nav-item dropdown pe-3">
+
+                  
+          
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                      <li class="dropdown-header">
+                       
+           
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+          
+                      <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                          <i class="bi bi-person"></i>
+                          <span>Профиль</span>
+                        </a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+          
+                      <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                          <i class="bi bi-gear"></i>
+                          <span>Настройки</span>
+                        </a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+          
+                      <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                          <i class="bi bi-box-arrow-right"></i>
+                          
+
+
+
+                        </a>
+                      </li>
+          
+                    </ul><!-- End Profile Dropdown Items -->
+                  </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <i class="bi bi-grid"></i>
+                    <span>Статистика</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed"  href="">
+                    <i class="bi bi-clipboard-data"></i><span>Мои акции</span></i>
+                </a>
+                
+              </li><!-- End Forms Nav -->
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Статистика</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Главная страница</a></li>
+                    <li class="breadcrumb-item active">Статистика</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section dashboard">
+            <div class="row">
+
+                <!-- Left side columns -->
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <!-- Reports -->
+                        <div class="col-12">
+                            <div class="card">
+
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title">Статистика </h5>
+                                    
+                                    <div id="reportsChart"></div>
+                                    <table class="table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Район</th>                                     
+                                                <th scope="col">Количество</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                            {% for district, count in data.items %}
+                                                    <tr>
+                                                      <td>{{ district }}</td>
+                                                      <td>{{ count }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                            
+                                        </tbody>
+                                    </table>
+                                    <!-- End Line Chart -->
+                                </div>
+                            </div>
+                        </div><!-- End Reports -->
+
+
+
+
+
+                    </div>
+                </div><!-- End Left side columns -->
+
+                <!-- Right side columns -->
+                <div class="col-lg-4">
+
+                    <!-- News & Updates Traffic -->
+                    <div class="card">
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Новости</h5>
+
+                            <div class="news">
+                      <div class="post-item clearfix">
+                          <img src="/static/assets/img/news3.jpg" alt="">
+                          <h4><a href="#">Почему крах банков США — это хорошие новости для фондового рынка?</a></h4>
+                          <p>В начале недели произошел резкий спад акций региональных банков США...
+
+                          </p>
+                      </div>
+
+                      <div class="post-item clearfix">
+                          <img src="/static/assets/img/news4.jpg" alt="">
+                          <h4><a href="#">Газпром назвал условие для газификации Забайкалья и Бурятии</a></h4>
+                          <p>Газпром готов газицировать Забайкалье и Бурятию в 2029-2030 гг...
+                          </p>
+                      </div>
+
+                      <div class="post-item clearfix">
+                          <img src="/static/assets/img/news5.jpg" alt="">
+                          <h4><a href="#">Amazon запустит спутники для передачи интернета в 2024 году</a></h4>
+                          <p>Amazon в 2024 году намерена запустить на орбиту первые спутники в рамках проекта...
+                          </p>
+                      </div>
+
+                      <div class="post-item clearfix">
+                          <img src="/static/assets/img/news2.jpg" alt="">
+                          <h4><a href="#">Торги акциями некоторых банков США приостановлены из-за обвала котировок</a></h4>
+                          <p>Торги акциями нескольких американских банков были приостановлены после открытия...
+                          </p>
+                      </div>
+
+                      <div class="post-item clearfix">
+                          <img src="/static/assets/img/news1.jpg" alt="">
+                          <h4><a href="#">Московская биржа рекомендовала выплатить дивиденды за 2022 год</a></h4>
+                          <p>Набсовет Московской биржи рекомендовал выплатить дивиденды за 2022 год в размере 4,84 руб...</p>
+                      </div>
+
+                  </div><!-- End sidebar recent posts-->
+
+                        </div>
+                    </div><!-- End News & Updates -->
+
+                </div><!-- End Right side columns -->
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>ChapmanTeam | Hard5</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            
+            Designed by <a>ChapmanTeam | Hard5</a>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/static/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="/static/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="/static/assets/vendor/quill/quill.min.js"></script>
+    <script src="/static/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/static/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/assets/js/main.js"></script>
+
 </body>
+
 </html>

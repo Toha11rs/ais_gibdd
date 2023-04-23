@@ -1,7 +1,26 @@
 .header {
-    background-color: red;
+    background: #0072CE;
 }
 
 .logo {
-    width: 800px;
+    width: 80px;
+}
+
+.text1 {
+    color: white;
+    top: 51px;
+    top: 3.1875rem;
+    left: 108px;
+    left: 6.75rem;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 25px;
+    font-size: 1.5625rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.text2 {
+    color: aliceblue;
 }

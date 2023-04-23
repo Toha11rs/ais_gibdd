@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
@@ -48,10 +48,10 @@ def entryEmployee(request):
     if request.method == 'POST':
         form = EntryEmployeeForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
             number = form.cleaned_data['number']
+            password = form.cleaned_data['password']
             try:
-                Employee.objects.get(name=name, number=number)
+                Employee.objects.get(number=number, password=password)
                 return redirect('EmployeeMain')
             except Employee.DoesNotExist:
                 error = "Такого сотруднкиа не существует"

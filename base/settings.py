@@ -42,6 +42,7 @@ LOGOUT_URL = 'logout'
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'ais',
     'django.contrib.admin',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'base.urls'

@@ -156,6 +156,7 @@ class Employee(models.Model):
     PhoneNumber = models.CharField(max_length=100)
     Position = models.ForeignKey(Position, on_delete=models.CASCADE)
     number = models.IntegerField()
+    password = models.CharField(max_length=100)
 
     class Meta:
         db_table = 'employee'
