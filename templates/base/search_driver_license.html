@@ -40,11 +40,11 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="" class="logo d-flex align-items-center">
+            <a href="{% url 'main' %}" class="logo d-flex align-items-center">
               <img src="/static/images/gibdd.png" alt="">
                 <span class="d-none d-lg-block">ГИБДД</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+         
         </div><!-- End Logo -->
 
         
@@ -170,26 +170,36 @@
                     
               
   
-                
-                  <div class="form-group mx-sm-3 mb-2">
+                <div>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="pt-4 pb-2">
                   <br>
-                  <h1>Введите номер водительского удостовренеия водителя</h1>
+                  <h1>Введите номер водительского удостовренеия</h1>
                   <form method="post" class="form-inline">
                     {% csrf_token %}
                    
                       <label for="floatingInput" class="sr-only">Введите номер</label>
                       {{ form.number }}
                       <button type="submit" class="btn btn-primary mb-2">Найти</button>
+                      {% if error_message %}
+                        <p>{{ error_message }}</p>
+                      {% endif %}
+                    </form>
                     </div>
-                  </form>
+                    </div>
+                    </div>
+                    
+                    
+                    
 
-                  {% if error_message %}
-                    <p>{{ error_message }}</p>
-                  {% endif %}
                   <div  calss = 'pam1'>
-                    <br>
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="pt-4 pb-2">
+                   
                     <p>Памятка для сотрудника ГИБДД при выписывании штрафа:<p>
-                    <br>
+                   
                     <ol>
                       <li>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
                       <p></p>

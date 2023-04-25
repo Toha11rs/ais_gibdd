@@ -48,7 +48,8 @@ class PenaltyForm(forms.ModelForm):
 
     PeymantPenalty = forms.IntegerField(label="Укажите сумму штрафа")
 
-    DateTime = forms.IntegerField(label="Укажите текущее время")
+    DateTime = forms.DateField(
+        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
 
     deprivationDriving = forms.IntegerField(label="Укажите срок лишения прав")
 
@@ -94,10 +95,6 @@ class CarInformationForm(forms.ModelForm):
 
     Year = YearField(label="Год автомобиля", widget=forms.TextInput(
         attrs={'placeholder': 'Пример: 2020'}))
-
-    # Year = YearField(label="Год автомобиля", validators=[RegexValidator(
-    #     r'^\d{4}$', 'Неправильно введен год')],
-    #     widget=forms.TextInput(attrs={'placeholder': 'Пример: 2000'}))
 
     RegistrationDate = forms.DateField(
         initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
