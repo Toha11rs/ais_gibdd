@@ -171,7 +171,7 @@ body {
 .navelem:hover {
   text-decoration: none;
   color: #fff;
-
+  /* Цвет ссылки при наведении на нее курсора мыши */
   background: #0072CE;
   border: 5px solid #0072CE;
 }
