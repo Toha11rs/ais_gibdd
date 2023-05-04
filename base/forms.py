@@ -77,21 +77,10 @@ class AuthForms(forms.ModelForm):
 
 
 class CarInformationForm(forms.ModelForm):
-    Number = forms.CharField(max_length=50, label="Номер автомобиля",
-                             validators=[RegexValidator(
-                                 r'^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3}$', 'Неправильно введен номер')],
-                             widget=forms.TextInput(attrs={'placeholder': 'Пример: H735HM177'}))
-
-    Brand = forms.CharField(max_length=50, label="Марка автомобиля",
-                            widget=forms.TextInput(attrs={'placeholder': 'Пример: LADA'}), validators=[
-                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена марка')])
-    Model = forms.CharField(max_length=50, label="Модель автомобиля",
-                            widget=forms.TextInput(
-                                attrs={'placeholder': 'Пример: VESTA'}), validators=[
-                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена модель')])
-    Color = forms.CharField(max_length=50, label="Цвет автомобиля",
-                            widget=forms.TextInput(attrs={'placeholder': 'Пример: Blue'}), validators=[
-                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильно введен цвет')])
+    Number = forms.CharField(max_length=50, label="Номер автомобиля")
+    Brand = forms.CharField(max_length=50, label="Марка автомобиля")
+    Model = forms.CharField(max_length=50, label="Модель автомобиля")
+    Color = forms.CharField(max_length=50, label="Цвет автомотбиля")
 
     Year = YearField(label="Год автомобиля", widget=forms.TextInput(
         attrs={'placeholder': 'Пример: 2020'}))

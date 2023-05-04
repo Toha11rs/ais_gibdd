@@ -1,228 +1,189 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Неофициальный сайт Гоставтоиспекции</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <title>Панель сотрудника ГАИ</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="/static/assets/img/logo.png" rel="icon">
-    <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/static/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="/static/assets/css/style.css" rel="stylesheet">
-
-
-</head>
-
-<body>
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="" class="logo d-flex align-items-center">
-                <img src="/static/assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Hard5</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-        
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none ">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-
-                  <li class="nav-item dropdown pe-3">
-
-                  
-          
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                      <li class="dropdown-header">
-                       
-           
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-person"></i>
-                          <span>Профиль</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-gear"></i>
-                          <span>Настройки</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-box-arrow-right"></i>
-                          
-
-
-
-                        </a>
-                      </li>
-          
-                    </ul><!-- End Profile Dropdown Items -->
-                  </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
-
-        
-
-        <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="bi bi-grid"></i>
-                    <span>Статистика</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed"  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
-                </a>
-                
-              </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed"  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
-                </a>
-                
-              </li>
-        </ul>
-
-    </aside><!-- End Sidebar-->
-
-    <main id="main" class="main">
-
-        <div class="pagetitle">
-            <h1>Статистика</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Главная страница</a></li>
-                    <li class="breadcrumb-item active">Статистика</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
-
-        <section class="section dashboard">
-            <div class="row">
-
-                <!-- Left side columns -->
-                <div class="col-lg-8">
-                    <div class="row">
-
-                        <!-- Reports -->
-                       
-
-
-
-
-                    </div>
-                </div>
-
-              
-                <body>
-                  <a href="{% url 'EmployeeMain' %}" class="btn btn-link">Вернуться в главную панель</a>
-                  <h1>Введите номер водительского удостовренеия водителя</h1>
-                  <form method="post">
-                    {% csrf_token %}
-                    {{ form.number }}
-                    <button type="submit">Найти</button>
-                  </form>
-                  {% if error_message %}
-                    <p>{{ error_message }}</p>
-                  {% endif %}
-                  <p>Памятка для сотрудника ГИБДД при выписывании штрафа</p>
-                  <ol>
-                    <li>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
-                    <p></p>
-                    <li>Убедитесь, что штраф выписывается в соответствии с размерами, установленными законом. Если нарушение не является крупным или особо крупным, то размер штрафа должен быть установлен в пределах законодательных норм.</li>
-                    <p></p>
-                    <li>Заполните бланк штрафного талона согласно установленным правилам. В бланке должны быть указаны данные о водителе и автомобиле, а также описано нарушение, совершенное водителем.</li>
-                    <p></p>
-                    <li>Объясните водителю, как он может оплатить штраф. Укажите способы оплаты (через банк, по почте и т.д.) и сроки оплаты.</li>
-                    <p></p>
-                    <li>Выдайте водителю копию штрафного талона. Объясните, что это означает, и что он должен делать с копией.</li>
-                    <li>Важно помнить, что выписывать штрафы нужно в рамках закона и только в тех случаях, когда нарушение действительно имеет место. Если вы не уверены в правильности своих действий, проконсультируйтесь со своим начальством.</li>
-                  </ol>
-                </body>
-
-                  
-                
-
-                
-            </div>
-        </section>
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
   
+</head>
+<body class = 'body'>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark header">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
+         
+        </a>
+        <a >
+          
+        <div class = 'headinfo'>
+          <p class = " text1"> Госавтоиснпекция</p>
+          <p class = 'text2'>Помогаем защитить ваши права на дороге</p>
+          <a/>
+          
+        </div>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+        <div class = 'info2'>
+          <div class = "ln-content-right info ln-content-top-right">
+      
+            <b class = 'f-cardy '>Управление ГИБДД ГУ МВД РОССИИ ПО Г. МОСКВЕ
+              
+            </b>
+              <p class = 'f-cardy'>ДЕЖУРНАЯ ЧАСТЬ:
+                +7(499)113-19-84</p>
+          
+          </div>
+          </div>
+  
+    </nav>
+    <nav class="  navbar navbar-expand-lg  ">
+      
+      <div class=" navstyle collapse navbar-collapse   " id="navbarNav">
+        <div > 
+            <ul class="navbar-nav cent ">
+            <li class="nav-item active  ">
+              <a class= " navelem " href="#">Вход <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="navelem " href="#">Контакты <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="navelem" href="#">О нас <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="navelem" href="#">Home <span class="sr-only"></span></a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+    <hr class = 'hr1'>
+  </header>
+  <main class = 'main'>
+   
+       
+      </div>
+      
+      </div>
+    </div>
+    <section class="section-banner">
+      <div class = 'right'>
+     
+    </div>
+<section class="section-news">
+  <div class="container">
 
-    <!-- Vendor JS Files -->
-    <script src="/static/assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="/static/assets/vendor/echarts/echarts.min.js"></script>
-    <script src="/static/assets/vendor/quill/quill.min.js"></script>
-    <script src="/static/assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="/static/assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+<br>
+</br>
 
-    <!-- Template Main JS File -->
-    <script src="/static/assets/js/main.js"></script>
+        <h2 class = 'f-cardy'>Последние новости</h2>
+        <div class="row ">
+          <div class="col-md-4 divs">
+            
+              <div class="card-body cardy ">
+                <h3 class=" f-cardy">Изменения в ПДД</h3>
+                <p class="card-text f-cardy">С 1 января 2023 года вступили в силу новые изменения в Правила дорожного движения, которые касаются всех участников дорожного движения. Узнайте подробнее о нововведениях.</p>
+    
+                
+              
+            </div>
+          </div>
+          <div class="col-md-4 ">
+            
+              <div class="card-body cardy ">
+                <h3 class=" f-cardy">Новые штрафы за нарушения</h3>
+                <p class="card-text f-cardy">С 1 января 2023 года увеличились штрафы за нарушения Правил дорожного движения. Узнайте, какие нарушения обойдутся вам дороже всего.</p>
+          
+ 
+              </div>
+           
+          </div>
+          <div class="col-md-4 ">
+            
+              <div class="card-body cardy">
+                <h3 class="f-cardy">Общественные организации</h3>
+                <p class="card-text f-cardy">В нашей базе вы найдете контакты общественных организаций, занимающихся безопасностью на дорогах, защитой прав автомобилистов и другими важными вопросами.</p>
+    
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class = 'hr2'>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 div3">
+            <h1 class="main-heading f-cardy">Проверка штрафов ГИБДД</h1>
+            <form class="form " action="#" method="post">
 
-</body>
-
+              <label class = 'f-cardy'for="region">Номер</label>
+              <div class="form-group ">
+                <input type="text" class = 'forms' id="number" name="number" placeholder="A123BC77">
+              </div>
+              <button type="submit" class="btn btn-primary">Проверить</button>
+             
+              
+                  <p>
+                  </p>
+                </div>
+              </form>
+                </div>
+                <br>
+                <hr class = 'hr2'>
+    </section>
+    <section class="section-feedback">
+      <br>
+      <div class="container div3">
+        <h2 class= 'f-cardy'>Обратная связь</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <form>
+              <div class="form-group">
+                <label for="name" class= 'f-cardy'>Ваше имя</label>
+                <input type="text" class=" forms" id="name" placeholder="Введите ваше имя">
+              </div>
+              <div class="form-group">
+                <label class= 'f-cardy' for="email">Email адрес</label>
+                <input type="email" class="forms" id="email" placeholder="Введите ваш email адрес">
+              </div>
+              <div class="form-group">
+                <label class= 'f-cardy' for="message">Сообщение</label>
+                <textarea class="forms" id="message" rows="2"></textarea>
+              </div>
+              <button   type="submit" class="btn btn-primary">Отправить сообщение</button>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="contact-info">
+              <h3 class= 'f-cardy'>Контакты</h3>
+              <p class= 'f-cardy'><i class="fas fa-phone "></i> +7 (495) 623-70-70</p>
+              <p class= 'f-cardy'><i class="fas fa-envelope "></i> info@gibdd.ru</p>
+              <p class= 'f-cardy'><i class="fas fa-map-marker-alt "></i> 127001, г. Москва, ул. Тверская, д. 1</p>
+              <p class= 'f-cardy'><i class="fas fa-clock "></i> Пн-Пт: с 9:00 до 18:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <h1>
+   
+    </h1>
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">© 2023 Государственная инспекция безопасности дорожного движения</p>
+      </div>
+      </footer>
+  </body>
 </html>
+
+
