@@ -12,13 +12,21 @@
 :root {
   scroll-behavior: smooth;
 }
-
+.txt{
+  color: white;
+}
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
+  background: #111112;
   color: #444444;
+  
 }
-
+.cardy {
+  border: 2px solid #0072CE;
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 20px;
+}
 a {
   color: #4154f1;
   text-decoration: none;
@@ -64,7 +72,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #ffffff;
 }
 
 /*--------------------------------------------------------------
@@ -312,20 +320,20 @@ h6 {
 }
 
 .breadcrumb a {
-  color: #899bbd;
+  color: white;
   transition: 0.3s;
 }
 
 .breadcrumb a:hover {
-  color: #51678f;
+  color: white;
 }
 
 .breadcrumb .breadcrumb-item::before {
-  color: #899bbd;
+  color: white;
 }
 
 .breadcrumb .active {
-  color: #51678f;
+  color: white;
   font-weight: 600;
 }
 
@@ -372,7 +380,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: white;
   font-family: "Nunito", sans-serif;
 }
 
@@ -381,7 +389,7 @@ h6 {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #1a1a1a;
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -610,7 +618,7 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: #1a1a1a;
 }
 
 @media (max-width: 1199px) {
@@ -686,7 +694,7 @@ h6 {
   font-weight: 600;
   color: #4154f1;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #111112;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -697,9 +705,16 @@ h6 {
   color: #4154f1;
 }
 
+.forms1 {
+  border: 2px solid #0072CE;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+}
+
 .sidebar-nav .nav-link.collapsed {
   color: #012970;
-  background: #fff;
+  background: #111112;
 }
 
 .sidebar-nav .nav-link.collapsed i {
@@ -708,7 +723,7 @@ h6 {
 
 .sidebar-nav .nav-link:hover {
   color: #4154f1;
-  background: #f6f9ff;
+  background: #505050;
 }
 
 .sidebar-nav .nav-link:hover i {

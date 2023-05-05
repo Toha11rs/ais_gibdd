@@ -2,22 +2,33 @@
   background: #1a1a1a;
 }
 
+.div5{
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .logo {
-  width: 80px;
+ 
+  position:absolute;
+	left:-1%;
+	top:0%;
 }
+
+/* btns{
+
+} */
 
 .text1 {
   color: white;
-  top: 51px;
-  top: 3.1875rem;
-  left: 108px;
-  left: 6.75rem;
-  white-space: nowrap;
+  top: 51%;
+
+  left: 50%;
+  
+ 
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 25px;
-  font-size: 1.5625rem;
+ 
   font-weight: 700;
   line-height: 1.2;
 }
@@ -26,6 +37,10 @@
   color: aliceblue;
 }
 
+.headinfo {
+  font-size: 18px;
+  
+}
 .pam1 {
   top: 5px;
 }
@@ -107,6 +122,16 @@
   background-color: #1a1a1a;
   border-radius: 3px;
   padding: 20px;
+  
+}
+.cardy2 {
+  border: 2px solid #0072CE;
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+
 }
 
 .f-cardy {
@@ -114,17 +139,13 @@
   padding: 10px;
 }
 
-.headinfo {
-  float: right;
-  margin-left: -80%;
-  font-size: 18px;
 
-
-}
 
 body {
   background-image: url("msc4.png");
-  background-size: cover;
+  background-size: 130%;
+  background-position: 10% 50%;
+  
 }
 
 .forms {

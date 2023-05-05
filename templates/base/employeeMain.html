@@ -27,7 +27,6 @@
     <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="static/css/entry.css">
     <!-- Template Main CSS File -->
     <link href="/static/assets/css/style.css" rel="stylesheet">
 
@@ -114,22 +113,22 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
+            <li class="nav-item cardy">
                 <a class="nav-link " href="">
                     <i class="bi bi-grid"></i>
-                    <span>Статистика</span>
+                    <span class = 'txt'>Статистика</span>
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item cardy">
                 <a class="nav-link collapsed"  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
                 </a>
                 
               </li>
-            <li class="nav-item">
+            <li class="nav-item  cardy">
                 <a class="nav-link collapsed"  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
                 
               </li>
@@ -140,11 +139,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Статистика</h1>
+            <h1 class = 'txt'>Статистика</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Главная страница</a></li>
-                    <li class="breadcrumb-item active">Статистика</li>
+                    <li class="breadcrumb-item "><a href="">Главная страница</a></li>
+                    <li class="breadcrumb-item active ">Статистика</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -161,23 +160,27 @@
                             <div class="card">
 
                                 
-                                <div class="card-body">
-                                    <h5 class="card-title"></h5>
+                                <div class="card-body cardy">
                                     
                                     <div id="reportsChart"></div>
                                     <table class="table">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">Район</th>                                     
-                                                <th scope="col">Количество</th>
+                                                <p>
+                                                <th class = 'txt' scope="col">Район</th>                                     
+                                                <th class = 'txt'scope="col">Количество</th>
+                                                
+                                                
                                             </tr>
+                                            
                                         </thead>
+                                        
                                         <tbody>
                                            
                                             {% for district, count in data.items %}
                                                     <tr>
-                                                      <td>{{ district }}</td>
-                                                      <td>{{ count }}</td>
+                                                      <td class = 'txt'>{{ district }}</td>
+                                                      <td class='txt'> {{ count }}</td>
                                                     </tr>
                                                     {% endfor %}
                                             

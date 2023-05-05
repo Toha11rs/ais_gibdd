@@ -117,22 +117,22 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
+            <li class="nav-item cardy">
                 <a class="nav-link collapsed " href="{% url 'EmployeeMain' %}">
                     <i class="bi bi-grid"></i>
-                    <span>Статистика</span>
+                    <span class = 'txt'> Статистика</span>
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item cardy">
                 <a class="nav-link collapsed "  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
                 </a>
                 
               </li>
             <li class="nav-item">
-                <a class="nav-link "  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                <a class="nav-link cardy "  href="{% url 'auth' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
                 
               </li>
@@ -170,14 +170,14 @@
                       <br>
                  
                     <h1></h1>
-                    <form method="post">
+                    <form method="post" class = 'txt'>
                         {% csrf_token %}
                         <input type="hidden" name="driver_id" value="{{ driver_id }}">
                         {{ car_information_form.as_p }}
 
 
                         
-                        <button type="submit">Зарегестрировать машину</button>
+                        <button  class =  'btn btn-primary mb-2'type="submit">Зарегестрировать машину</button>
                       </form>
                     
                       {% if messages %}

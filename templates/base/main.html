@@ -18,18 +18,14 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark header">
       <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
-         
-        </a>
-        <a >
+       
           
-        <div class = 'headinfo'>
-          <p class = " text1"> Госавтоиснпекция</p>
-          <p class = 'text2'>Помогаем защитить ваши права на дороге</p>
-          <a/>
+          <div class = 'headinfo'>
+            <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
+            <p class = " text1"> Госавтоиснпекция  <p class = 'text2'> Помогаем защитить ваши права на дороге</p>
+            
+          </div>
           
-        </div>
 
         <div class = 'info2'>
           <div class = "ln-content-right info ln-content-top-right">
@@ -47,7 +43,7 @@
     <nav class="  navbar navbar-expand-lg  ">
       
       <div class=" navstyle collapse navbar-collapse   " id="navbarNav">
-        <div > 
+        <div class = 'div5'> 
             <ul class="navbar-nav cent ">
             <li class="nav-item active  ">
               <a class= " navelem " href="{% url 'entryEmployee' %}">Вход <span class="sr-only"></span></a>
@@ -66,7 +62,7 @@
         
       </div>
     </nav>
-    <hr class = 'hr1'>
+    
   </header>
   <main class = 'main'>
    
@@ -89,7 +85,7 @@
         <div class="row ">
           <div class="col-md-4 divs">
             
-              <div class="card-body cardy ">
+              <div class="card-body cardy2 ">
                 <h3 class=" f-cardy">Изменения в ПДД</h3>
                 <p class="card-text f-cardy">С 1 января 2023 года вступили в силу новые изменения в Правила дорожного движения, которые касаются всех участников дорожного движения. Узнайте подробнее о нововведениях.</p>
     
@@ -99,7 +95,7 @@
           </div>
           <div class="col-md-4 ">
             
-              <div class="card-body cardy ">
+              <div class="card-body cardy2 ">
                 <h3 class=" f-cardy">Новые штрафы за нарушения</h3>
                 <p class="card-text f-cardy">С 1 января 2023 года увеличились штрафы за нарушения Правил дорожного движения. Узнайте, какие нарушения обойдутся вам дороже всего.</p>
           
@@ -109,7 +105,7 @@
           </div>
           <div class="col-md-4 ">
             
-              <div class="card-body cardy">
+              <div class="card-body cardy2">
                 <h3 class="f-cardy">Общественные организации</h3>
                 <p class="card-text f-cardy">В нашей базе вы найдете контакты общественных организаций, занимающихся безопасностью на дорогах, защитой прав автомобилистов и другими важными вопросами.</p>
     
@@ -125,12 +121,15 @@
           <div class="col-lg-6 col-md-12 div3">
             <h1 class="main-heading f-cardy">Проверка штрафов ГИБДД</h1>
             <form class="form " action="#" method="post">
-
-              <label class = 'f-cardy'for="region">Номер</label>
-              <div class="form-group ">
-                <input type="text" class = 'forms' id="number" name="number" placeholder="A123BC77">
-              </div>
-              <button type="submit" class="btn btn-primary">Проверить</button>
+                <div class =''>
+                  <div class="form-group div5 ">
+                    <label class = 'f-cardy'for="region">Номер</label>
+                    <input type="text" class = 'forms' id="number" name="number" placeholder="A123BC77">
+                    <button type="submit" class="btn btn-primary">Проверить</button>
+                    <br>
+                    <br>
+                  </div>
+                </div>
              
               
                   <p>

@@ -68,31 +68,31 @@
                        
            
                       </li>
-                      <li>
+                       <li class = 'txt'>
                         <hr class="dropdown-divider">
                       </li>
           
-                      <li>
+                       <li class = 'txt'>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-person"></i>
                           <span>Профиль</span>
                         </a>
                       </li>
-                      <li>
+                       <li class = 'txt'>
                         <hr class="dropdown-divider">
                       </li>
           
-                      <li>
+                       <li class = 'txt'>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-gear"></i>
                           <span>Настройки</span>
                         </a>
                       </li>
-                      <li>
+                       <li class = 'txt'>
                         <hr class="dropdown-divider">
                       </li>
           
-                      <li>
+                       <li class = 'txt'>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-box-arrow-right"></i>
                           
@@ -117,22 +117,22 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link collapsed " href="{% url 'EmployeeMain' %}">
                     <i class="bi bi-grid"></i>
-                    <span>Статистика</span>
+                    <span class = 'txt'>Статистика</span>
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link "  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
                 </a>
                 
               </li>
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link collapsed"  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
                 
               </li>
@@ -172,14 +172,14 @@
   
                 <div>
                   <div class="card mb-3">
-                    <div class="card-body">
+                    <div class="card-body cardy">
                       <div class="pt-4 pb-2">
                   <br>
-                  <h1>Введите номер водительского удостовренеия</h1>
+                  <h1 class = 'txt'> Введите номер водительского удостовренеия</h1>
+                  <label for="floatingInput" class="sr-only txt">Введите номер</label>
                   <form method="post" class="form-inline">
                     {% csrf_token %}
                    
-                      <label for="floatingInput" class="sr-only">Введите номер</label>
                       {{ form.number }}
                       <button type="submit" class="btn btn-primary mb-2">Найти</button>
                       {% if error_message %}
@@ -195,23 +195,24 @@
 
                   <div  calss = 'pam1'>
                     <div class="card mb-3">
-                      <div class="card-body">
+                      <div class="card-body cardy">
                         <div class="pt-4 pb-2">
                    
-                    <p>Памятка для сотрудника ГИБДД при выписывании штрафа:<p>
+                    <b class = 'txt'>Памятка для сотрудника ГИБДД при выписывании штрафа:</b>
+                      <p>
                    
                     <ol>
-                      <li>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
+                       <li class = 'txt'>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
                       <p></p>
-                      <li>Убедитесь, что штраф выписывается в соответствии с размерами, установленными законом. Если нарушение не является крупным или особо крупным, то размер штрафа должен быть установлен в пределах законодательных норм.</li>
+                       <li class = 'txt'>Убедитесь, что штраф выписывается в соответствии с размерами, установленными законом. Если нарушение не является крупным или особо крупным, то размер штрафа должен быть установлен в пределах законодательных норм.</li>
                       <p></p>
-                      <li>Заполните бланк штрафного талона согласно установленным правилам. В бланке должны быть указаны данные о водителе и автомобиле, а также описано нарушение, совершенное водителем.</li>
+                       <li class = 'txt'>Заполните бланк штрафного талона согласно установленным правилам. В бланке должны быть указаны данные о водителе и автомобиле, а также описано нарушение, совершенное водителем.</li>
                       <p></p>
-                      <li>Объясните водителю, как он может оплатить штраф. Укажите способы оплаты (через банк, по почте и т.д.) и сроки оплаты.</li>
+                       <li class = 'txt'>Объясните водителю, как он может оплатить штраф. Укажите способы оплаты (через банк, по почте и т.д.) и сроки оплаты.</li>
                       <p></p>
-                      <li>Выдайте водителю копию штрафного талона. Объясните, что это означает, и что он должен делать с копией.</li>
+                       <li class = 'txt'>Выдайте водителю копию штрафного талона. Объясните, что это означает, и что он должен делать с копией.</li>
                       <p></p>
-                      <li>Важно помнить, что выписывать штрафы нужно в рамках закона и только в тех случаях, когда нарушение действительно имеет место. Если вы не уверены в правильности своих действий, проконсультируйтесь со своим начальством.</li>
+                       <li class = 'txt'>Важно помнить, что выписывать штрафы нужно в рамках закона и только в тех случаях, когда нарушение действительно имеет место. Если вы не уверены в правильности своих действий, проконсультируйтесь со своим начальством.</li>
                       <p></p>
                     </ol>
                   </div>

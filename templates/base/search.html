@@ -117,22 +117,22 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link collapsed " href="{% url 'EmployeeMain' %}">
                     <i class="bi bi-grid"></i>
-                    <span>Статистика</span>
+                    <span class = 'txt'>Статистика</span>
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link  "  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Выписать штраф</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
                 </a>
                 
               </li>
-            <li class="nav-item">
+            <li class="nav-item forms1">
                 <a class="nav-link collapsed "  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span>Поставить машину <br> на учёт</span></i>
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
                 
               </li>
@@ -182,25 +182,25 @@
                             
                             
                             <div>
-                                <h1>Информация о водителе:</h1>
-                                <p>Имя: {{ driver.name }}</p>
-                                <p>Фамилия: {{ driver.surname }}</p>
-                                <p>Город: {{ address.City }}</p>
-                                <p>Улица: {{ address.Street }}</p>
-                                <p>Дом: {{ address.House }}</p>
-                                <p>Квартира: {{ address.Flat }}</p>
-                                <p>Номер водительского удостоверения: {{ driver_license.number }}</p>
-                                <p>Статус:
+                                <h1 class = 'txt'>Информация о водителе:</h1>
+                                 <p class = 'txt'>Имя: {{ driver.name }}</p>
+                                 <p class = 'txt'>Фамилия: {{ driver.surname }}</p>
+                                 <p class = 'txt'>Город: {{ address.City }}</p>
+                                 <p class = 'txt'>Улица: {{ address.Street }}</p>
+                                 <p class = 'txt'>Дом: {{ address.House }}</p>
+                                 <p class = 'txt'>Квартира: {{ address.Flat }}</p>
+                                 <p class = 'txt'>Номер водительского удостоверения: {{ driver_license.number }}</p>
+                                 <p class = 'txt'>Статус:
                                     {% if driver_license.status.id == 1 %}
-                                    <span class="text-success">{{ driver_license.status.status }}</span>
+                                    <span class="text-success txt">{{ driver_license.status.status }}</span>
                                     {% elif driver_license.status.id == 2 %}
                                     
                                     <span class="text-danger">{{ driver_license.status.status }}</span>
                                     {% endif %}
                                 </div>
-                                <div>
+                                <div class = ''>
                                             <hr style="float: up; width: 100%;">
-                                            <form method="POST">
+                                            <form method="POST" class = 'txt'>
                                                 {% csrf_token %}
                                                 {{ form.as_p }}
                                                 <button type="submit">Выписать штраф</button>
@@ -213,15 +213,15 @@
                                             
                                         </p>
                                         <hr style="float: up; width: 100%;">
-                                        <h1>Информация об автомобиле:</h1>
+                                        <h1 class = 'txt'>Информация об автомобиле:</h1>
                                         <div class="container">
                                             <div class="row">
                                               
                                               </div>
                                               <div class="col-md-9">
                                                 {% for car in cars %}
-                                                <table class="table">
-                                                  <thead>
+                                                <table class="table txt">
+                                                  <thead class = 'txt'>
                                                     <tr>
                                                       <th>Марка</th>
                                                       <th>Модель</th>
