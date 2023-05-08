@@ -38,37 +38,57 @@ class ViolationForm(forms.ModelForm):
 
 class PenaltyForm(forms.ModelForm):
     typeWarning = forms.ModelChoiceField(
-        queryset=TypeWarning.objects.all(), label="Тип нарушения")
+        queryset=TypeWarning.objects.all(), label="Тип нарушения", 
+        widget=forms.Select(attrs={'class': 'my-type-warning-field'})
+    )
 
     code = forms.ModelChoiceField(
-        queryset=CodeWarning.objects.all(), label="Код нарушения")
+        queryset=CodeWarning.objects.all(), label="Код нарушения",
+        widget=forms.Select(attrs={'class': 'my-code-warning-field'})
+    )
 
     warning = forms.ModelChoiceField(
-        queryset=GetWarning.objects.all(), label="Сделать предупреждение")
+        queryset=GetWarning.objects.all(), label="Сделать предупреждение",
+        widget=forms.Select(attrs={'class': 'my-warning-field'})
+    )
 
-    PeymantPenalty = forms.IntegerField(label="Укажите сумму штрафа")
+    PeymantPenalty = forms.IntegerField(label="Укажите сумму штрафа",
+        widget=forms.NumberInput(attrs={'class': 'my-penalty-field'})
+    )
 
     DateTime = forms.DateField(
-        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
+        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden', 'class': 'my-date-field'})
+    )
 
-    deprivationDriving = forms.IntegerField(label="Укажите срок лишения прав")
+    deprivationDriving = forms.IntegerField(label="Укажите срок лишения прав",
+        widget=forms.NumberInput(attrs={'class': 'my-deprivation-field'})
+    )
 
     baseValue = forms.ModelChoiceField(
-        queryset=BaseValue.objects.all(), label="Базовое значение")
+        queryset=BaseValue.objects.all(), label="Базовое значение",
+        widget=forms.Select(attrs={'class': 'my-base-value-field'})
+    )
 
     district = forms.ModelChoiceField(
-        queryset=District.objects.all(), label="Район")
+        queryset=District.objects.all(), label="Район",
+        widget=forms.Select(attrs={'class': 'my-district-field'})
+    )
 
     statusPenalty = forms.ModelChoiceField(
-        queryset=StatusPenalty.objects.all(), label="Статус штрафа")
+        queryset=StatusPenalty.objects.all(), label="Статус штрафа",
+        widget=forms.Select(attrs={'class': 'my-status-penalty-field'})
+    )
 
     employee = forms.ModelChoiceField(
-        queryset=Employee.objects.all(), label="Сотрудник")
+        queryset=Employee.objects.all(), label="Сотрудник",
+        widget=forms.Select(attrs={'class': 'my-employee-field'})
+    )
 
     class Meta:
         model = Penalty
         fields = ['code', 'warning', 'typeWarning', 'PeymantPenalty', 'employee', 'baseValue', 'DateTime',
                   'deprivationDriving', 'district', 'statusPenalty']
+        
 
 
 class AuthForms(forms.ModelForm):

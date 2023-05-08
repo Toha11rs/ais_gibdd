@@ -128,6 +128,7 @@ def car_info(request, driver_license_id):
         'driver': driver,
         'address': address,
         'driver_license': driver_license,
+        
     }
 
     context['form'] = form

@@ -198,11 +198,70 @@
                                     <span class="text-danger">{{ driver_license.status.status }}</span>
                                     {% endif %}
                                 </div>
-                                <div class = ''>
+                                <div class = ' '>
                                             <hr style="float: up; width: 100%;">
                                             <form method="POST" class = 'txt'>
                                                 {% csrf_token %}
-                                                {{ form.as_p }}
+                                                
+                                                <div class ="" >
+                                                  {% load widget_tweaks %}
+                                                 
+                                                  <table class = "tableForm">
+                                                    <tbody>
+                                                      <tr>
+                                                        <th>{{ form.typeWarning.label }}</th>
+                                                        <td>{{ form.typeWarning|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.code.label }}</th>
+                                                        <td>{{ form.code|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.warning.label }}</th>
+                                                        <td>{{ form.warning|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.PeymantPenalty.label }}</th>
+                                                        <td>{{ form.PeymantPenalty|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.deprivationDriving.label }}</th>
+                                                        <td>{{ form.deprivationDriving|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.baseValue.label }}</th>
+                                                        <td> {{ form.baseValue|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.district.label }}</th>
+                                                        <td>{{ form.district|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <th>{{ form.statusPenalty.label }}</th>
+                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                        
+                                                        <th>{{ form.employee.label }}</th>
+                                                        <td>{{ form.employee|add_class:"my-form-field" }}</td>
+                                                        
+                                                      </tr>
+                                                      <tr>
+                                                        
+                                                       
+                                                        <td>{{ form.DateTime|add_class:"my-form-field" }}</td>
+                                                        
+                                                      </tr>
+                                                     
+
+                                                    </tbody>
+                                                    
+                                                  </table>
+                                                </div>
+
+
+
+
                                                 <button type="submit">Выписать штраф</button>
                                             </form>
                                         </div>

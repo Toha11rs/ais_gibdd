@@ -2,16 +2,16 @@
   background: #1a1a1a;
 }
 
-.div5{
+.div5 {
   margin-right: auto;
   margin-left: auto;
 }
 
 .logo {
- 
-  position:absolute;
-	left:-1%;
-	top:0%;
+
+  position: absolute;
+  left: -1%;
+  top: 0%;
 }
 
 /* btns{
@@ -23,12 +23,12 @@
   top: 51%;
 
   left: 50%;
-  
- 
+
+
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-size: 25px;
- 
+
   font-weight: 700;
   line-height: 1.2;
 }
@@ -39,8 +39,9 @@
 
 .headinfo {
   font-size: 18px;
-  
+
 }
+
 .pam1 {
   top: 5px;
 }
@@ -122,8 +123,9 @@
   background-color: #1a1a1a;
   border-radius: 3px;
   padding: 20px;
-  
+
 }
+
 .cardy2 {
   border: 2px solid #0072CE;
   background-color: #1a1a1a;
@@ -145,7 +147,7 @@ body {
   background-image: url("msc4.png");
   background-size: 130%;
   background-position: 10% 50%;
-  
+
 }
 
 .forms {

@@ -12,21 +12,25 @@
 :root {
   scroll-behavior: smooth;
 }
-.txt{
+
+.txt {
   color: white;
 }
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #111112;
   color: #444444;
-  
+
 }
+
 .cardy {
   border: 2px solid #0072CE;
   background-color: #1a1a1a;
   border-radius: 3px;
   padding: 20px;
 }
+
 a {
   color: #4154f1;
   text-decoration: none;
@@ -1252,9 +1256,9 @@ h6 {
   text-align: center;
   border-radius: 30px;
   background: #f6f9ff;
-  box-shadow: 0 0px 0px rgb(1 41 112 / 40%) ;
+  box-shadow: 0 0px 0px rgb(1 41 112 / 40%);
   font-size: 2px;
-  
+
 }
 
 .mar {
@@ -1263,7 +1267,7 @@ h6 {
 }
 
 .lef {
-  margin:12px;
+  margin: 12px;
 }
 
 .btn-bl {
@@ -1273,7 +1277,7 @@ h6 {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #066cc5;
   --bs-btn-hover-border-color: #066cc5;
-  --bs-btn-focus-shadow-rgb: 130,138,145;
+  --bs-btn-focus-shadow-rgb: 130, 138, 145;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #066cc5;
   --bs-btn-active-border-color: #066cc5;
@@ -1291,7 +1295,7 @@ h6 {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #066cc5;
   --bs-btn-hover-border-color: #066cc5;
-  --bs-btn-focus-shadow-rgb: 130,138,145;
+  --bs-btn-focus-shadow-rgb: 130, 138, 145;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #066cc5;
   --bs-btn-active-border-color: #066cc5;
@@ -1318,10 +1322,11 @@ h6 {
   -moz-appearance: none;
   appearance: none;
   border-radius: 0.375rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-.form-pay.is-valid, .was-validated .form-pay:valid {
+.form-pay.is-valid,
+.was-validated .form-pay:valid {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-repeat: no-repeat;
@@ -1329,9 +1334,81 @@ h6 {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
-.form-pay.is-invalid, .was-validated .form-pay:invalid {
+.form-pay.is-invalid,
+.was-validated .form-pay:invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Стили для всех полей */
+.my-form-field {
+  background-color: transparent;
+  border: 1px solid #0072CE;
+  border-radius: 5px;
+}
+
+/* Стили для поля "Тип нарушения" */
+.my-type-warning-field {
+  color: #0072CE;
+  font-weight: bold;
+}
+
+/* Стили для поля "Код нарушения" */
+.my-code-warning-field {
+  color: #0072CE;
+  font-weight: bold;
+}
+
+/* Стили для поля "Сделать предупреждение" */
+.my-warning-field {
+  color: #0072CE;
+  font-weight: bold;
+}
+
+/* Стили для поля "Укажите сумму штрафа" */
+.my-penalty-field {
+  color: #0072CE;
+  font-weight: bold;
+}
+
+/* Стили для поля "Дата" */
+.my-date-field {
+  display: none;
+}
+
+/* Стили для поля "Укажите срок лишения прав" */
+.my-deprivation-field {
+  font-weight: bold;
+}
+
+/* Стили для поля "Базовое значение" */
+.my-base-value-field {
+  color: #0072CE;
+  font-weight: bold;
+}
+
+/* Стили для поля "Район" */
+.my-district-field {
+  color: #0072CE;
+  font-weight: bold;
+  
+}
+
+/* Стили для поля "Статус штрафа" */
+.my-status-penalty-field {
+  color: #0072CE;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+/* Стили для поля "Сотрудник" */
+.my-employee-field {
+  color: #0072CE;
+}
+
+.tableForm{
+  padding: 10px;
+  line-height: 2;
 }
