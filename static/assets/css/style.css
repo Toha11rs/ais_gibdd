@@ -560,7 +560,7 @@ h6 {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #444444;
+  color: #18d26e;
 }
 
 .header-nav .messages .message-item p {
@@ -1342,73 +1342,92 @@ h6 {
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
-/* Стили для всех полей */
 .my-form-field {
   background-color: transparent;
   border: 1px solid #0072CE;
   border-radius: 5px;
 }
+.my-form-field2 {
+  background-color: transparent;
+  border: 1px solid #0072CE;
+  border-radius: 5px;
+  width: 50%;
+  
+}
 
-/* Стили для поля "Тип нарушения" */
 .my-type-warning-field {
   color: #0072CE;
   font-weight: bold;
 }
 
-/* Стили для поля "Код нарушения" */
 .my-code-warning-field {
   color: #0072CE;
   font-weight: bold;
 }
 
-/* Стили для поля "Сделать предупреждение" */
 .my-warning-field {
   color: #0072CE;
   font-weight: bold;
 }
 
-/* Стили для поля "Укажите сумму штрафа" */
 .my-penalty-field {
   color: #0072CE;
   font-weight: bold;
 }
 
-/* Стили для поля "Дата" */
 .my-date-field {
   display: none;
 }
 
-/* Стили для поля "Укажите срок лишения прав" */
 .my-deprivation-field {
   font-weight: bold;
+  color: #0072CE;
 }
 
-/* Стили для поля "Базовое значение" */
 .my-base-value-field {
   color: #0072CE;
   font-weight: bold;
 }
 
-/* Стили для поля "Район" */
 .my-district-field {
   color: #0072CE;
   font-weight: bold;
-  
 }
 
-/* Стили для поля "Статус штрафа" */
 .my-status-penalty-field {
+  display: none;
   color: #0072CE;
-  font-weight: bold;
-  padding-top: 10px;
 }
 
-/* Стили для поля "Сотрудник" */
 .my-employee-field {
   color: #0072CE;
+  font-weight: bold
 }
 
 .tableForm{
   padding: 10px;
-  line-height: 2;
+  line-height: 2.3;
+  
+}
+
+ul.messages {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+ 
+}
+
+ul.messages.error {
+  background-color: #f44336;
+  color: #fff;
+}
+
+ul.messages.success {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.note{
+  color: #066cc5;
 }

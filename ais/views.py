@@ -77,7 +77,7 @@ def create_car_information(request, driver_id):
 
             return redirect('registercar', driver_id=driver_id)
         else:
-            messages.error(request, 'Ошибка регистрации')
+            messages.error(request, 'Ошибка регистрации.Убедитесь, что данные автомобиля введены врено')
 
     else:
         car_information_form = CarInformationForm()
@@ -128,7 +128,7 @@ def car_info(request, driver_license_id):
         'driver': driver,
         'address': address,
         'driver_license': driver_license,
-        
+                                   
     }
 
     context['form'] = form

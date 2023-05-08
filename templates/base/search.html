@@ -236,10 +236,7 @@
                                                         <th>{{ form.district.label }}</th>
                                                         <td>{{ form.district|add_class:"my-form-field" }}</td>
                                                       </tr>
-                                                      <tr>
-                                                        <th>{{ form.statusPenalty.label }}</th>
-                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td>
-                                                      </tr>
+                                                      
                                                       <tr>
                                                         
                                                         <th>{{ form.employee.label }}</th>
@@ -250,6 +247,7 @@
                                                         
                                                        
                                                         <td>{{ form.DateTime|add_class:"my-form-field" }}</td>
+                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td>
                                                         
                                                       </tr>
                                                      
@@ -257,12 +255,20 @@
                                                     </tbody>
                                                     
                                                   </table>
+
+                                                  {% if messages %}
+                                                      <ul class="messages">
+                                                          {% for message in messages %}
+                                                              <li{% if message.tags %} class="{{ message.tags }} my-error-class"{% else %} class="my-error-class"{% endif %}>{{ message }}</li>
+                                                          {% endfor %}
+                                                      </ul>
+                                                  {% endif %}
                                                 </div>
 
 
 
 
-                                                <button type="submit">Выписать штраф</button>
+                                                <button  class = "btn btn-primary " type="submit">Выписать штраф</button>
                                             </form>
                                         </div>
                                         <div>

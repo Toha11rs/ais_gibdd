@@ -75,8 +75,8 @@ class PenaltyForm(forms.ModelForm):
     )
 
     statusPenalty = forms.ModelChoiceField(
-        queryset=StatusPenalty.objects.all(), label="Статус штрафа",
-        widget=forms.Select(attrs={'class': 'my-status-penalty-field'})
+        queryset=StatusPenalty.objects.all(), label="Статус штрафа",initial=2,
+        widget=forms.Select(attrs={'class': 'my-status-penalty-field','type': 'hidden'})
     )
 
     employee = forms.ModelChoiceField(
@@ -97,18 +97,29 @@ class AuthForms(forms.ModelForm):
 
 
 class CarInformationForm(forms.ModelForm):
-    Number = forms.CharField(max_length=50, label="Номер автомобиля")
-    Brand = forms.CharField(max_length=50, label="Марка автомобиля")
-    Model = forms.CharField(max_length=50, label="Модель автомобиля")
-    Color = forms.CharField(max_length=50, label="Цвет автомотбиля")
+    Number = forms.CharField(max_length=50, label="Номер автомобиля",
+                             validators=[RegexValidator(
+                                 r'^[АВЕКМНОРСТУХ]\d{3}[АВЕКМНОРСТУХ]{2}\d{2,3}$', 'Неправильно введен номер')],
+                             widget=forms.TextInput(attrs={'placeholder': 'Пример: H735HM177','class': 'my-district-field'}))
+
+    Brand = forms.CharField(max_length=50, label="Марка автомобиля",
+                            widget=forms.TextInput(attrs={'placeholder': 'Пример: LADA','class': 'my-district-field'}), validators=[
+                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена марка')])
+    Model = forms.CharField(max_length=50, label="Модель автомобиля",
+                            widget=forms.TextInput(
+                                attrs={'placeholder': 'Пример: VESTA','class': 'my-district-field'}), validators=[
+                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена модель')])
+    Color = forms.CharField(max_length=50, label="Цвет автомобиля",
+                            widget=forms.TextInput(attrs={'placeholder': 'Пример: Blue','class': 'my-district-field'}), validators=[
+                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильно введен цвет')])
 
     Year = YearField(label="Год автомобиля", widget=forms.TextInput(
-        attrs={'placeholder': 'Пример: 2020'}))
+        attrs={'placeholder': 'Пример: 2020','class': 'my-district-field'}))
 
     RegistrationDate = forms.DateField(
-        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden'}))
+        initial=date.today, widget=forms.DateInput(attrs={'class': 'my-district-field'}))
 
-    class Meta:
+    class Meta: 
         model = CarInformation
         fields = ['Number', 'Brand', 'Model',
                   'Color', 'Year', 'RegistrationDate']
