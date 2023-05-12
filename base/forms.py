@@ -7,6 +7,7 @@ from django import forms
 from ais.fields import YearField
 
 
+
 class SearchForm(forms.Form):
     number = forms.IntegerField(
         label='Введите номер водительского удостоверения')
@@ -52,20 +53,26 @@ class PenaltyForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'my-warning-field'})
     )
 
-    PeymantPenalty = forms.IntegerField(label="Укажите сумму штрафа",
-        widget=forms.NumberInput(attrs={'class': 'my-penalty-field'})
+    PeymantPenalty = forms.IntegerField(label="Сумма штрафа",min_value=0,max_value=50000,initial=0,
+        widget=forms.NumberInput(
+        attrs={'class': 'my-penalty-field',
+                'value_suffix': 'руб.',    
+                "step":100,
+
+                }
+                )
     )
 
     DateTime = forms.DateField(
         initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden', 'class': 'my-date-field'})
     )
 
-    deprivationDriving = forms.IntegerField(label="Укажите срок лишения прав",
+    deprivationDriving = forms.IntegerField(label="Срок лишения прав",help_text='Значение указывать в месяцах',min_value=0,
         widget=forms.NumberInput(attrs={'class': 'my-deprivation-field'})
     )
 
     baseValue = forms.ModelChoiceField(
-        queryset=BaseValue.objects.all(), label="Базовое значение",
+        queryset=BaseValue.objects.all(), label="Базовое значение",initial=0.5, 
         widget=forms.Select(attrs={'class': 'my-base-value-field'})
     )
 

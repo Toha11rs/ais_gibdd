@@ -210,3 +210,11 @@ body {
   color: whitesmoke;
 
 }
+
+.foot {
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+}

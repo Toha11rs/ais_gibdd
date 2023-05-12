@@ -209,6 +209,12 @@
                                                   <table class = "tableForm">
                                                     <tbody>
                                                       <tr>
+                                                        
+                                                        <th>{{ form.employee.label }}</th>
+                                                        <td>{{ form.employee|add_class:"my-form-field" }}</td>
+                                                        
+                                                      </tr>
+                                                      <tr>
                                                         <th>{{ form.typeWarning.label }}</th>
                                                         <td>{{ form.typeWarning|add_class:"my-form-field" }}</td>
                                                       </tr>
@@ -225,35 +231,20 @@
                                                         <td>{{ form.PeymantPenalty|add_class:"my-form-field" }}</td>
                                                       </tr>
                                                       <tr>
-                                                        <th>{{ form.deprivationDriving.label }}</th>
+                                                        <th >{{ form.deprivationDriving.label }}</th>
                                                         <td>{{ form.deprivationDriving|add_class:"my-form-field" }}</td>
                                                       </tr>
+                                                      <th class = 'helptxt'><small>{{ form.deprivationDriving.help_text }}</small></th>
                                                       <tr>
+                                                        <hr>
                                                         <th>{{ form.baseValue.label }}</th>
                                                         <td> {{ form.baseValue|add_class:"my-form-field" }}</td>
-                                                      </tr>
+                                                      </tr>                           
                                                       <tr>
-                                                        <th>{{ form.district.label }}</th>
-                                                        <td>{{ form.district|add_class:"my-form-field" }}</td>
-                                                      </tr>
-                                                      
-                                                      <tr>
-                                                        
-                                                        <th>{{ form.employee.label }}</th>
-                                                        <td>{{ form.employee|add_class:"my-form-field" }}</td>
-                                                        
-                                                      </tr>
-                                                      <tr>
-                                                        
-                                                       
                                                         <td>{{ form.DateTime|add_class:"my-form-field" }}</td>
-                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td>
-                                                        
+                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td>                                   
                                                       </tr>
-                                                     
-
                                                     </tbody>
-                                                    
                                                   </table>
 
                                                   {% if messages %}
