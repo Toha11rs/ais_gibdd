@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
-from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm
+from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.contrib.auth.decorators import login_required
+
 
 
 def main(request):
@@ -77,7 +76,8 @@ def create_car_information(request, driver_id):
 
             return redirect('registercar', driver_id=driver_id)
         else:
-            messages.error(request, 'Ошибка регистрации.Убедитесь, что данные автомобиля введены врено')
+            messages.error(request, 'Ошибка регистрации')
+         
 
     else:
         car_information_form = CarInformationForm()
@@ -150,3 +150,17 @@ def EmployeeMain(request):
         'data': data
     }
     return render(request, 'base/employeeMain.html', context)
+
+
+def addEmployee(request):
+
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('addEmployee')
+    else:
+        form = EmployeeForm()
+
+    return render(request, 'base/add_employee.html', {'form': form})

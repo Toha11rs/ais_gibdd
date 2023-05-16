@@ -37,4 +37,5 @@ urlpatterns = [
     # главная странциа сотрудников
     path('employeeMain', views.EmployeeMain, name='EmployeeMain'),
 
+    path('addEmployee', views.addEmployee, name='addEmployee'),
 ]

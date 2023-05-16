@@ -40,11 +40,11 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{% url 'main' %}" class="logo d-flex align-items-center">
+            <a href="" class="logo d-flex align-items-center">
               <img src="/static/images/gibdd.png" href = 'main'> 
                 <span href = 'main' class="d-none d-lg-block">ГИБДД</span>
             </a>
-          
+            <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
         
@@ -68,31 +68,31 @@
                        
            
                       </li>
-                       <li class = 'txt'>
+                      <li>
                         <hr class="dropdown-divider">
                       </li>
           
-                       <li class = 'txt'>
+                      <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-person"></i>
                           <span>Профиль</span>
                         </a>
                       </li>
-                       <li class = 'txt'>
+                      <li>
                         <hr class="dropdown-divider">
                       </li>
           
-                       <li class = 'txt'>
+                      <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-gear"></i>
                           <span>Настройки</span>
                         </a>
                       </li>
-                       <li class = 'txt'>
+                      <li>
                         <hr class="dropdown-divider">
                       </li>
           
-                       <li class = 'txt'>
+                      <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-box-arrow-right"></i>
                           
@@ -130,8 +130,8 @@
                 </a>
                 
               </li>
-            <li class="nav-item cardy">
-                <a class="nav-link "  href="{% url 'auth' %}">
+            <li class="nav-item">
+                <a class="nav-link cardy "  href="{% url 'auth' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
                 
@@ -152,84 +152,73 @@
             </nav>
         </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <div class="row">
-
-                <!-- Left side columns -->
-                <div class="col-lg-8">
-                    <div class="row">
-
-                        <!-- Reports -->
-                       
+      
+            
 
 
-
-
-                    </div>
-                  </div>
-                    
-              
-  
-                
-                  <div>
-                    <div class="card mb-3">
-                      <div class="card-body cardy">
-                        <div class="pt-4 pb-2">
-                    <br>
-                  <h1 class = 'txt'> Введите номер водительского удостовренеия </h1>
-                  <label for="floatingInput" class="sr-only txt">Введите номер</label>
-                  <form method="post" class="form-inline">
-                    {% csrf_token %}
-                   
-                      {{ form.number }}
-                      <button type="submit" class="btn btn-primary mb-2">Найти</button>
-                    </div>
-                  </form>
-
-                  {% if error_message %}
-                    <p>{{ error_message }}</p>
-                  {% endif %}
-                </div>
-              </div>
-            </div>
+                          
+        <div class="form-group mx-sm-3 mb-2">
             <br>
-            <div>
-                      <div  calss = 'pam1'>
-                      <div class="card mb-3">
-                        <div class="card-body cardy">
-                          <div class="pt-4 pb-2">
-                    <b class = 'txt'>Памятки для сотрудника ГИБДД при регистрации автомобиля водителя</b>
-                    <hr>
-                        <ol>
-                          <p></p>
-                           <li class = 'txt'>Убедитесь, что водитель предоставил все необходимые документы: паспорт, водительское удостоверение, технический паспорт и страховой полис ОСАГО.</li>
-                          <p></p>
-                           <li class = 'txt'>Проверьте, что данные в документах водителя совпадают с информацией о машине (номер кузова, двигателя, государственный номер).</li>
-                          <p></p>
-                           <li class = 'txt'>Проверьте наличие задолженностей по оплате штрафов или других нарушений, связанных с водительскими правами или автомобилем.</li>
-                          <p></p>
-                           <li class = 'txt'>Ознакомьте водителя с правилами дорожного движения и напомните о необходимости соблюдения скоростного режима, использования ремней безопасности и прочих правил.</li>
-                          <p></p>
-                           <li class = 'txt'>Объясните, как правильно заполнить бланк заявления на регистрацию автомобиля и ответьте на все вопросы, которые могут возникнуть у водителя.</li>
-                          <p></p>
-                           <li class = 'txt'>Внимательно проверьте все данные в заявлении на регистрацию автомобиля, чтобы избежать ошибок и опечаток.</li>
-                          <p></p>
-                           <li class = 'txt'>Сообщите водителю о сроках выдачи регистрационных документов и о том, как и где их можно получить.</li>
-                          <p></p>
-                           <li class = 'txt'>Напомните водителю о необходимости прохождения технического осмотра автомобиля через определенный период времени.</li>
-                          <p></p>
-                           <li class = 'txt'>При регистрации автомобиля обязательно выдайте водителю временное разрешение на эксплуатацию машины до получения официальных регистрационных документов.</li>
-                        </ol>
-                    </ol>
-                  </div>
-             
+       
+          <h1></h1>
+          <div>
+          <form novalidate method="post" class = 'txt'>
+              {% csrf_token %}
+              {% load widget_tweaks %}
 
-                  
-                
-
-                
-            </div>
-        </section>
+              
+              <div = class = 'my-form-field2'>
+                <br>
+              <table class = "tableForm">
+                <tbody>
+                  <tr>
+                          <th>{{ form.name.label }}</th>
+                          <td>{{ form.name|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.surname.label }}</th>
+                          <td>{{ form.surname|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.patronimyc.label }}</th>
+                          <td>{{ form.patronimyc|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.PhoneNumber.label }}</th>
+                          <td>{{ form.PhoneNumber|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.Position.label }}</th>
+                          <td>{{ form.Position|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.number.label }}</th>
+                          <td>{{ form.number|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                          <th>{{ form.password.label }}</th>
+                          <td>{{ form.password|add_class:"my-form-field" }}</td>
+                        </tr>
+                        <tr>
+                        </tr>
+                                            
+                        
+                    </tbody>                          
+                </table>
+                <br>
+                </div>
+                <br>
+                <button  class =  'btn btn-primary mb-2' type="submit">Добавить сотрудника</button>
+            </form>
+            
+        </div>
+        
+        
+        {% comment %} {% if form.errors %}
+<div class="alert alert-danger">
+<strong>Error:</strong> {{ form.errors }}
+</div>
+{% endif %} {% endcomment %}
 
     </main><!-- End #main -->
 

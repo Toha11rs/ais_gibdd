@@ -171,7 +171,7 @@
                  
                     <h1></h1>
                     <div>
-                    <form method="post" class = 'txt'>
+                    <form novalidate method="post" class = 'txt'>
                         {% csrf_token %}
                         {% load widget_tweaks %}
 
@@ -227,12 +227,26 @@
                                                   
                         <br>            
                         <button  class =  'btn btn-primary mb-2'type="submit">Зарегестрировать машину</button>
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Ошибка:</strong> Проверьте правильность введенных данных.
+                            <ul>
+                                {% for field,errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
                       </form>
                     
 
                       
                       <div  class = 'note'>
-                        <p>dff</p>
+                     
                         
                       </div>
                     </div>

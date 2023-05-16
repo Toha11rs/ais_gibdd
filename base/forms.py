@@ -1,11 +1,13 @@
 from django import forms
 from ais.models import TypeWarning, CodeWarning, GetWarning, Violation, Penalty, BaseValue, District, StatusPenalty, Employee
-from ais.models import CarInformation, Car
+from ais.models import CarInformation, Car, Position
 from django.core.validators import RegexValidator
 from datetime import date
 from django import forms
 from ais.fields import YearField
-
+from django.core.exceptions import ValidationError
+from phonenumber_field.formfields import PhoneNumberField
+import re
 
 
 class SearchForm(forms.Form):
@@ -130,9 +132,51 @@ class CarInformationForm(forms.ModelForm):
         model = CarInformation
         fields = ['Number', 'Brand', 'Model',
                   'Color', 'Year', 'RegistrationDate']
+        
+    def clean_Number(self):
+        number = self.cleaned_data.get('Number')
+        if CarInformation.objects.filter(Number=number).exists():
+            raise ValidationError('Автомобиль с таким номером уже существует')
+        return number
 
 
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = ['carinformation']
+
+
+class EmployeeForm(forms.ModelForm):
+    name = forms.CharField(max_length=15, label="Имя",
+                            widget=forms.TextInput(attrs={'class': 'my-district-field'}))
+
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        if not re.match(r'^[A-Za-zа-яА-ЯёЁ]+$', name):
+            raise forms.ValidationError('Введите имя, используя только буквы')
+        return name
+
+    surname = forms.CharField(max_length=15, label="Фамилия", widget=forms.TextInput(attrs={'class': 'my-district-field'}))
+
+    patronimyc = forms.CharField(max_length=15, label="Отчество", widget=forms.TextInput(attrs={'class': 'my-district-field'}))
+
+    PhoneNumber = forms.CharField(max_length=11, label="Номер телефона",
+                                   widget=forms.TextInput(attrs={'class': 'my-district-field', 'placeholder':"+7 (xxx) xxx-xx-xx"}))
+
+    Position = forms.ModelChoiceField(queryset=Position.objects.all(), label="Должность",
+                                      widget=forms.Select(attrs={'class': 'my-district-field'}))
+
+    number = forms.IntegerField(label="Номер",widget=forms.TextInput(attrs={'class': 'my-district-field'}))
+
+    password = forms.CharField(label="Пароль",widget=forms.PasswordInput(attrs={'class': 'my-district-field'}))
+                               
+
+    class Meta:
+        model = Employee
+        fields = ['name', 'surname', 'patronimyc', 'PhoneNumber', 'Position', 'number', 'password']
+
+    def clean_number(self):
+        number = self.cleaned_data.get('number')
+        if Employee.objects.filter(number=number).exists():
+            raise forms.ValidationError('Такой сотрудник уже существует')
+        return number
