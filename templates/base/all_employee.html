@@ -27,23 +27,24 @@
     <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     <link href="/static/assets/css/style.css" rel="stylesheet">
 
 
 </head>
 
-<body class = 'body'>
+<body>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{% url 'main' %}" class="logo d-flex align-items-center">
-                <img src="/static/images/gibdd.png" alt="">
-                <span class="d-none d-lg-block">ГИБДД</span>
+            <a href="" class="logo d-flex align-items-center">
+              <img src="/static/images/gibdd.png" href = 'main'> 
+                <span href = 'main' class="d-none d-lg-block">ГИБДД</span>
             </a>
-          
+            <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
         
@@ -94,6 +95,9 @@
                       <li>
                         <a class="dropdown-item d-flex align-items-center" href="">
                           <i class="bi bi-box-arrow-right"></i>
+                          
+
+
 
                         </a>
                       </li>
@@ -109,33 +113,31 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
-        
+       
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item cardy">
-                <a class="nav-link " href="">
+                <a class="nav-link collapsed " href="{% url 'addEmployee' %}">
                     <i class="bi bi-grid"></i>
-                    <span class = 'txt'>Статистика</span>
+                    <span class = 'txt'> Добавление сотрудника</span>
                 </a>
             </li>
 
+    
             <li class="nav-item cardy">
-                <a class="nav-link collapsed"  href="{% url 'search_driver_license' %}">
-                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
+                <a class="nav-link   "  href="{% url 'allEmployee' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Все сотрудники</span></i>
+                </a>
+            </li>
+            
+        
+            <li class="nav-item">
+                <a class="nav-link collapsed cardy "  href="{% url 'EmployeeMain' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Вернуться в главное меню </span></i>
                 </a>
                 
-              </li>
-            <li class="nav-item  cardy">
-                <a class="nav-link collapsed"  href="{% url 'auth' %}">
-                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
-                </a>
-              </li>
-            <li class="nav-item  cardy">
-                <a class="nav-link collapsed"  href="{% url 'allEmployee' %}">
-                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Сотрудники</span></i>
-                </a>
-              </li>
+            </li>
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -143,74 +145,91 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1 class = 'txt'>Статистика</h1>
+            <h1>Все сотрудники</h1>
             <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item "><a href="">Главная страница</a></li>
-                    <li class="breadcrumb-item active ">Статистика</li>
-                </ol>
+                
             </nav>
         </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <div class="row">
-
-                <!-- Left side columns -->
-                <div class="col-lg-8">
-                    <div class="row">
-
-                        <!-- Reports -->
-                        <div class="col-12">
-                            <div class="card">
-
-                                
-                                <div class="card-body cardy">
-                                    
-                                    <div id="reportsChart"></div>
-                                    <table class="table">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <p>
-                                                <th class = 'txt' scope="col">Район</th>                                     
-                                                <th class = 'txt'scope="col">Количество</th>
-                                                
-                                                
-                                            </tr>
-                                            
-                                        </thead>
-                                        
-                                        <tbody>
-                                           
-                                            {% for district, count in data.items %}
-                                                    <tr>
-                                                      <td class = 'txt'>{{ district }}</td>
-                                                      <td class='txt'> {{ count }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-                                            
-                                        </tbody>
-                                    </table>
-                                    <!-- End Line Chart -->
-                                </div>
-                            </div>
-                        </div><!-- End Reports -->
+      
+            
 
 
+                          
+        <div class="form-group mx-sm-3 mb-2">
+            <br>
+       
 
 
-
-                    </div>
+            {% comment %} <form method="get" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" name="search" placeholder="Поиск">
                 </div>
+                <button type="submit" class="btn btn-default">Найти</button>
+
+
+                
+
+            </form> {% endcomment %}
+
+
+          <h1></h1>
+          <div>
+          <form novalidate method="post" class = 'txt'>
+              {% csrf_token %}
+              {% load widget_tweaks %}
 
               
-                   
-
-                  
+              <div class = ''>
                 
+                <h1>Список сотрудников</h1>
+                <br>
 
-                
-            </div>
-        </section>
+                <table class = 'tabl'>
+                    <thead>
+                      <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Отчество</th>
+                        <th>Номер телефона</th>
+                        <th>Должность</th>
+                        <th>Номер</th>
+                        <th>Действия</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for employee in employees %}
+                      <tr>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.surname }}</td>
+                        <td>{{ employee.patronimyc }}</td>
+                        <td>{{ employee.PhoneNumber }}</td>
+                        <td>{{ employee.Position }}</td>
+                        <td>{{ employee.number }}</td>
+                        <td>
+                          <form action="{% url 'delete_employee' employee.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class = 'btn btn-primary mb-2' type="submit">Удалить</button>
+                          </form>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                <br>
+                </div>
+                <br>
+
+            </form>
+            
+        </div>
+        
+        
+        {% comment %} {% if form.errors %}
+<div class="alert alert-danger">
+<strong>Error:</strong> {{ form.errors }}
+</div>
+{% endif %} {% endcomment %}
 
     </main><!-- End #main -->
 

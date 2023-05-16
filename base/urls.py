@@ -38,4 +38,8 @@ urlpatterns = [
     path('employeeMain', views.EmployeeMain, name='EmployeeMain'),
 
     path('addEmployee', views.addEmployee, name='addEmployee'),
+
+    path('allEmployee', views.allEmployee, name='allEmployee'),
+    
+    path('delete_employee/<int:id>/', views.delete_employee, name='delete_employee'),
 ]

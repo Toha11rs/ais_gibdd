@@ -1439,3 +1439,11 @@ ul.messages.success {
 }
 
 
+.tabl {
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 10px;
+  border: 1px solid #ccc;
+}

@@ -3,6 +3,7 @@ from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm
 from django.contrib import messages
 from django.db.models import Count
+from django.db.models import Q
 
 
 
@@ -164,3 +165,23 @@ def addEmployee(request):
         form = EmployeeForm()
 
     return render(request, 'base/add_employee.html', {'form': form})
+
+def allEmployee(request):
+        
+    employees = Employee.objects.all()
+
+    search_query = request.GET.get('search')
+    if search_query:
+        employees = employees.filter(Q(name__icontains=search_query) |
+                                     Q(surname__icontains=search_query) |
+                                     Q(patronimyc__icontains=search_query))
+ 
+
+    context = {'employees': employees}
+
+    return render(request, 'base/all_employee.html',context)
+
+def delete_employee(request, id):
+    employee = Employee.objects.get(id=id)
+    employee.delete()
+    return redirect('allEmployee')

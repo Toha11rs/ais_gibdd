@@ -7,7 +7,7 @@ from django import forms
 from ais.fields import YearField
 from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
-import re
+import random
 
 
 class SearchForm(forms.Form):
@@ -147,14 +147,7 @@ class CarForm(forms.ModelForm):
 
 
 class EmployeeForm(forms.ModelForm):
-    name = forms.CharField(max_length=15, label="Имя",
-                            widget=forms.TextInput(attrs={'class': 'my-district-field'}))
-
-    def clean_name(self):
-        name = self.cleaned_data['name']
-        if not re.match(r'^[A-Za-zа-яА-ЯёЁ]+$', name):
-            raise forms.ValidationError('Введите имя, используя только буквы')
-        return name
+    name = forms.CharField(max_length=15, label="Имя",widget=forms.TextInput(attrs={'class': 'my-district-field'}))
 
     surname = forms.CharField(max_length=15, label="Фамилия", widget=forms.TextInput(attrs={'class': 'my-district-field'}))
 
@@ -175,8 +168,9 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         fields = ['name', 'surname', 'patronimyc', 'PhoneNumber', 'Position', 'number', 'password']
 
-    def clean_number(self):
-        number = self.cleaned_data.get('number')
-        if Employee.objects.filter(number=number).exists():
-            raise forms.ValidationError('Такой сотрудник уже существует')
-        return number
+    # def clean_number(self):
+    #     number = self.cleaned_data.get('number')
+    #     if Employee.objects.filter(number=number).exists():
+    #         raise forms.ValidationError('Такой сотрудник уже существует')
+    #     return number
+    
