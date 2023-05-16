@@ -1447,3 +1447,15 @@ td, th {
   padding: 10px;
   border: 1px solid #ccc;
 }
+
+.ser{
+  width:50%;
+}
+
+.cardy2 {
+  border: 2px solid #0072CE;
+
+  border-radius: 3px;
+  padding: 20px;
+  width:30%;
+}

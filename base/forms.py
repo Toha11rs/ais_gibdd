@@ -69,12 +69,13 @@ class PenaltyForm(forms.ModelForm):
         initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden', 'class': 'my-date-field'})
     )
 
-    deprivationDriving = forms.IntegerField(label="Срок лишения прав",help_text='Значение указывать в месяцах',min_value=0,
+    deprivationDriving = forms.IntegerField(label="Срок лишения прав",help_text='Значение указывать в месяцах',
+                                            min_value=0,initial=0,
         widget=forms.NumberInput(attrs={'class': 'my-deprivation-field'})
     )
 
     baseValue = forms.ModelChoiceField(
-        queryset=BaseValue.objects.all(), label="Базовое значение",initial=0.5, 
+        queryset=BaseValue.objects.all(), label="Базовое значение",initial=1, 
         widget=forms.Select(attrs={'class': 'my-base-value-field'})
     )
 

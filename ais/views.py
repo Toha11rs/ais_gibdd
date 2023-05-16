@@ -121,6 +121,7 @@ def car_info(request, driver_license_id):
             messages.success(request, 'Штраф успешно создан')
             return redirect('car_info', driver_license_id=driver_license_id)
         else:
+            print("ok3")
             messages.error(request, 'Ошибка при созданни штрафа')
     else:
         form = PenaltyForm()
@@ -174,6 +175,8 @@ def allEmployee(request):
     if search_query:
         employees = employees.filter(Q(name__icontains=search_query) |
                                      Q(surname__icontains=search_query) |
+                                     Q(PhoneNumber__icontains=search_query) |
+                                     Q(number__icontains=search_query) |                                
                                      Q(patronimyc__icontains=search_query))
  
 

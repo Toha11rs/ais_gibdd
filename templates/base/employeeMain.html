@@ -42,71 +42,13 @@
             <a href="{% url 'main' %}" class="logo d-flex align-items-center">
                 <img src="/static/images/gibdd.png" alt="">
                 <span class="d-none d-lg-block">ГИБДД</span>
+               
             </a>
           
-        </div><!-- End Logo -->
+        </div>
 
-        
+    </header>
 
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none ">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-
-                  <li class="nav-item dropdown pe-3">
-
-                  
-          
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                      <li class="dropdown-header">
-                       
-           
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-person"></i>
-                          <span>Профиль</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-gear"></i>
-                          <span>Настройки</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-box-arrow-right"></i>
-
-                        </a>
-                      </li>
-          
-                    </ul><!-- End Profile Dropdown Items -->
-                  </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
-
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
         
@@ -130,7 +72,8 @@
                 <a class="nav-link collapsed"  href="{% url 'auth' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
-              </li>
+            </li>
+            <br>
             <li class="nav-item  cardy">
                 <a class="nav-link collapsed"  href="{% url 'allEmployee' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Сотрудники</span></i>
@@ -167,7 +110,7 @@
                                 <div class="card-body cardy">
                                     
                                     <div id="reportsChart"></div>
-                                    <table class="table">
+                                        <table class="table">
                                         <thead class="thead-light">
                                             <tr>
                                                 <p>
@@ -190,31 +133,16 @@
                                             
                                         </tbody>
                                     </table>
-                                    <!-- End Line Chart -->
                                 </div>
                             </div>
-                        </div><!-- End Reports -->
-
-
-
-
-
+                        </div>
                     </div>
                 </div>
-
-              
-                   
-
-                  
-                
-
-                
             </div>
         </section>
+    </main>
 
-    </main><!-- End #main -->
 
-    <!-- ======= Footer ======= -->
   
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
