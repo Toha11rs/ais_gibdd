@@ -162,7 +162,7 @@ class Employee(models.Model):
         db_table = 'employee'
 
     def __str__(self):
-        return f"{self.name}"
+        return f" {self.surname} {self.name} {self.patronimyc}"
 
 ###################################
 # Penalty

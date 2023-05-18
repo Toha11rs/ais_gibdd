@@ -45,18 +45,12 @@
       <div class=" navstyle collapse navbar-collapse   " id="navbarNav">
         <div class = 'div5'> 
             <ul class="navbar-nav cent ">
-            <li class="nav-item active  ">
-              <a class= " navelem " href="{% url 'entryEmployee' %}">Вход <span class="sr-only"></span></a>
-            </li>
+            
             <li class="nav-item active">
-              <a class="navelem " href="#">Контакты <span class="sr-only"></span></a>
+              <a class="navelem "> <span class="sr-only"></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="navelem" href="#">О нас <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="navelem" href="#">Home <span class="sr-only"></span></a>
-            </li>
+            
+            
           </ul>
         </div>
         
@@ -176,10 +170,11 @@
       </div>
     </section>
     <h1>
-   
+      
     </h1>
     <footer class="py-5 bg-dark">
       <div class="container">
+        <a  href="{% url 'entryEmployee' %}">Вход для сотрудников<span></span></a>
         <p class="m-0 text-center text-white">© 2023 Государственная инспекция безопасности дорожного движения</p>
       </div>
       </footer>

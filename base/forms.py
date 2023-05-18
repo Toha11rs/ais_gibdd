@@ -18,7 +18,7 @@ class SearchForm(forms.Form):
 class EntryEmployeeForm(forms.Form):
     number = forms.CharField(max_length=50, required=False,
                              label="Номер сотрудника")
-    password = forms.IntegerField(label="Пароль")
+    password = forms.CharField(label="Пароль")
 
 
 class AuthForm(forms.Form):
@@ -55,12 +55,12 @@ class PenaltyForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'my-warning-field'})
     )
 
-    PeymantPenalty = forms.IntegerField(label="Сумма штрафа",min_value=0,max_value=50000,initial=0,
+    PeymantPenalty = forms.IntegerField(label="Сумма штрафа",min_value=0,max_value=50000,
         widget=forms.NumberInput(
         attrs={'class': 'my-penalty-field',
                 'value_suffix': 'руб.',    
                 "step":100,
-
+                'placeholder':'0₽'
                 }
                 )
     )
@@ -69,9 +69,11 @@ class PenaltyForm(forms.ModelForm):
         initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden', 'class': 'my-date-field'})
     )
 
-    deprivationDriving = forms.IntegerField(label="Срок лишения прав",help_text='Значение указывать в месяцах',
-                                            min_value=0,initial=0,
-        widget=forms.NumberInput(attrs={'class': 'my-deprivation-field'})
+    deprivationDriving = forms.IntegerField(label="Срок лишения прав",
+                                            min_value=0,
+        widget=forms.NumberInput(attrs={'class': 'my-deprivation-field',
+                                        'placeholder':'Указывать в месяцах'
+                                        })
     )
 
     baseValue = forms.ModelChoiceField(

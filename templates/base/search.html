@@ -49,64 +49,7 @@
 
         
 
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none ">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-
-                  <li class="nav-item dropdown pe-3">
-
-                  
-          
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                      <li class="dropdown-header">
-                       
-           
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-person"></i>
-                          <span>Профиль</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-gear"></i>
-                          <span>Настройки</span>
-                        </a>
-                      </li>
-                      <li>
-                        <hr class="dropdown-divider">
-                      </li>
-          
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
-                          <i class="bi bi-box-arrow-right"></i>
-                          
-
-
-
-                        </a>
-                      </li>
-          
-                    </ul><!-- End Profile Dropdown Items -->
-                  </li><!-- End Profile Nav -->
-
-            </ul>
-        </nav><!-- End Icons Navigation -->
+       
 
     </header><!-- End Header -->
 
@@ -134,8 +77,13 @@
                 <a class="nav-link collapsed "  href="{% url 'auth' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
                 </a>
-                
               </li>
+                <br>
+              <li class="nav-item">
+                <a class="nav-link collapsed cardy "  href="{% url 'EmployeeMain' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Вернуться в главное меню </span></i>
+                </a>
+            </li>
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -155,22 +103,13 @@
         <section class="section dashboard">
             <div class="row">
 
-                <!-- Left side columns -->
                 <div class="col-lg-8">
                     <div class="row">
-
-                        <!-- Reports -->
-                       
-
-
-
 
                     </div>
                   </div>
                     
-              
-  
-                
+
                   <div class="form-group mx-sm-3 mb-2">
                     <br>
                
@@ -208,11 +147,12 @@
                                                  
                                                   <table class = "tableForm">
                                                     <tbody>
-                                                      <tr>
-                                                        
+                                                      <tr>     
                                                         <th>{{ form.employee.label }}</th>
                                                         <td>{{ form.employee|add_class:"my-form-field" }}</td>
-                                                        
+                                                      </tr>
+                                                      <tr>
+                                                        <td>{{ form.DateTime|add_class:"my-form-field" }}</td>                          
                                                       </tr>
                                                       <tr>
                                                         <th>{{ form.typeWarning.label }}</th>
@@ -234,16 +174,13 @@
                                                         <th >{{ form.deprivationDriving.label }}</th>
                                                         <td>{{ form.deprivationDriving|add_class:"my-form-field" }}</td>
                                                       </tr>
-                                                      <th class = 'helptxt'><small>{{ form.deprivationDriving.help_text }}</small></th>
+                                                      
                                                       <tr>
                                                         <hr>
                                                         <th>{{ form.baseValue.label }}</th>
                                                         <td> {{ form.baseValue|add_class:"my-form-field" }}</td>
                                                       </tr>                           
-                                                      <tr>
-                                                        <td>{{ form.DateTime|add_class:"my-form-field" }}</td>
-                                                                                        
-                                                      </tr>
+                                                      
                                                       <tr>
                                                         <td>{{ form.district.label }}</td>
                                                         <td> {{ form.district|add_class:"my-form-field" }}</td>                                   
