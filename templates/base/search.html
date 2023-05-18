@@ -124,6 +124,7 @@
                                 <h1 class = 'txt'>Информация о водителе:</h1>
                                  <p class = 'txt'>Имя: {{ driver.name }}</p>
                                  <p class = 'txt'>Фамилия: {{ driver.surname }}</p>
+                                 <p class = 'txt'>Отчество: {{ driver.Patronymic }}</p>
                                  <p class = 'txt'>Город: {{ address.City }}</p>
                                  <p class = 'txt'>Улица: {{ address.Street }}</p>
                                  <p class = 'txt'>Дом: {{ address.House }}</p>
@@ -147,12 +148,15 @@
                                                  
                                                   <table class = "tableForm">
                                                     <tbody>
+                                                     
+                                                      <tr>
+                                                        <th></th>   
+                                                        
+                                                        <td>{{ form.DateTime|add_class:"my-form-field" }}</td>                          
+                                                      </tr>
                                                       <tr>     
                                                         <th>{{ form.employee.label }}</th>
                                                         <td>{{ form.employee|add_class:"my-form-field" }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td>{{ form.DateTime|add_class:"my-form-field" }}</td>                          
                                                       </tr>
                                                       <tr>
                                                         <th>{{ form.typeWarning.label }}</th>
@@ -175,15 +179,19 @@
                                                         <td>{{ form.deprivationDriving|add_class:"my-form-field" }}</td>
                                                       </tr>
                                                       
-                                                      <tr>
-                                                        <hr>
-                                                        <th>{{ form.baseValue.label }}</th>
-                                                        <td> {{ form.baseValue|add_class:"my-form-field" }}</td>
-                                                      </tr>                           
                                                       
                                                       <tr>
                                                         <td>{{ form.district.label }}</td>
                                                         <td> {{ form.district|add_class:"my-form-field" }}</td>                                   
+                                                      </tr>
+                                                      <tr>
+                                                        
+                                                        <td> {{ form.statusPenalty|add_class:"my-form-field" }}</td> 
+                                                        
+                                                       
+                                                      
+                                                          <td> {{ form.baseValue|add_class:"my-form-field" }}</td>
+                                                        </tr>                           
                                                       </tr>
                                                     </tbody>
                                                   </table>

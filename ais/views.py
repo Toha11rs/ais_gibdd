@@ -121,7 +121,6 @@ def car_info(request, driver_license_id):
             messages.success(request, 'Штраф успешно создан')
             return redirect('car_info', driver_license_id=driver_license_id)
         else:
-            print("ok3")
             messages.error(request, 'Ошибка при созданни штрафа')
     else:
         form = PenaltyForm()

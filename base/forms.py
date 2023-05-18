@@ -59,14 +59,13 @@ class PenaltyForm(forms.ModelForm):
         widget=forms.NumberInput(
         attrs={'class': 'my-penalty-field',
                 'value_suffix': 'руб.',    
-                "step":100,
                 'placeholder':'0₽'
                 }
                 )
     )
 
     DateTime = forms.DateField(
-        initial=date.today, widget=forms.DateInput(attrs={'type': 'hidden', 'class': 'my-date-field'})
+        initial=date.today, widget=forms.DateInput(attrs={ 'class': 'my-date-field'})
     )
 
     deprivationDriving = forms.IntegerField(label="Срок лишения прав",
@@ -78,7 +77,7 @@ class PenaltyForm(forms.ModelForm):
 
     baseValue = forms.ModelChoiceField(
         queryset=BaseValue.objects.all(), label="Базовое значение",initial=1, 
-        widget=forms.Select(attrs={'class': 'my-base-value-field'})
+        widget=forms.Select(attrs={'class': 'my-status-penalty-field','type': 'hidden'})
     )
 
     district = forms.ModelChoiceField(
@@ -119,8 +118,7 @@ class CarInformationForm(forms.ModelForm):
                                 RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена марка')])
     Model = forms.CharField(max_length=50, label="Модель автомобиля",
                             widget=forms.TextInput(
-                                attrs={'placeholder': 'Пример: VESTA','class': 'my-district-field'}), validators=[
-                                RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильна введена модель')])
+                                attrs={'placeholder': 'Пример: VESTA','class': 'my-district-field'}))
     Color = forms.CharField(max_length=50, label="Цвет автомобиля",
                             widget=forms.TextInput(attrs={'placeholder': 'Пример: Blue','class': 'my-district-field'}), validators=[
                                 RegexValidator(r'^[A-Za-z]{2,}$', 'Неправильно введен цвет')])
@@ -171,9 +169,9 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         fields = ['name', 'surname', 'patronimyc', 'PhoneNumber', 'Position', 'number', 'password']
 
-    # def clean_number(self):
-    #     number = self.cleaned_data.get('number')
-    #     if Employee.objects.filter(number=number).exists():
-    #         raise forms.ValidationError('Такой сотрудник уже существует')
-    #     return number
+    def clean_number(self):
+        number = self.cleaned_data.get('number')
+        if Employee.objects.filter(number=number).exists():
+            raise forms.ValidationError('Такой сотрудник уже существует')
+        return number
     

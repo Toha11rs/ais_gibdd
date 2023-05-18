@@ -130,6 +130,11 @@
                         <table class = "tableForm">
                           <tbody>
                             <tr>
+                              <td></td>     
+                              <td>{{ car_information_form.RegistrationDate|add_class:"my-date-field" }}</td>
+                            </tr>
+                                                
+                                  <tr>
                                     <th>{{ car_information_form.Number.label }}</th>
                                     <td>{{ car_information_form.Number|add_class:"my-form-field" }}</td>
                                   </tr>
@@ -150,10 +155,9 @@
                                     <td>{{ car_information_form.Year|add_class:"my-form-field" }}</td>
                                   </tr>
                                   <tr>
-                                    
-                                    <td>{{ car_information_form.RegistrationDate|add_class:"my-date-field" }}</td>
+                                    <td></td>     
+                                    <td></td>
                                   </tr>
-                                                      
                                         
                              </tbody>                          
                              </table>
