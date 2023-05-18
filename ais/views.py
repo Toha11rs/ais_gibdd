@@ -161,8 +161,10 @@ def addEmployee(request):
         form = EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Сотрудник успешко добавлен!')
             return redirect('addEmployee')
     else:
+
         form = EmployeeForm()
 
     return render(request, 'base/add_employee.html', {'form': form})
@@ -170,7 +172,6 @@ def addEmployee(request):
 def allEmployee(request):
         
     employees = Employee.objects.all()
-
     search_query = request.GET.get('search')
     if search_query:
         employees = employees.filter(Q(name__icontains=search_query) |
@@ -184,7 +185,15 @@ def allEmployee(request):
 
     return render(request, 'base/all_employee.html',context)
 
+
+def penalty(request):
+    penaltyes = Penalty.objects.all()
+    context = { "penaltyes":penaltyes}
+
+    return render(request, 'base/penalty.html',context)
+
 def delete_employee(request, id):
     employee = Employee.objects.get(id=id)
     employee.delete()
     return redirect('allEmployee')
+

@@ -18,10 +18,15 @@ class DriverAddress(models.Model):
 class Driver(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
+    Patronymic = models.CharField(max_length=50)
     address = models.ForeignKey(DriverAddress, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'driver'
+
+    def __str__(self):
+
+        return (f"{self.name} {self.surname} {self.Patronymic}")
 
 
 ###################################
@@ -184,6 +189,11 @@ class Penalty (models.Model):
 
     class Meta:
         db_table = 'penalty'
+
+    
+    def __str__(self):
+
+        return (f"{self.district} {self.employee}")
 
 ###################################
 # VIOLATION

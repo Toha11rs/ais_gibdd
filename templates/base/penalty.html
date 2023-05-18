@@ -49,48 +49,36 @@
 
         
 
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none ">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
-
-                 
-        </nav><!-- End Icons Navigation -->
+      
 
     </header><!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
 
-        
+       
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item ">
-                <a class="nav-link cardy  " href="{% url 'addEmployee' %}">
+            <li class="nav-item cardy">
+                <a class="nav-link collapsed " href="{% url 'addEmployee' %}">
                     <i class="bi bi-grid"></i>
                     <span class = 'txt'> Добавление сотрудника</span>
                 </a>
             </li>
 
     
-            <li class="nav-item  ">
-                <a class="nav-link collapsed cardy"  href="{% url 'allEmployee' %}">
+            <li class="nav-item cardy">
+                <a class="nav-link collapsed  "  href="{% url 'allEmployee' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Все сотрудники</span></i>
                 </a>
             </li>
             
         <br>
-            <li class="nav-item">
-                <a class="nav-link collapsed cardy "  href="{% url 'EmployeeMain' %}">
+            <li class="nav-item cardy">
+                <a class="nav-link   "  href="{% url 'EmployeeMain' %}">
                     <i class="bi bi-clipboard-data"></i><span class = 'txt'>Вернуться в главное меню </span></i>
                 </a>
-                
             </li>
         </ul>
 
@@ -98,24 +86,6 @@
 
     <main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Поставить машину на учёт</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'main'%}"> Главная страница</a></li>
-                    <li class="breadcrumb-item active">Поставить машину на учёт</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
-
-      
-            
-
-
-                          
-        <div class="form-group mx-sm-3 mb-2">
-            <br>
-       
           <h1></h1>
           <div>
           <form novalidate method="post" class = 'txt'>
@@ -123,54 +93,48 @@
               {% load widget_tweaks %}
 
               
-              <div = class = ''>
-                <br>
-              <table class = "tableForm">
-                <tbody>
-                  <tr>
-                          <th>{{ form.name.label }}</th>
-                          <td>{{ form.name|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.surname.label }}</th>
-                          <td>{{ form.surname|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.patronimyc.label }}</th>
-                          <td>{{ form.patronimyc|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.PhoneNumber.label }}</th>
-                          <td>{{ form.PhoneNumber|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.Position.label }}</th>
-                          <td>{{ form.Position|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.number.label }}</th>
-                          <td>{{ form.number|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                          <th>{{ form.password.label }}</th>
-                          <td>{{ form.password|add_class:"my-form-field" }}</td>
-                        </tr>
-                        <tr>
-                        </tr>
-                                            
-                        
-                    </tbody>                          
+              <div class = ''>
+                
+                  <br>
+                  <br>
+                <h1>Список штрафов</h1>
+    <table class="tabl">
+        <thead>
+            <tr>
+                <th>Код нарушения</th>
+                <th>Тип напрушения</th>
+                <th>Предупреждение</th>
+                <th>Сумма штрафа</th>
+                <th>Базовая величина</th>
+                <th>Район</th>
+                <th>Статус</th>
+                <th>Лишиние ВУ</th>
+                <th>Сотрудник</th>
+                <th>Водитель</th>
+          
+            </tr>
+        </thead>
+        <tbody>
+            {% for penalty in penaltyes %}
+                <tr>
+                    <td>{{ penalty.code }}</td>
+                    <td>{{ penalty.typeWarning }}</td>
+                    <td>{{ penalty.warning }}</td>
+                    <td>{{ penalty.PeymantPenalty }}</td>
+                    <td>{{ penalty.baseValue }}</td>
+                    <td>{{ penalty.district }}</td>
+                    <td>{{ penalty.statusPenalty }}</td>
+                    <td>{{ penalty.deprivationDriving }}</td>
+                    <td>{{ penalty.employee }}</td>
+                    <td>{{ penalty.driver }}</td>
+                </tr>
+                {% endfor %}
+               
+                    </tbody>
                 </table>
                 <br>
                 </div>
                 <br>
-                <button  class =  'btn btn-primary mb-2' type="submit">Добавить сотрудника</button>
-
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                  
-                {{ message }}</li>
-                {% endfor %}
             </form>
             
         </div>
