@@ -1,0 +1,27 @@
+.header {
+    background: #1a1a1a;
+}
+
+body {
+    background-image: url("msc4.png");
+    background-size: 130%;
+  background-position:20% 40%;
+    
+  }
+
+  .div {
+    border: 2px solid #0072CE;
+    border-radius: 3px;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+  }
+.txt{
+    color: white;
+    text-decoration: none;
+}
+.txt1{
+    color: white;
+    font-size:25px;
+    text-decoration: none;
+    font-weight: bolder;
+}

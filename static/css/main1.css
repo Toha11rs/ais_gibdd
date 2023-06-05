@@ -1,0 +1,220 @@
+.header {
+  background: #1a1a1a;
+}
+
+.div5 {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.logo {
+
+  position: absolute;
+  left: -1%;
+  top: 0%;
+}
+
+/* btns{
+
+} */
+
+.text1 {
+  color: white;
+  top: 51%;
+
+  left: 50%;
+
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 25px;
+
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text2 {
+  color: aliceblue;
+}
+
+.headinfo {
+  font-size: 18px;
+
+}
+
+.pam1 {
+  top: 5px;
+}
+
+.cont {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 800px;
+}
+
+.caro {
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.info {
+
+  text-align: right;
+  border: 3px solid #0072CE;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+.info2 {
+
+  margin-left: -80%;
+}
+
+.containe {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.containe div {
+  width: 10em;
+  height: 10em;
+
+}
+
+.div2 {
+  width: 50em;
+  height: 50em;
+
+}
+
+
+
+.stream {
+  width: 100px;
+  height: 260px;
+  margin: 3px;
+}
+
+.main-div {
+
+  display: table;
+  clear: both;
+}
+
+.cent {
+  float: right;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ln-content-right,
+.ln-content-top-right {
+  float: right;
+  width: 300px;
+  width: 18.75rem;
+}
+
+.cardy {
+  border: 2px solid #0072CE;
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 20px;
+
+}
+
+.cardy2 {
+  border: 2px solid #0072CE;
+  background-color: #1a1a1a;
+  border-radius: 3px;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+
+}
+
+.f-cardy {
+  color: aliceblue;
+  padding: 10px;
+}
+
+
+
+body {
+  background-image: url("msc4.png");
+  background-size: 130%;
+  background-position: 10% 50%;
+
+}
+
+.forms {
+  border: 2px solid #0072CE;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+}
+
+.div3 {
+  border: 2px solid #0072CE;
+  border-radius: 3px;
+}
+
+.divs {
+  height: 250px;
+  width: 200px;
+}
+
+.navstyle {
+  display: inline-block;
+  padding: 10px;
+  background-color: #424242;
+
+}
+
+.navelem {
+  display: inline-block;
+  padding: 10px;
+
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 90;
+
+}
+
+.navelem:hover {
+  text-decoration: none;
+  color: #fff;
+  /* Цвет ссылки при наведении на нее курсора мыши */
+  background: #0072CE;
+  border: 5px solid #0072CE;
+}
+
+.hr2 {
+  color: whitesmoke;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hr1 {
+  color: whitesmoke;
+
+}
+
+.foot {
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+}

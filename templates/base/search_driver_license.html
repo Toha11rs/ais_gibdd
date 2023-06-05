@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Панель сотрудника ГАИ</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/static/assets/img/logo.png" rel="icon">
+    <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/static/assets/css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="{% url 'main' %}" class="logo d-flex align-items-center">
+              <img src="/static/images/gibdd.png" alt="">
+                <span class="d-none d-lg-block">ГИБДД</span>
+            </a>
+         
+        </div><!-- End Logo -->
+
+      
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item forms1">
+                <a class="nav-link collapsed " href="{% url 'EmployeeMain' %}">
+                    <i class="bi bi-grid"></i>
+                    <span class = 'txt'>Статистика</span>
+                </a>
+            </li>
+
+            <li class="nav-item forms1">
+                <a class="nav-link "  href="{% url 'search_driver_license' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Выписать штраф</span></i>
+                </a>
+                
+              </li>
+            <li class="nav-item forms1">
+                <a class="nav-link collapsed"  href="{% url 'auth' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Поставить машину <br> на учёт</span></i>
+                </a>
+                
+              </li>
+              <br>
+              <li class="nav-item  cardy">
+                <a class="nav-link collapsed"  href="{% url 'allEmployee' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>Сотрудники</span></i>
+                </a>
+              </li>
+              <br>
+              <li class="nav-item">
+                <a class="nav-link collapsed cardy "  href="{% url 'penalty' %}">
+                    <i class="bi bi-clipboard-data"></i><span class = 'txt'>штрафы </span></i>
+                </a>
+            </li>
+
+           
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Выписать штраф</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Главная страница</a></li>
+                    <li class="breadcrumb-item active">Выписать штраф</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section dashboard">
+            <div class="row">
+
+                <!-- Left side columns -->
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <!-- Reports -->
+                       
+
+
+
+
+                    </div>
+                  </div>
+                    
+              
+  
+                <div>
+                  <div class="card mb-3">
+                    <div class="card-body cardy">
+                      <div class="pt-4 pb-2">
+                  <br>
+                  <h1 class = 'txt'> Введите номер водительского удостовренеия</h1>
+                  <label for="floatingInput" class="sr-only txt">Введите номер</label>
+                  <form method="post" class="form-inline">
+                    {% csrf_token %}
+                   
+                      {{ form.number }}
+                      <button type="submit" class="btn btn-primary mb-2">Найти</button>
+                      {% if error_message %}
+                        <p>{{ error_message }}</p>
+                      {% endif %}
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    
+                    
+
+                  <div  calss = 'pam1'>
+                    <div class="card mb-3">
+                      <div class="card-body cardy">
+                        <div class="pt-4 pb-2">
+                   
+                    <b class = 'txt'>Памятка для сотрудника ГИБДД при выписывании штрафа:</b>
+                      <p>
+                   
+                    <ol>
+                       <li class = 'txt'>Проверьте, что нарушение действительно имеет место. Для этого убедитесь, что водитель нарушил одно из правил дорожного движения, предусмотренных законодательством.</li>
+                      <p></p>
+                       <li class = 'txt'>Убедитесь, что штраф выписывается в соответствии с размерами, установленными законом. Если нарушение не является крупным или особо крупным, то размер штрафа должен быть установлен в пределах законодательных норм.</li>
+                      <p></p>
+                       <li class = 'txt'>Заполните бланк штрафного талона согласно установленным правилам. В бланке должны быть указаны данные о водителе и автомобиле, а также описано нарушение, совершенное водителем.</li>
+                      <p></p>
+                       <li class = 'txt'>Объясните водителю, как он может оплатить штраф. Укажите способы оплаты (через банк, по почте и т.д.) и сроки оплаты.</li>
+                      <p></p>
+                       <li class = 'txt'>Выдайте водителю копию штрафного талона. Объясните, что это означает, и что он должен делать с копией.</li>
+                      <p></p>
+                       <li class = 'txt'>Важно помнить, что выписывать штрафы нужно в рамках закона и только в тех случаях, когда нарушение действительно имеет место. Если вы не уверены в правильности своих действий, проконсультируйтесь со своим начальством.</li>
+                      <p></p>
+                    </ol>
+                  </div>
+             
+
+                  
+                
+
+                
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+  
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/static/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="/static/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="/static/assets/vendor/quill/quill.min.js"></script>
+    <script src="/static/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/static/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/assets/js/main.js"></script>
+
+</body>
+
+</html>
