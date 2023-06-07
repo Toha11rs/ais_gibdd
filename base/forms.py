@@ -184,3 +184,21 @@ class RegistrationForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(label='Имя пользователя')
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+
+
+
+class UserRegistrationForm(forms.Form):
+    username = forms.CharField(label='Имя пользователя', max_length=100)
+    email = forms.EmailField(label='Email')
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        confirm_password = cleaned_data.get('confirm_password')
+
+        if password and confirm_password and password != confirm_password:
+            raise forms.ValidationError('Пароли не совпадают')
+
+        return cleaned_data

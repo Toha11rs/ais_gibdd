@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
+from base.forms import UserRegistrationForm
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
 from django.contrib import messages
 from django.db.models import Count
@@ -7,7 +8,14 @@ from django.db.models import Q
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from ais.serializer import UserSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+import requests
+import json
+from django.http import JsonResponse
 
 
 def main(request):
@@ -237,3 +245,34 @@ def login_user(request):
 
     return render(request, 'base/auth/login.html', {'form': form, 'error_message': error_message})
 
+
+
+##########################################
+# API
+##########################################
+
+
+
+def registrationView(request):
+    if request.method == 'POST':
+        url = 'http://127.0.0.1:8000/auth/users/'
+
+        data = {
+            'username': request.POST.get('username'),
+            'email': request.POST.get('email'),
+            'password': request.POST.get('password'),
+        }
+
+        response = requests.post(url, data=data)
+
+        if response.status_code == 201:
+            messages.success(request, 'Регистрация успешна!')
+            return redirect('success')  # Перенаправление на другую страницу
+        elif response.status_code == 400:
+            errors = response.json()
+            for field, error_messages in errors.items():
+                for error_message in error_messages:
+                    messages.error(request, f' {error_message}')
+        else:
+            messages.error(request, 'Произошла ошибка регистрации')
+    return render(request, 'base/auth/registration.html',)

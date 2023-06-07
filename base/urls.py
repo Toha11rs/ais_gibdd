@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
 from ais import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('test', views.test, name='test'),
@@ -23,7 +29,7 @@ urlpatterns = [
     path('serach_license/', views.search_driver_license,
          name='search_driver_license'),  # поиск ВУ для вывода всей информации о водиетле а также выписывание штрафа
     # поиск ВУ для потсановления на учет
-    path('auth/', views.AuthDriver, name='auth'),
+    path('auths/', views.AuthDriver, name='auths'),
 
     # вывод информации о водителе а также выписывание ему  штарфа
     path('car_info/<int:driver_license_id>/', views.car_info, name='car_info'),
@@ -48,4 +54,18 @@ urlpatterns = [
     path('register', views.register, name='register'),
 
     path('login', views.login_user, name='login'),
+    ######
+    # API
+    ######
+    # path('api/register/', views.api_register, name='user-registration'),
+
+
+    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    path('auth/', include('djoser.urls')),
+    re_path('auth/', include('djoser.urls.authtoken')),
+
+    path('registration_user', views.registrationView, name='registration_user'),
 ]
