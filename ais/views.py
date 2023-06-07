@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
-from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm
+from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
 from django.contrib import messages
 from django.db.models import Count
 from django.db.models import Q
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 
@@ -211,4 +212,28 @@ def register(request):
             return redirect('main')  
     else:
         form = RegistrationForm()
-    return render (request,'base/register.html',{'form': form})
+    return render (request,'base/auth/register.html',{'form': form})
+
+
+def login_user(request):
+    error_message = ''
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('main')
+            else:
+                error_message = 'Неверное имя пользователя или пароль'
+        else:
+            error_message = 'Некорректные данные'
+    else:
+        form = LoginForm()
+
+    return render(request, 'base/auth/login.html', {'form': form, 'error_message': error_message})
+

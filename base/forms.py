@@ -180,3 +180,7 @@ class EmployeeForm(forms.ModelForm):
 class RegistrationForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Имя пользователя')
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)

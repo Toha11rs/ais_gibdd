@@ -46,4 +46,6 @@ urlpatterns = [
     path('penalty', views.penalty, name='penalty'),
 
     path('register', views.register, name='register'),
+
+    path('login', views.login_user, name='login'),
 ]
