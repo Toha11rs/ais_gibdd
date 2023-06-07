@@ -1,4 +1,6 @@
-<!-- registration.html -->
+
+
+
 
 <!DOCTYPE html>
 <html>
@@ -8,19 +10,59 @@
 <body>
     <h1>Регистрация пользователя</h1>
     
+    <style>
+        #password-strength {
+            height: 20px;
+            width: 200px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+    
+        #password-strength .strength-meter {
+            height: 100%;
+            width: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+    
+        .weak {
+            background-color: #00bbbb;
+        }
+    
+        .medium {
+            background-color: #ff4444;
+        }
+    
+        .strong {
+            background-color: #ffbb33;
+        }
+    
+        .very-strong {
+            background-color: #99cc00;
+        }
+        .very-extra-strong {
+            background-color: #00C851;
+        }
+    </style>
+    
     <form method="post">
         {% csrf_token %}
         <label for="username">Имя пользователя:</label>
         <input type="text" id="username" name="username" required><br>
-        
-        {% comment %} <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br> {% endcomment %}
-        
+    
         <label for="password">Пароль:</label>
         <input type="password" id="password" name="password" required><br>
-        
+    
+        <div id="password-strength">
+            <div class="strength-meter"></div>
+        </div>
+    
         <button type="submit">Зарегистрироваться</button>
-
+    
         {% if messages %}
         <div>
             {% for message in messages %}
@@ -28,6 +70,95 @@
             {% endfor %}
         </div>
         {% endif %}
+        <div id="remaining-time">Осталось: {{ remaining_time }} сек.</div>
+<!-- Другие элементы страницы -->
+
+            <script>
+
+                    // Функция для обновления значения таймера
+                    function updateRemainingTime() {
+                      var remainingTimeElement = document.getElementById("remaining-time");
+                      var remainingTime = parseInt(remainingTimeElement.innerText.split(":")[1]);
+                  
+                      if (remainingTime > 0) {
+                        remainingTime--;
+                        remainingTimeElement.innerText = "Привышен лимит попыток регистрации. Попробуйте через: " + remainingTime + " сек.";
+                      } else {
+                        remainingTimeElement.style.display = "none";  // Скрыть элемент, если таймер равен 0
+                      }
+                    }
+                  
+                    setInterval(updateRemainingTime, 1000);
+            </script>
+
+        <script>
+            var passwordInput = document.getElementById("password");
+            var passwordStrength = document.querySelector("#password-strength .strength-meter");
+    
+            passwordInput.addEventListener("input", function () {
+                var password = passwordInput.value;
+                var strength = calculatePasswordStrength(password);
+    
+                var width = 0;
+                if (strength === 0) {
+                    width = 20;
+                } else if (strength === 1) {
+                    width = 40;
+                } else if (strength === 2) {
+                    width = 60;
+                } else if (strength === 3) {
+                    width = 80;
+                } else if (strength === 4) {
+                    width = 100;
+                }
+    
+                passwordStrength.style.width = width + "%";
+                passwordStrength.className = "strength-meter";
+                passwordStrength.classList.add(getStrengthClass(strength));
+            });
+    
+            function calculatePasswordStrength(password) {
+                // Проверка требования "Ужасный пароль: состоит только из цифр"
+                if (/^\d{8,}$/.test(password)) {
+                    return 1; // Ужасный
+                }
+                
+                // Проверка требования "Плохой пароль: состоит из строчных букв и содержит 1-2 цифры"
+                if (/^(?=.*\d{1,2})[a-z\d]{8,}$/.test(password)) {
+                    return 2; // Плохой
+                } 
+                
+                // Проверка требования "Умеренный пароль: состоит из строчных букв и содержит более 3 цифр"
+                if (/^(?=(?:.*\d){3,}$)[a-z\d]{8,}$/.test(password)) {
+                    return 3; // Умеренный
+                }  
+                
+                // Проверка требования "Хороший пароль: состоит из 1 буквы верхнего регистра и строчных букв и содержит более 3 цифр"
+                if (/^(?=.*\d{3,})[a-zA-Z\d]{8,}$/.test(password)) {
+                    return 4; // Хороший
+                } 
+            
+                return 0; // Ужасный
+            }
+    
+            function getStrengthClass(strength) {
+                if (strength === 0) {
+                    return "weak";
+                } else if (strength === 1) {
+                    return "medium";
+                } else if (strength === 2) {
+                    return "strong";
+                } else if (strength === 3) {
+                    return "very-strong";
+                } else if (strength === 4) {
+                    return "very-extra-strong";
+                }
+            }
+        </script>
     </form>
+
+    
 </body>
+
+
 </html>

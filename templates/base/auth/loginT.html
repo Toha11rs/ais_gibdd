@@ -1,0 +1,30 @@
+<!-- login.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход пользователя</title>
+</head>
+<body>
+    <h1>Вход пользователя</h1>
+    
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br>
+        
+        <button type="submit">Войти</button>
+    </form>
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>

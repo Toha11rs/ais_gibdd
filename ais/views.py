@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
-from base.forms import UserRegistrationForm
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
 from django.contrib import messages
 from django.db.models import Count
@@ -14,9 +13,9 @@ from ais.serializer import UserSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
-import json
-from django.http import JsonResponse
-
+from django.utils import timezone
+import pytz
+import time
 
 def main(request):
 
@@ -254,7 +253,26 @@ def login_user(request):
 
 
 def registrationView(request):
+
+    maxAttempts = 3
+    lockoutDuration = 30  # Время блокировки в секундах
+    incorrectAttempts = request.session.get('incorrect_attempts', 0)
+    lastAttemptTime = request.session.get('last_attempt_time')
+    
     if request.method == 'POST':
+        if lastAttemptTime and time.time() - lastAttemptTime < lockoutDuration:
+            # Пользователь находится в периоде блокировки
+            remainingTime = lockoutDuration - (time.time() - lastAttemptTime)
+           
+            return redirect('registration_user')  # Перенаправление на страницу регистрации
+        
+        if incorrectAttempts >= maxAttempts:
+            # Превышено максимальное количество некорректных попыток
+            request.session['last_attempt_time'] = time.time()  # Сохранить время последней попытки
+            request.session['incorrect_attempts'] = 2  # Сбросить счетчик некорректных попыток
+
+            return redirect('registration_user')  # Перенаправление на страницу регистрации
+        
         url = 'http://127.0.0.1:8000/auth/users/'
 
         data = {
@@ -267,12 +285,53 @@ def registrationView(request):
 
         if response.status_code == 201:
             messages.success(request, 'Регистрация успешна!')
-            return redirect('success')  # Перенаправление на другую страницу
+            return redirect('main')  # Перенаправление на другую страницу
         elif response.status_code == 400:
             errors = response.json()
             for field, error_messages in errors.items():
                 for error_message in error_messages:
-                    messages.error(request, f' {error_message}')
+                    messages.error(request, f'{error_message}')
+            # Увеличить счетчик некорректных попыток
+            request.session['incorrect_attempts'] = incorrectAttempts + 1
         else:
             messages.error(request, 'Произошла ошибка регистрации')
-    return render(request, 'base/auth/registration.html',)
+
+    remainingTime = int(lockoutDuration - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
+    return render(request, 'base/auth/registration.html', {'remaining_time': remainingTime})
+
+
+def login_view(request):
+
+    if request.method == 'POST':
+        url = 'http://127.0.0.1:8000/auth/token/login/'
+
+        data = {
+            'username': request.POST.get('username'),
+            'password': request.POST.get('password'),
+        }
+
+        response = requests.post(url, data=data)
+
+        if response.status_code == 200:
+            token = response.json().get('auth_token')
+            # Сохраняем токен в сессии для последующего использования
+            request.session['token'] = token
+
+            # Аутентифицируем пользователя в Django
+            user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+            if user is not None:
+                # Устанавливаем сессию входа пользователя
+                login(request, user)
+                # Обновляем время последнего входа пользователя
+                user.last_login = timezone.now().astimezone(pytz.timezone('Europe/Moscow'))
+                user.save()
+
+            messages.success(request, 'Вход выполнен успешно!')
+            return redirect('main')  # Перенаправление на другую страницу
+        elif response.status_code == 400:
+            error_message = response.json().get('detail')
+            messages.error(request, f'Ошибка входа: {error_message}')
+        else:
+            messages.error(request, 'Произошла ошибка входа')
+
+    return render(request, 'base/auth/loginT.html')

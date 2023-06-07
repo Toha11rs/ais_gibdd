@@ -68,4 +68,5 @@ urlpatterns = [
     re_path('auth/', include('djoser.urls.authtoken')),
 
     path('registration_user', views.registrationView, name='registration_user'),
+    path('login_user', views.login_view, name='login_user'),
 ]
