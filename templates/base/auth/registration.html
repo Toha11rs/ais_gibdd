@@ -1,164 +1,286 @@
-
-
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Регистрация пользователя</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Авторизация | Hard5</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/static/assets/img/logo.png" rel="icon">
+  <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/static/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/static/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="static/css/entry.css">
+  <!-- Template Main CSS File -->
+  
+
+ 
 </head>
-<body>
-    <h1>Регистрация пользователя</h1>
-    
-    <style>
-        #password-strength {
-            height: 20px;
-            width: 200px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-    
-        #password-strength .strength-meter {
-            height: 100%;
-            width: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-    
-        .weak {
-            background-color: #00bbbb;
-        }
-    
-        .medium {
-            background-color: #ff4444;
-        }
-    
-        .strong {
-            background-color: #ffbb33;
-        }
-    
-        .very-strong {
-            background-color: #99cc00;
-        }
-        .very-extra-strong {
-            background-color: #00C851;
-        }
-    </style>
-    
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Имя пользователя:</label>
-        <input type="text" id="username" name="username" required><br>
-    
-        <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" required><br>
-    
-        <div id="password-strength">
-            <div class="strength-meter"></div>
-        </div>
-    
-        <button type="submit">Зарегистрироваться</button>
-    
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-            <p>{{ message }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
-        <div id="remaining-time">Осталось: {{ remaining_time }} сек.</div>
-<!-- Другие элементы страницы -->
+<body class = 'body'>
 
-            <script>
 
-                    // Функция для обновления значения таймера
-                    function updateRemainingTime() {
-                      var remainingTimeElement = document.getElementById("remaining-time");
-                      var remainingTime = parseInt(remainingTimeElement.innerText.split(":")[1]);
+  <main >
+    <div class="container ">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4 ">
+                <a href="{% url 'main' %}" class="logo d-flex align-items-center w-auto txt1">
                   
-                      if (remainingTime > 0) {
-                        remainingTime--;
-                        remainingTimeElement.innerText = "Привышен лимит попыток регистрации. Попробуйте через: " + remainingTime + " сек.";
-                      } else {
-                        remainingTimeElement.style.display = "none";  // Скрыть элемент, если таймер равен 0
-                      }
+                  <span class="d-none d-lg-block ">ГИБДД</span>
+                </a>
+              </div><!-- End Logo -->
+              <div class="div">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2 ">
+                    <h5 class=" txt card-title text-center pb-0 fs-4">Регистарция</h5>
+                  </div>
+
+                  
+
+                  <style>
+                    #password-strength {
+                        height: 20px;
+                        width: 200px;
+                        border: 1px solid #ccc;
+                        margin-top: 10px;
+                        position: relative;
+                        overflow: hidden;
                     }
+                
+                    #password-strength .strength-meter {
+                        height: 100%;
+                        width: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        transition: width 0.3s ease;
+                    }
+                
+                    .weak {
+                        background-color: #c41e3a;
+                    }
+                
+                    .medium {
+                        background-color: #ff4444;
+                    }
+                
+                    .strong {
+                        background-color: #ffbb33;
+                    }
+                
+                    .very-strong {
+                        background-color: #99cc00;
+                    }
+                    .very-extra-strong {
+                        background-color: #00C851;
+                    }
+
+                    .super-strong {
+                      background-color: #FF8800;
+                  }
                   
-                    setInterval(updateRemainingTime, 1000);
-            </script>
+                  .very-super-strong {
+                      background-color: #FF00FF;
+                  }
+                  
+                  .very-extra-super-strong {
+                      background-color: #AA66CC;
+                  }
+                </style>
+                
+                <form method="post" class="row g-3 needs-validation">
+                    {% csrf_token %}
+                    <label class=" txt form-label" for="username">Имя пользователя:</label>
+                    <input class="form-control" type="text" id="username" name="username" required><br>
+                    
+                    <label class=" txt form-label" for="email">Email:</label>
+                    <input class="form-control" type="email" id="email" name="email" required><br>
+                
+                    <label class=" txt form-label" for="password">Пароль:</label>
+                    <input class="form-control" type="password" id="password" name="password" required><br>
+                    
+                    <label class=" txt form-label" for="confirm_password">Подтвержденяи пароля:</label>
+                    <input class="form-control" type="password" id="confirm_password" name="confirm_password" required><br>
 
-        <script>
-            var passwordInput = document.getElementById("password");
-            var passwordStrength = document.querySelector("#password-strength .strength-meter");
-    
-            passwordInput.addEventListener("input", function () {
-                var password = passwordInput.value;
-                var strength = calculatePasswordStrength(password);
-    
-                var width = 0;
-                if (strength === 0) {
-                    width = 20;
-                } else if (strength === 1) {
-                    width = 40;
-                } else if (strength === 2) {
-                    width = 60;
-                } else if (strength === 3) {
-                    width = 80;
-                } else if (strength === 4) {
-                    width = 100;
-                }
-    
-                passwordStrength.style.width = width + "%";
-                passwordStrength.className = "strength-meter";
-                passwordStrength.classList.add(getStrengthClass(strength));
-            });
-    
-            function calculatePasswordStrength(password) {
-                // Проверка требования "Ужасный пароль: состоит только из цифр"
-                if (/^\d{8,}$/.test(password)) {
-                    return 1; // Ужасный
-                }
+
+                    <div id="password-strength">
+                        <div  class="strength-meter"></div>
+                    </div>
                 
-                // Проверка требования "Плохой пароль: состоит из строчных букв и содержит 1-2 цифры"
-                if (/^(?=.*\d{1,2})[a-z\d]{8,}$/.test(password)) {
-                    return 2; // Плохой
-                } 
-                
-                // Проверка требования "Умеренный пароль: состоит из строчных букв и содержит более 3 цифр"
-                if (/^(?=(?:.*\d){3,}$)[a-z\d]{8,}$/.test(password)) {
-                    return 3; // Умеренный
-                }  
-                
-                // Проверка требования "Хороший пароль: состоит из 1 буквы верхнего регистра и строчных букв и содержит более 3 цифр"
-                if (/^(?=.*\d{3,})[a-zA-Z\d]{8,}$/.test(password)) {
-                    return 4; // Хороший
-                } 
+                    <button  class="btn btn-primary w-100" type="submit">Зарегистрироваться</button>
+                    
+                    {% if error_message %}
+                    <div class="error-message txt form-label ">{{ error_message }}</div>
+                    {% endif %}
+
+                    {% if messages %}
+                    <div class=" txt form-label">
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class=" txt form-label" id="remaining-time">Осталось: {{ remaining_time }} сек.</div>
+            <!-- Другие элементы страницы -->
             
-                return 0; // Ужасный
-            }
-    
-            function getStrengthClass(strength) {
-                if (strength === 0) {
-                    return "weak";
-                } else if (strength === 1) {
-                    return "medium";
-                } else if (strength === 2) {
-                    return "strong";
-                } else if (strength === 3) {
-                    return "very-strong";
-                } else if (strength === 4) {
-                    return "very-extra-strong";
-                }
-            }
-        </script>
-    </form>
+                        <script>
+            
+                                // Функция для обновления значения таймера
+                                function updateRemainingTime() {
+                                  var remainingTimeElement = document.getElementById("remaining-time");
+                                  var remainingTime = parseInt(remainingTimeElement.innerText.split(":")[1]);
+                              
+                                  if (remainingTime > 0) {
+                                    remainingTime--;
+                                    remainingTimeElement.innerText = "Привышен лимит попыток регистрации. Попробуйте через: " + remainingTime + " сек.";
+                                  } else {
+                                    remainingTimeElement.style.display = "none"; 
+                                  }
+                                }
+                              
+                                setInterval(updateRemainingTime, 1000);
+                        </script>
+            
+                    <script>
+                        var passwordInput = document.getElementById("password");
+                        var passwordStrength = document.querySelector("#password-strength .strength-meter");
+                
+                        passwordInput.addEventListener("input", function () {
+                            var password = passwordInput.value;
+                            var strength = calculatePasswordStrength(password);
+                
+                            var width = 0;
+                            if (strength === 0) {
+                                width = 10;
+                            } else if (strength === 1) {
+                                width = 30;
+                            } else if (strength === 2) {
+                                width = 40;
+                            } else if (strength === 3) {
+                                width = 50;
+                            } else if (strength === 4) {
+                                width = 60;
+                            } else if (strength === 5) {
+                                width = 70;                    
+                            } else if (strength === 6) {
+                                width = 80;                          
+                            } else if (strength === 7) {
+                                width = 100;
+                            }
+                
+                            passwordStrength.style.width = width + "%";
+                            passwordStrength.className = "strength-meter";
+                            passwordStrength.classList.add(getStrengthClass(strength));
+                        });
+                
+                        function calculatePasswordStrength(password) {
+                            // состоит только из цифр
+                            if (/^\d+$/.test(password)) {
+                              return 1; 
+                          }
+                      
+                          // состоит из строчных букв и содержит 1-2 цифры"
+                          if (/^(?=.*\d{1,2})[a-z]+$/.test(password)) {
+                              return 2;
+                          }
+                      
+                          // состоит из строчных букв и содержит более 3 цифр"
+                          if (/^(?=(?:.*\d){3,})[a-z\d]+$/.test(password)) {
+                              return 3; 
+                          }
+                      
+                          // состоит из 1 буквы верхнего регистра и строчных букв и содержит более 3 цифр"
+                          if (/^(?=.*\d{3,})[a-zA-Z\d]+$/.test(password)) {
+                              return 4; 
+                          }
+                      
+                          //  состоит из 1 буквы верхнего регистра, строчных букв, более 3 цифр и 1го специального символа"
+                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*])[a-zA-Z\d]+$/.test(password)) {
+                              return 5; 
+                          }
+                      
+                          //состоит из 1 буквы верхнего регистра, строчных букв, более 3 цифр и более 3ех специальных символов"
+                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*]{3,})[a-zA-Z\d]+$/.test(password)) {
+                              return 6;
+                          }
+                      
+                         //состоит из 4 букв верхнего регистра не идущих подряд, строчных букв, более 3 цифр и более 5и специальных символов"
+                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*]{5,})(?!.*[A-Z]{4,})[a-zA-Z\d]+$/.test(password)) {
+                              return 7; 
+                          }
+                        
+                            return 0; 
+                        }
+                
+                        function getStrengthClass(strength) {
+                            if (strength === 0) {
+                                return "weak";
+                            } else if (strength === 1) {
+                                return "medium";
+                            } else if (strength === 2) {
+                                return "strong";
+                            } else if (strength === 3) {
+                                return "very-strong";
+                            } else if (strength === 4) {
+                                return "very-extra-strong";
+                           } else if (strength === 5) {
+                                return "super-strong";  
+                           } else if (strength === 6) {
+                                return "very-super-strong";                           
+                            } else if (strength === 7) {
+                                return "very-extra-super-strong";
+                            }
+                          }
+                    </script>
+                </form>
 
-    
+                
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/static/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/static/assets/vendor/quill/quill.min.js"></script>
+  <script src="/static/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/static/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/assets/js/main.js"></script>
+
 </body>
 
 
-</html>

@@ -208,3 +208,12 @@ class Violation(models.Model):
 
     class Meta:
         db_table = 'violation'
+
+
+################
+
+# class Authuser(models.Model):
+#     is_staff = models.BooleanField(default=False)
+
+#     class Meta:
+#         db_table = 'auth_user'

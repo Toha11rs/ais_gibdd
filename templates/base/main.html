@@ -19,38 +19,39 @@
     <nav class="navbar navbar-expand-lg navbar-dark header">
       <div class="container">
        
+        
+        <div class = 'headinfo'>
+          <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
+          <p class = " text1"> Госавтоиснпекция  <p class = 'text2'> Помогаем защитить ваши права на дороге</p>
           
-          <div class = 'headinfo'>
-            <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
-            <p class = " text1"> Госавтоиснпекция  <p class = 'text2'> Помогаем защитить ваши права на дороге</p>
-            
-          </div>
+        </div>
           
-
+        
         <div class = 'info2'>
           <div class = "ln-content-right info ln-content-top-right">
-      
             <b class = 'f-cardy '>Управление ГИБДД ГУ МВД РОССИИ ПО Г. МОСКВЕ
               
             </b>
-              <p class = 'f-cardy'>ДЕЖУРНАЯ ЧАСТЬ:
-                +7(499)113-19-84</p>
+            <p class = 'f-cardy'>ДЕЖУРНАЯ ЧАСТЬ:
+              +7(499)113-19-84</p>
+              
+            </div>
+          </div>
           
-          </div>
-          </div>
-  
-    </nav>
-    <nav class="  navbar navbar-expand-lg  ">
-      
-      <div class=" navstyle collapse navbar-collapse   " id="navbarNav">
-        <div class = 'div5'> 
-            <ul class="navbar-nav cent ">
-            
-            <li class="nav-item active">
-              <a class="navelem "> <span class="sr-only"></span></a>
-            </li>
-            
-            
+        </nav>
+        <nav class="  navbar navbar-expand-lg  ">
+          
+          <div class=" navstyle collapse navbar-collapse   " id="navbarNav">
+            <div class = 'div5'> 
+              <ul class="navbar-nav cent ">
+                <a class= " navelem " href="{% url 'registration_user' %}">регистрация <span class="sr-only"></span></a>
+                <a class= " navelem " href="{% url 'login_user' %}">Вход <span class="sr-only"></span></a>
+                
+                <li class="nav-item active">
+                  <a class="navelem "> <span class="sr-only"></span></a>
+                </li>
+                
+                
           </ul>
         </div>
         

@@ -1,41 +1,34 @@
+from audioop import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.db.models import Q
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from ais.serializer import UserSerializer
-from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
 from django.utils import timezone
 import pytz
 import time
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+
 
 def main(request):
 
     return render(request, 'base/main.html')
 
 
+# @api_view(['GET'])    
+# @permission_classes([IsAuthenticated])
+@login_required
 def test(request):
-    penalty_counts = Penalty.objects.values(
-        'district__District').annotate(count=Count('id'))
-    districts = District.objects.annotate(
-        num_penalties=Count('penalty')).order_by('-num_penalties')
-    data = {}
-    for district in districts:
-        data[district.District] = 0
-    for penalty_count in penalty_counts:
-        data[penalty_count['district__District']] = penalty_count['count']
-    context = {
-        'data': data
-    }
-    return render(request, 'base/test.html', context)
+
+    return render(request, 'base/test.html')
 
 
 def search_driver_license(request):
@@ -146,8 +139,12 @@ def car_info(request, driver_license_id):
 
     return render(request, 'base/search.html', context)
 
-
+# @api_view(['GET'])    
+# @permission_classes([IsAuthenticated])
+@login_required
 def EmployeeMain(request):
+
+    
     penalty_counts = Penalty.objects.values(
         'district__District').annotate(count=Count('id'))
     districts = District.objects.annotate(
@@ -207,42 +204,6 @@ def delete_employee(request, id):
     return redirect('allEmployee')
 
 
-def register(request):
-
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            hashed_password = make_password(password)
-            user = User.objects.create(username=username, password=hashed_password)
-            return redirect('main')  
-    else:
-        form = RegistrationForm()
-    return render (request,'base/auth/register.html',{'form': form})
-
-
-def login_user(request):
-    error_message = ''
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('main')
-            else:
-                error_message = 'Неверное имя пользователя или пароль'
-        else:
-            error_message = 'Некорректные данные'
-    else:
-        form = LoginForm()
-
-    return render(request, 'base/auth/login.html', {'form': form, 'error_message': error_message})
 
 
 
@@ -252,26 +213,36 @@ def login_user(request):
 
 
 
-def registrationView(request):
+def registration_view(request):
+
+    
 
     maxAttempts = 3
-    lockoutDuration = 30  # Время блокировки в секундах
+    lock_time = 10  # Время блокировки в секундах
     incorrectAttempts = request.session.get('incorrect_attempts', 0)
     lastAttemptTime = request.session.get('last_attempt_time')
     
     if request.method == 'POST':
-        if lastAttemptTime and time.time() - lastAttemptTime < lockoutDuration:
-            # Пользователь находится в периоде блокировки
-            remainingTime = lockoutDuration - (time.time() - lastAttemptTime)
+
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        print("пароли совпадают")
+
+        if password != confirm_password:
+            error_message = 'Пароли не совпадают'
+            print("пароли  не совпадают")
+            return render(request, 'base/auth/registration.html', {'error_message': error_message})
+        
+        if lastAttemptTime and time.time() - lastAttemptTime < lock_time:
+            remainingTime = lock_time - (time.time() - lastAttemptTime)
            
-            return redirect('registration_user')  # Перенаправление на страницу регистрации
+            return redirect('registration_user')  
         
         if incorrectAttempts >= maxAttempts:
-            # Превышено максимальное количество некорректных попыток
             request.session['last_attempt_time'] = time.time()  # Сохранить время последней попытки
-            request.session['incorrect_attempts'] = 2  # Сбросить счетчик некорректных попыток
+            request.session['incorrect_attempts'] = 2  # сброс счетчика некорректных попыток
 
-            return redirect('registration_user')  # Перенаправление на страницу регистрации
+            return redirect('registration_user')  
         
         url = 'http://127.0.0.1:8000/auth/users/'
 
@@ -285,7 +256,7 @@ def registrationView(request):
 
         if response.status_code == 201:
             messages.success(request, 'Регистрация успешна!')
-            return redirect('main')  # Перенаправление на другую страницу
+            return redirect('main') 
         elif response.status_code == 400:
             errors = response.json()
             for field, error_messages in errors.items():
@@ -296,7 +267,7 @@ def registrationView(request):
         else:
             messages.error(request, 'Произошла ошибка регистрации')
 
-    remainingTime = int(lockoutDuration - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
+    remainingTime = int(lock_time - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
     return render(request, 'base/auth/registration.html', {'remaining_time': remainingTime})
 
 
@@ -314,20 +285,31 @@ def login_view(request):
 
         if response.status_code == 200:
             token = response.json().get('auth_token')
-            # Сохраняем токен в сессии для последующего использования
             request.session['token'] = token
 
-            # Аутентифицируем пользователя в Django
             user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
             if user is not None:
-                # Устанавливаем сессию входа пользователя
                 login(request, user)
-                # Обновляем время последнего входа пользователя
                 user.last_login = timezone.now().astimezone(pytz.timezone('Europe/Moscow'))
                 user.save()
-
             messages.success(request, 'Вход выполнен успешно!')
-            return redirect('main')  # Перенаправление на другую страницу
+
+            user = User.objects.get(username=request.POST.get('username'))
+            if user.is_staff:
+                print("админ")
+                return redirect("EmployeeMain")
+
+            else:
+                print("юзер")
+                return redirect("main")
+
+
+                # вход по токену( не рабоает)
+            # url = 'http://127.0.0.1:8000/test'
+            # response['Authorization'] = f'Token {token}'
+            # response = requests.get(url, headers={'Authorization': f'Token {token}'})
+            
+        
         elif response.status_code == 400:
             error_message = response.json().get('detail')
             messages.error(request, f'Ошибка входа: {error_message}')

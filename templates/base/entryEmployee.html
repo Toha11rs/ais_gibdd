@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Авторизация | Hard5</title>
+  <title>Вход | Hard5</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -34,7 +34,7 @@
 <body class = 'body'>
 
 
-  <main >
+  <main>
     <div class="container ">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -47,51 +47,40 @@
                   
                   <span class="d-none d-lg-block ">ГИБДД</span>
                 </a>
-              </div><!-- End Logo -->
+              </div>
               <div class="div">
 
                 <div class="card-body">
 
                   <div class="pt-4 pb-2 ">
-                    <h5 class=" txt card-title text-center pb-0 fs-4">Вход</h5>
+                    <h5 class=" txt card-title text-center pb-0 fs-4">Войти</h5>
                   </div>
 
-                  
-
-<form action="" method="post" class="row g-3 needs-validation" >
-                            {% if error %}
-          <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
-        <form action="{% url 'EmployeeMain' %}" method="post" class="row g-3 needs-validation" >
-
-  {% csrf_token %}
-
-  <div class="col-12">
-    <label class=" txt form-label">Личный номер</label>
-    <div class="input-group has-validation">
-      <input type="text" name="number" class="form-control"  required>
-      
-    </div>
-  </div>
-
-  <div class="col-12">
-    <label  class=" txt form-label">Пароль</label>
-    <input type="password" name="password" class="form-control"  required>
-    <div class="invalid-feedback">Пожалуйста, введите пароль!</div>
-  </div>
-  <div class="col-12">
-    <button class="btn btn-primary w-100" type="submit">Войти</button>
-  </div>
-
-  <div class="col-12">
-    {% if form.errors %}
-    <p class="small mb-0">Проверьте правильность написания номера или пароля!</p>
-    {% endif %}
-  </div>
-</form>
-
+        
                 
+                <form method="post" class="row g-3 needs-validation">
+                    {% csrf_token %}
+                    <label class=" txt form-label" for="username">Имя пользователя:</label>
+                    <input class="form-control" type="text" id="username" name="username" required><br>
+                                    
+                    <label class=" txt form-label" for="password">Пароль:</label>
+                    <input class="form-control" type="password" id="password" name="password" required><br>
+                                  
+                    <button  class="btn btn-primary w-100" type="submit">Войти</button>
+                    
+                    {% if error_message %}
+                    <div class="error-message txt form-label ">{{ error_message }}</div>
+                    {% endif %}
 
+                    {% if messages %}
+                    <div class=" txt form-label">
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                </form>
             </div>
           </div>
         </div>
@@ -99,7 +88,7 @@
       </section>
 
     </div>
-  </main><!-- End #main -->
+  </main>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

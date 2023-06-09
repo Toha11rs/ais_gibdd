@@ -41,7 +41,9 @@ urlpatterns = [
     path('entryEmployee', views.entryEmployee,
          name='entryEmployee'),  # вход для сторудников
     # главная странциа сотрудников
-    path('employeeMain', views.EmployeeMain, name='EmployeeMain'),
+    # path('employeeMain', views.EmployeeMain, name='EmployeeMain'),
+
+    path('employeeMain/', views.EmployeeMain, name='EmployeeMain'),
 
     path('addEmployee', views.addEmployee, name='addEmployee'),
 
@@ -51,9 +53,7 @@ urlpatterns = [
 
     path('penalty', views.penalty, name='penalty'),
 
-    path('register', views.register, name='register'),
 
-    path('login', views.login_user, name='login'),
     ######
     # API
     ######
@@ -67,6 +67,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.authtoken')),
 
-    path('registration_user', views.registrationView, name='registration_user'),
+    path('registration_user', views.registration_view, name='registration_user'),
     path('login_user', views.login_view, name='login_user'),
 ]
