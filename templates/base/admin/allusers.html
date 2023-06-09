@@ -144,7 +144,7 @@
                     </thead>
                     <tbody>
                         {% for user in users %}
-                        <tr>
+                        <tr {% for login_attempt in login_attempts %}{% if login_attempt.user == user and login_attempt.attempt_number > 5 %} style="background-color: #FF7F50; color: #fff;"{% endif %}{% endfor %}>>
                             <td>{{ user.username }}</td>
                             <td>{{ user.first_name }}</td>
                             <td>{{ user.last_name }}</td>
@@ -168,7 +168,11 @@
                     {% endif %}
                         </tr>
                         {% endfor %}
-                    </tbody>
+                        {% comment %} {% for login_attempt in login_attempts %}
+                            <tr{% if login_attempt.attempt_number > 5 %} style="background-color: #FF7F50; color: #fff;"{% endif %}>
+                         {% endfor %} {% endcomment %}
+                        
+                        </tbody>
                 </table>
             {% else %}
                 <p>Сотрудники не найдены</p>
@@ -181,12 +185,7 @@
             
         </div>
         
-        
-        {% comment %} {% if form.errors %}
-<div class="alert alert-danger">
-<strong>Error:</strong> {{ form.errors }}
-</div>
-{% endif %} {% endcomment %}
+    
 
     </main>
 

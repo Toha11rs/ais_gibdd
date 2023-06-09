@@ -55,12 +55,12 @@ urlpatterns = [
     path('delete_employee/<int:id>/', views.delete_employee, name='delete_employee'),
 
 
-    path('unblock_user/<int:id>/', views.unblock_user, name='unblock_user'),
 
     path('penalty', views.penalty, name='penalty'),
 
     path('block_user/<int:id>/', views.block_users, name='block_users'),
 
+    path('unblock_user/<int:id>/', views.unblock_user, name='unblock_user'),
     ######
     # API
     ######

@@ -214,7 +214,13 @@ class UserTryLogin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     attempt_number = models.PositiveIntegerField(default=0)
 
+    def clear_attempt(self):
+        self.attempt_number = 0
+        self.save()
 
+    def increase_attempt(self):
+        self.attempt_number += 1
+        self.save()
 
     class Meta:
         db_table = 'user_try_login'

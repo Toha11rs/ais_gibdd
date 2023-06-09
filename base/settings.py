@@ -160,6 +160,8 @@ LANGUAGES = [
 ]
 
 
+MAX_ATTEMPTS = 4
+
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Europe/Moscow'

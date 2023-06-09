@@ -223,8 +223,9 @@ def unblock_user(request, id):
     except User.DoesNotExist:
         return redirect('allUsers')
 
+
+@login_required
 def allUsers(request):
-        
     users = User.objects.all()
     search_query = request.GET.get('search')
     if search_query:
@@ -235,8 +236,11 @@ def allUsers(request):
             Q(email__icontains=search_query) |
             Q(last_login__icontains=search_query)
         )
-
-    context = {'users': users}
+    login_attempts = UserTryLogin.objects.filter(user__in=users, attempt_number__gt=5)
+    context = {
+        'users': users,
+        'login_attempts':login_attempts,
+               }
 
     return render(request, 'base/admin/allusers.html', context)
 
@@ -308,7 +312,7 @@ def login_view(request):
     employees = UserTryLogin.objects.all()
     print(employees)
     maxAttempts = 3
-    lock_time = 10  # Время блокировки в секундах
+    lock_time = 10  
     incorrectAttempts = request.session.get('incorrect_attempts', 0)
     lastAttemptTime = request.session.get('last_attempt_time')
 
@@ -326,6 +330,7 @@ def login_view(request):
             token = response.json().get('auth_token')
             request.session['token'] = token
 
+
             user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
             if user is not None:
                 login(request, user)
@@ -333,17 +338,21 @@ def login_view(request):
                 user.save()
             messages.success(request, 'Вход выполнен успешно!')
 
+                # обнуление счетчика неудачных попыток
             username = request.POST.get('username')     
             password = request.POST.get('password')     
             is_staff = request.POST.get('is_staff')     
             
             user = authenticate(request, username=username, password=password,is_staff=is_staff)
 
+            login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
+            login_attempt.clear_attempt()
+
             is_staff = user.is_staff
             print(is_staff)
             if user.is_staff == True:
                 print("админ")
-                return redirect("EmployeeMain")
+                return redirect("allUsers")
 
             else:
                 print("юзер")
@@ -358,11 +367,13 @@ def login_view(request):
         
         elif response.status_code == 400:
                     request.session['incorrect_attempts'] = incorrectAttempts + 1
-                    request.session['last_attempt_time'] = time.time()  # Сохранить время последней попытки
+                    request.session['last_attempt_time'] = time.time()  #  время последней попытки
 
-                    # login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
-                    # print(login_attempt)
-                    # login_attempt.increase_attempt()
+                     #счетчик неудачных попыток
+                    
+                    login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
+                    login_attempt.increase_attempt()
+
                     if incorrectAttempts + 1 >= maxAttempts:
 
                         return redirect('login_user') 
@@ -373,13 +384,4 @@ def login_view(request):
     remainingTime = int(lock_time - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
     return render(request, 'base/auth/loginT.html', {'remaining_time': remainingTime})
 
-
-def block_user(request, id):
-    try:
-        user = User.objects.get(id=id)
-        user.is_active = False
-        user.save()
-        return redirect('allEmployee')  
-    except User.DoesNotExist:
-        return redirect('allEmployee')
 
