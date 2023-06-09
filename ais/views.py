@@ -273,6 +273,11 @@ def registration_view(request):
 
 def login_view(request):
 
+    maxAttempts = 3
+    lock_time = 10  # Время блокировки в секундах
+    incorrectAttempts = request.session.get('incorrect_attempts', 0)
+    lastAttemptTime = request.session.get('last_attempt_time')
+
     if request.method == 'POST':
         url = 'http://127.0.0.1:8000/auth/token/login/'
 
@@ -311,9 +316,15 @@ def login_view(request):
             
         
         elif response.status_code == 400:
-            error_message = response.json().get('detail')
-            messages.error(request, f'Ошибка входа: {error_message}')
-        else:
-            messages.error(request, 'Произошла ошибка входа')
+                    request.session['incorrect_attempts'] = incorrectAttempts + 1
+                    request.session['last_attempt_time'] = time.time()  # Сохранить время последней попытки
 
-    return render(request, 'base/auth/loginT.html')
+                    if incorrectAttempts + 1 >= maxAttempts:
+
+                        return redirect('login_user') 
+                    else:
+                        messages.error(request, 'Неправильный логин или пароль')
+        else:
+                    messages.error(request, 'Произошла ошибка входа')
+    remainingTime = int(lock_time - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
+    return render(request, 'base/auth/loginT.html', {'remaining_time': remainingTime})
