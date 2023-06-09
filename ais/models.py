@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 ###################################
 # DRIVER
 ###################################
@@ -18,8 +18,8 @@ class DriverAddress(models.Model):
 class Driver(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    Patronymic = models.CharField(max_length=50)
-    address = models.ForeignKey(DriverAddress, on_delete=models.CASCADE)
+    Patronymic = models.CharField(max_length=50,default="none")
+    address = models.ForeignKey(DriverAddress, on_delete=models.CASCADE,default="none")
 
     class Meta:
         db_table = 'driver'
@@ -210,10 +210,11 @@ class Violation(models.Model):
         db_table = 'violation'
 
 
-################
+class UserTryLogin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    attempt_number = models.PositiveIntegerField(default=0)
 
-# class Authuser(models.Model):
-#     is_staff = models.BooleanField(default=False)
 
-#     class Meta:
-#         db_table = 'auth_user'
+
+    class Meta:
+        db_table = 'user_try_login'

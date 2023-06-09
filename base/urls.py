@@ -38,6 +38,7 @@ urlpatterns = [
 
     path('registercar/<int:driver_id>/',
          views.create_car_information, name='registercar'),  # регистрация автомобиля
+
     path('entryEmployee', views.entryEmployee,
          name='entryEmployee'),  # вход для сторудников
     # главная странциа сотрудников
@@ -49,10 +50,16 @@ urlpatterns = [
 
     path('allEmployee', views.allEmployee, name='allEmployee'),
     
+    path('allUsers', views.allUsers, name='allUsers'),
+
     path('delete_employee/<int:id>/', views.delete_employee, name='delete_employee'),
+
+
+    path('unblock_user/<int:id>/', views.unblock_user, name='unblock_user'),
 
     path('penalty', views.penalty, name='penalty'),
 
+    path('block_user/<int:id>/', views.block_users, name='block_users'),
 
     ######
     # API

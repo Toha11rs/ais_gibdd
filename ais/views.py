@@ -1,7 +1,7 @@
 from audioop import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District
+from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District,UserTryLogin
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -205,7 +205,40 @@ def delete_employee(request, id):
 
 
 
+def block_users(request, id):
+    try:
+        user = User.objects.get(id=id)
+        user.is_active = False
+        user.save()
+        return redirect('allUsers')  
+    except User.DoesNotExist:
+        return redirect('allUsers')
 
+def unblock_user(request, id):
+    try:
+        user = User.objects.get(id=id)
+        user.is_active = True
+        user.save()
+        return redirect('allUsers')  
+    except User.DoesNotExist:
+        return redirect('allUsers')
+
+def allUsers(request):
+        
+    users = User.objects.all()
+    search_query = request.GET.get('search')
+    if search_query:
+        users = users.filter(
+            Q(username__icontains=search_query) |
+            Q(first_name__icontains=search_query) |
+            Q(last_name__icontains=search_query) |
+            Q(email__icontains=search_query) |
+            Q(last_login__icontains=search_query)
+        )
+
+    context = {'users': users}
+
+    return render(request, 'base/admin/allusers.html', context)
 
 ##########################################
 # API
@@ -272,7 +305,8 @@ def registration_view(request):
 
 
 def login_view(request):
-
+    employees = UserTryLogin.objects.all()
+    print(employees)
     maxAttempts = 3
     lock_time = 10  # Время блокировки в секундах
     incorrectAttempts = request.session.get('incorrect_attempts', 0)
@@ -299,8 +333,15 @@ def login_view(request):
                 user.save()
             messages.success(request, 'Вход выполнен успешно!')
 
-            user = User.objects.get(username=request.POST.get('username'))
-            if user.is_staff:
+            username = request.POST.get('username')     
+            password = request.POST.get('password')     
+            is_staff = request.POST.get('is_staff')     
+            
+            user = authenticate(request, username=username, password=password,is_staff=is_staff)
+
+            is_staff = user.is_staff
+            print(is_staff)
+            if user.is_staff == True:
                 print("админ")
                 return redirect("EmployeeMain")
 
@@ -319,6 +360,9 @@ def login_view(request):
                     request.session['incorrect_attempts'] = incorrectAttempts + 1
                     request.session['last_attempt_time'] = time.time()  # Сохранить время последней попытки
 
+                    # login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
+                    # print(login_attempt)
+                    # login_attempt.increase_attempt()
                     if incorrectAttempts + 1 >= maxAttempts:
 
                         return redirect('login_user') 
@@ -328,3 +372,14 @@ def login_view(request):
                     messages.error(request, 'Произошла ошибка входа')
     remainingTime = int(lock_time - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
     return render(request, 'base/auth/loginT.html', {'remaining_time': remainingTime})
+
+
+def block_user(request, id):
+    try:
+        user = User.objects.get(id=id)
+        user.is_active = False
+        user.save()
+        return redirect('allEmployee')  
+    except User.DoesNotExist:
+        return redirect('allEmployee')
+

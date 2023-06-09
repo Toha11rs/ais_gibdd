@@ -84,7 +84,11 @@ MIDDLEWARE = [
 
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+AUTH_USER_MODEL = 'auth.User'
 
 ROOT_URLCONF = 'base.urls'
 
@@ -119,8 +123,12 @@ DATABASES = {
         'PASSWORD': '50795144',
         'HOST': 'mysql.j27954659.myjino.ru',
         'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_ALL_TABLES',
     }
 }
+}
+
 
 
 # Password validation
