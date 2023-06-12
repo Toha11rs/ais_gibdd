@@ -147,7 +147,32 @@ body {
   background-image: url("msc4.png");
   background-size: 130%;
   background-position: 10% 50%;
+  
+}
 
+
+.userBack{
+  background-color: #252525;
+
+}
+
+.txt{
+  color: white;
+  text-decoration: none;
+}
+
+.userphoto{
+  width: 80%;
+  height: 80%;
+  border-radius: 10%;
+}
+
+.userback2{
+  width: 50%;
+}
+
+.user1{
+  left: 10%;
 }
 
 .forms {

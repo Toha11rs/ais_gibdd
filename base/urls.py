@@ -76,4 +76,6 @@ urlpatterns = [
 
     path('registration_user', views.registration_view, name='registration_user'),
     path('login_user', views.login_view, name='login_user'),
+
+     path('user', views.user_page, name='user_page'),
 ]

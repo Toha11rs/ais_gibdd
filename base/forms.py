@@ -7,7 +7,7 @@ from django import forms
 from ais.fields import YearField
 from django.core.exceptions import ValidationError
 from phonenumber_field.formfields import PhoneNumberField
-import random
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class SearchForm(forms.Form):
@@ -202,3 +202,10 @@ class UserRegistrationForm(forms.Form):
             raise forms.ValidationError('Пароли не совпадают')
 
         return cleaned_data
+    
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password2'].widget.attrs['class'] = 'form-control'

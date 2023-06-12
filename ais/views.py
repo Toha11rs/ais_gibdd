@@ -1,8 +1,9 @@
 from audioop import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District,UserTryLogin
 from base.forms import SearchForm, CarInformationForm, PenaltyForm, AuthForm, EntryEmployeeForm,EmployeeForm,RegistrationForm,LoginForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
@@ -13,9 +14,9 @@ import requests
 from django.utils import timezone
 import pytz
 import time
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+
 
 
 def main(request):
@@ -370,9 +371,12 @@ def login_view(request):
                     request.session['last_attempt_time'] = time.time()  #  время последней попытки
 
                      #счетчик неудачных попыток
-                    
-                    login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
-                    login_attempt.increase_attempt()
+                    try:
+                        login_attempt, _ = UserTryLogin.objects.get_or_create(user=request.user)
+                        login_attempt.increase_attempt()
+                    except:
+                        messages.error(request, 'Неправильный логин или пароль')
+                        return redirect("login_user")
 
                     if incorrectAttempts + 1 >= maxAttempts:
 
@@ -384,4 +388,22 @@ def login_view(request):
     remainingTime = int(lock_time - (time.time() - lastAttemptTime)) if lastAttemptTime else 0
     return render(request, 'base/auth/loginT.html', {'remaining_time': remainingTime})
 
+@login_required(login_url='login_user') 
+def user_page(request):
+    user = request.user
 
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Ваш пароль успешно изменен.')
+            return redirect('user')
+    else:
+        form = PasswordChangeForm(user)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'base/user/user_page.html', context)
