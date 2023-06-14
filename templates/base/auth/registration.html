@@ -108,6 +108,14 @@
                       background-color: #AA66CC;
                   }
                 </style>
+
+                <style>
+                    .strength-meter {
+                        height: 10px;
+                        background-color: lightgray;
+                        transition: width 0.3s ease;
+                    }
+                </style>
                 
                 <form method="post" class="row g-3 needs-validation">
                     {% csrf_token %}
@@ -162,97 +170,118 @@
                                 setInterval(updateRemainingTime, 1000);
                         </script>
             
-                    <script>
-                        var passwordInput = document.getElementById("password");
-                        var passwordStrength = document.querySelector("#password-strength .strength-meter");
-                
-                        passwordInput.addEventListener("input", function () {
-                            var password = passwordInput.value;
-                            var strength = calculatePasswordStrength(password);
-                
-                            var width = 0;
-                            if (strength === 0) {
-                                width = 10;
-                            } else if (strength === 1) {
-                                width = 30;
-                            } else if (strength === 2) {
-                                width = 40;
-                            } else if (strength === 3) {
-                                width = 50;
-                            } else if (strength === 4) {
-                                width = 60;
-                            } else if (strength === 5) {
-                                width = 70;                    
-                            } else if (strength === 6) {
-                                width = 80;                          
-                            } else if (strength === 7) {
-                                width = 100;
-                            }
-                
-                            passwordStrength.style.width = width + "%";
-                            passwordStrength.className = "strength-meter";
-                            passwordStrength.classList.add(getStrengthClass(strength));
-                        });
-                
-                        function calculatePasswordStrength(password) {
-                            // состоит только из цифр
-                            if (/^\d+$/.test(password)) {
-                              return 1; 
-                          }
-                      
-                          // состоит из строчных букв и содержит 1-2 цифры"
-                          if (/^(?=.*\d{1,2})[a-z]+$/.test(password)) {
-                              return 2;
-                          }
-                      
-                          // состоит из строчных букв и содержит более 3 цифр"
-                          if (/^(?=(?:.*\d){3,})[a-z\d]+$/.test(password)) {
-                              return 3; 
-                          }
-                      
-                          // состоит из 1 буквы верхнего регистра и строчных букв и содержит более 3 цифр"
-                          if (/^(?=.*\d{3,})[a-zA-Z\d]+$/.test(password)) {
-                              return 4; 
-                          }
-                      
-                          //  состоит из 1 буквы верхнего регистра, строчных букв, более 3 цифр и 1го специального символа"
-                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*])[a-zA-Z\d]+$/.test(password)) {
-                              return 5; 
-                          }
-                      
-                          //состоит из 1 буквы верхнего регистра, строчных букв, более 3 цифр и более 3ех специальных символов"
-                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*]{3,})[a-zA-Z\d]+$/.test(password)) {
-                              return 6;
-                          }
-                      
-                         //состоит из 4 букв верхнего регистра не идущих подряд, строчных букв, более 3 цифр и более 5и специальных символов"
-                          if (/^(?=.*\d{3,})(?=.*[!@#$%^&*]{5,})(?!.*[A-Z]{4,})[a-zA-Z\d]+$/.test(password)) {
-                              return 7; 
-                          }
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                // Поле ввода пароля
+                                const passwordInput = document.getElementById("password");
                         
-                            return 0; 
-                        }
-                
-                        function getStrengthClass(strength) {
-                            if (strength === 0) {
-                                return "weak";
-                            } else if (strength === 1) {
-                                return "medium";
-                            } else if (strength === 2) {
-                                return "strong";
-                            } else if (strength === 3) {
-                                return "very-strong";
-                            } else if (strength === 4) {
-                                return "very-extra-strong";
-                           } else if (strength === 5) {
-                                return "super-strong";  
-                           } else if (strength === 6) {
-                                return "very-super-strong";                           
-                            } else if (strength === 7) {
-                                return "very-extra-super-strong";
+                                // Индикатор сложности пароля
+                                const complexityIndicator = document.querySelector("#password-strength .strength-meter");
+                        
+                                // Слушатель события ввода для поля ввода пароля
+                                passwordInput.addEventListener("input", function() {
+                                    updatePasswordIndicator();
+                                });
+                        
+                                function updatePasswordIndicator() {
+                                    const password = passwordInput.value;
+                                    const complexity = getPasswordComplexity(password);
+                                    const indicatorColor = getIndicatorColor(complexity);
+                                    const indicatorWidth = (complexity / 7) * 100;
+                        
+                                    complexityIndicator.innerText = "";
+                                    complexityIndicator.style.backgroundColor = indicatorColor;
+                                    complexityIndicator.style.width = indicatorWidth + "%";
+                                }
+                            });
+                          
+                            function getPasswordComplexity(password) {
+                              let complexity = 0;
+                          
+                              // Проверка наличия цифр
+                              if (/\d/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия строчных букв и цифр
+                              if (/[a-z]/.test(password) && /\d{1,2}/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия строчных букв и более трех цифр
+                              if (/[a-z]/.test(password) && /\d{3,}/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия букв верхнего регистра, строчных букв и более трех цифр
+                              if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /\d{3,}/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия букв верхнего регистра, строчных букв, более трех цифр и одного специального символа
+                              if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /\d{3,}/.test(password) && /[^a-zA-Z0-9]/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия букв верхнего регистра, строчных букв, более трех цифр и более трех специальных символов
+                              if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /\d{3,}/.test(password) && /[^a-zA-Z0-9]{3,}/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              // Проверка наличия четырех букв верхнего регистра (не идущих подряд), строчных букв, более трех цифр и более трех специальных символов
+                              if (/(?=.*[A-Z].*[A-Z].*[A-Z])(?=.*[a-z])(?=.*\d{3,})(?=.*[^a-zA-Z0-9]{3,})/.test(password)) {
+                                complexity++;
+                              }
+                          
+                              return complexity;
                             }
-                          }
-                    </script>
+                          
+                            function getPasswordComplexityText(complexity) {
+                              switch (complexity) {
+                                case 0:
+                                  return "";
+                                case 1:
+                                  return "Weak";
+                                case 2:
+                                  return "Medium";
+                                case 3:
+                                  return "Strong";
+                                case 4:
+                                  return "Very Strong";
+                                case 5:
+                                  return "Excellent";
+                                case 6:
+                                  return "Incredible";
+                                case 7:
+                                  return "Unbreakable!";
+                                default:
+                                  return "";
+                              }
+                            }
+                          
+                            function getIndicatorColor(complexity) {
+                              switch (complexity) {
+                                case 0:
+                                  return "";
+                                case 1:
+                                  return "pink";
+                                case 2:
+                                  return "red";
+                                case 3:
+                                  return "orange";
+                                case 4:
+                                  return "yellow";
+                                case 5:
+                                  return "lightgreen";
+                                case 6:
+                                  return "green";
+                                case 7:
+                                  return "darkgreen";
+                                default:
+                                  return "";
+                              }
+                            }
+                          </script>
                 </form>
 
                 

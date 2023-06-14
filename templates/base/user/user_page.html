@@ -21,7 +21,9 @@
        
           
           <div class = 'headinfo'>
-            <img src="static/images/gibdd.png" alt="Логотип" class="logo" >
+            <a href="/" class="logo d-flex align-items-center">
+            <img src="static/images/gibdd.png" alt="Логотип" class="logo"   href="/">
+          </a>
             <p class = " text1"> Госавтоиснпекция  <p class = 'text2'> Помогаем защитить ваши права на дороге</p>
             
           </div>
@@ -37,10 +39,12 @@
                 +7(499)113-19-84</p>
           
           </div>
-         
-           
-          </div>
-  
+          
+          
+           {% if user.is_authenticated %}
+           <a href="{% url 'logout' %}" class="navelem">Выход</a>
+         {% endif %}
+           </div>
     </nav>
     <nav class="  navbar navbar-expand-lg  ">
       

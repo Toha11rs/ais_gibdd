@@ -1,4 +1,5 @@
 from audioop import reverse
+from django.contrib.auth import logout
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from ais.models import Driver, DriverLicense, Car, Employee, Penalty, District,UserTryLogin
@@ -399,7 +400,7 @@ def user_page(request):
             user = form.save()
             update_session_auth_hash(request, user)
             messages.success(request, 'Ваш пароль успешно изменен.')
-            return redirect('user')
+            return redirect('user_page')
     else:
         form = PasswordChangeForm(user)
 
@@ -407,3 +408,8 @@ def user_page(request):
         'form': form,
     }
     return render(request, 'base/user/user_page.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/') 
